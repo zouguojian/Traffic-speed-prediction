@@ -1,27 +1,37 @@
 # -- coding: utf-8 --
 import tensorflow as tf
+
 class rlstm(object):
-    def __init__(self,layer_num=1,nodes=128,is_training=True):
+    def __init__(self,batch_size, layer_num=1,nodes=128,is_training=None,site_num=49):
+        self.batch_size=batch_size
         self.layer_num=layer_num    #the numbers of layer
         self.nodes=nodes            #the numbers of nodes to each layer
         self.is_training=is_training
+        self.site_num=49
+        if self.is_training: self.train_state(self.batch_size)
+        self.test_state(self.site_num)
+        print(self.is_training)
 
     #the funtion of init_state() is used to initialized the state of c and h
-    def train_state(self,batch_size, layer):
+    def train_state(self, batch_size=32):
         '''
-        it divided train or test
         :return:
         '''
-        with tf.variable_scope(name_or_scope='train_state_'+str(layer), reuse=tf.AUTO_REUSE):
-            c_state=tf.Variable(tf.zeros(shape=[batch_size,self.nodes],dtype=tf.float32),name='c_state')
-            h_state=tf.Variable(tf.zeros(shape=[batch_size,self.nodes],dtype=tf.float32),name='h_state')
-            return c_state,h_state
+        with tf.variable_scope(name_or_scope='train_state', reuse=tf.AUTO_REUSE):
+            self.c_state_train = tf.Variable(tf.zeros(shape=[batch_size,self.nodes],dtype=tf.float32),name='c_state')
+            self.h_state_train = tf.Variable(tf.zeros(shape=[batch_size,self.nodes],dtype=tf.float32),name='h_state')
 
-    def test_state(self,batch_size, layer):
-        with tf.variable_scope(name_or_scope='test_state_'+str(layer), reuse=tf.AUTO_REUSE):
-            c_state = tf.Variable(tf.zeros(shape=[batch_size, self.nodes], dtype=tf.float32),name='c_state')
-            h_state = tf.Variable(tf.zeros(shape=[batch_size, self.nodes], dtype=tf.float32),name='h_state')
-            return c_state, h_state
+        # return c_state_train,h_state_train
+
+    def test_state(self, batch_size=1):
+        '''
+        :return:
+        '''
+        with tf.variable_scope(name_or_scope='test_state', reuse=tf.AUTO_REUSE):
+            self.c_state_test = tf.Variable(tf.zeros(shape=[batch_size,self.nodes],dtype=tf.float32),name='c_state')
+            self.h_state_test = tf.Variable(tf.zeros(shape=[batch_size, self.nodes], dtype=tf.float32), name='h_state')
+
+        # return c_state_test, h_state_test
 
     def lstm_layer(self,inputs,c_state, h_state, layer):
         '''
@@ -100,13 +110,12 @@ class rlstm(object):
 
         return (self.h, self.c)
 
-    def calculate(self,input,batch_size):
+    def calculate(self,input):
         '''
-        This function
+        this function
         :param input: input,and the size is [bacth_size,time_size,data_features]
         :return:
         '''
-
 
         self.c_states=[]
         self.h_states=[]
@@ -117,8 +126,8 @@ class rlstm(object):
         '''
         for layer in range(self.layer_num):
             with tf.variable_scope(name_or_scope=str(layer)):
-                if self.is_training:c_state,h_state=self.train_state(batch_size, layer)
-                else:c_state,h_state=self.test_state(batch_size, layer)
+                if not self.is_training: c_state,h_state=self.c_state_test,self.h_state_test
+                else:c_state,h_state=self.c_state_train,self.h_state_train
 
                 h = []
                 c = []
@@ -132,7 +141,6 @@ class rlstm(object):
                 self.c_states.append(c_state)
                 self.h_states.append(h_state)
             if layer==self.layer_num-1:return (c,h)
-
         return (self.c_states,self.h_states)
 
 

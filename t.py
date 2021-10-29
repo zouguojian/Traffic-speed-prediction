@@ -1,7 +1,12 @@
 import numpy as np
 
-a=np.random.randint(0,5,size=[10])
+a=np.random.randint(low=1,high=100,size=[2, 4, 3])
+
+print(a)
+
+# b=np.reshape(a,newshape=[-1,3])
+# print(b)
 
 
-for i ,e in enumerate(a):
-    print(i,e)
+c=np.reshape(a,newshape=[-1, 2, 2, 3])
+print(c)

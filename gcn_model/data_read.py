@@ -2,10 +2,10 @@
 import pandas as pd
 import csv
 
-file_path=r'/Users/guojianzou/Documents/同济大学/智慧公路云平台/OD/data/fivemonth_qiepian.csv'
-save_path=r'/Users/guojianzou/Documents/同济大学/智慧公路云平台/OD/data/data_all.csv'
+file_path=r'/Users/guojianzou/Traffic-speed-prediction/data/fivemonth_qiepian.csv'
+save_path=r'/Users/guojianzou/Traffic-speed-prediction/data/data_all.csv'
 
-train_path=r'/Users/guojianzou/Documents/同济大学/智慧公路云平台/OD/data/train.csv'
+train_path=r'/Users/guojianzou/Traffic-speed-prediction/data/train.csv'
 
 
 def create_train(year,month,file_path, save_path, train_path):

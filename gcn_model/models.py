@@ -29,42 +29,93 @@ class Model(object):
 
     def predict(self,inputs):
         '''
-        :return:  output each node result
+        :return:  output each node result :[batch size, n nodes, embedding]
         '''
         self.inputs = inputs  # input features
         # Build sequential layer model
         self.activations.append(self.inputs)
 
-        for layer in self.layers:
+        for i, layer in enumerate(self.layers):
             hidden = layer.forward(self.activations[-1])
-            self.activations.append(hidden) # feed forward
+            # trick
+            res_x=tf.layers.dense(self.inputs,units=hidden.shape[-1],name=str(i))
+            self.activations.append(hidden+res_x) # feed forward
         outputs = self.activations[-1] # the last layer output
         return outputs
 
 class GCN(Model):
-    def __init__(self, placeholders, input_dim, para):
+    def __init__(self, placeholders, input_dim, para, day=None, hour=None, position=None, supports=None):
+        '''
+        :param placeholders:
+        :param input_dim:
+        :param para:
+        '''
         super(GCN, self).__init__()
 
+        self.day=day
+        self.hour=hour
+        self.position=position
         self.input_dim = input_dim  # input features dimension
         self.para=para
 
         # self.output_dim = placeholders['labels'].get_shape().as_list()[1]  # number of class
-        self.output_dim = para.gcn_output_size  # number of features of gcn output
+        self.output_dim = self.para.gcn_output_size  # number of features of gcn output
         self.placeholders = placeholders
+        self.supports=supports
 
         self.build()  # build model
 
     def _build(self):
-        self.layers.append(GraphConvolution(input_dim=self.input_dim,
+        day= tf.reshape(self.day,shape=[-1, self.para.site_num, self.para.gcn_output_size])
+        hour= tf.reshape(self.hour,shape=[-1, self.para.site_num, self.para.gcn_output_size])
+        position=tf.reshape(self.position,shape=[-1, self.para.site_num, self.para.gcn_output_size])
+
+        self.layers.append(GraphConvolution(day=day,
+                                            hour=hour,
+                                            position=position,
+                                            input_dim=self.input_dim,
                                             output_dim=self.para.hidden1,
                                             placeholders=self.placeholders,
+                                            supports=self.supports,
                                             act=tf.nn.relu,
                                             bias=True,
                                             dropout=True,
-                                            sparse_inputs=False))
+                                            sparse_inputs=False,
+                                            res_name='layer1'))
 
-        self.layers.append(GraphConvolution(input_dim=self.para.hidden1,
+        self.layers.append(GraphConvolution(day=day,
+                                            hour=hour,
+                                            position=position,
+                                            input_dim=self.para.hidden1,
+                                            output_dim=self.para.hidden1,
+                                            placeholders=self.placeholders,
+                                            supports=self.supports,
+                                            act=tf.nn.relu,
+                                            bias=True,
+                                            dropout=True,
+                                            sparse_inputs=False,
+                                            res_name='layer3'))
+
+        self.layers.append(GraphConvolution(day=day,
+                                            hour=hour,
+                                            position=position,
+                                            input_dim=self.para.hidden1,
+                                            output_dim=self.para.hidden1,
+                                            placeholders=self.placeholders,
+                                            supports=self.supports,
+                                            act=tf.nn.relu,
+                                            bias=True,
+                                            dropout=True,
+                                            sparse_inputs=False,
+                                            res_name='layer4'))
+
+        self.layers.append(GraphConvolution(day=day,
+                                            hour=hour,
+                                            position=position,
+                                            input_dim=self.para.hidden1,
                                             output_dim=self.output_dim,
                                             placeholders=self.placeholders,
+                                            supports=self.supports,
                                             act=lambda x: x,
-                                            dropout=False))
+                                            dropout=False,
+                                            res_name='layer2'))

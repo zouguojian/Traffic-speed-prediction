@@ -7,35 +7,7 @@ import argparse
 from gcn_model.hyparameter import parameter
 import os
 
-file_path=r'/Users/guojianzou/Documents/同济大学/智慧公路云平台/OD/data/fivemonth_qiepian.csv'
-save_path=r'/Users/guojianzou/Documents/同济大学/智慧公路云平台/OD/data/data_all.csv'
-
-train_path=r'/Users/guojianzou/Documents/同济大学/智慧公路云平台/OD/data/train.csv'
-
-# data=data_save(file_path,save_path)
-#
-# train_data(save_path,train_path)
-#
-# data_combine(train_path, combine_path)
-
-def sudden_changed(city_dictionary_):
-    '''
-    用于处理突变的值
-    Args:
-        city_dictionary:
-    Returns:
-    '''
-    if city_dictionary_:
-        for key in city_dictionary_.keys():
-            dataFrame=city_dictionary_[key].values
-            shape=city_dictionary_[key].shape
-            for i in range(shape[0]):
-                for j in range(shape[1]):
-                    if i!=0:
-                        if dataFrame[i][j]-dataFrame[i-1][j]>200:
-                            dataFrame[i][j] = dataFrame[i - 1][j]
-            city_dictionary_[key]=pd.DataFrame(dataFrame)
-    return city_dictionary_
+train_path=r'data/training_data/train.csv'
 
 class DataIterator():             #切记这里的训练时段和测试时段的所用的对象不变，否则需要重复加载数据
     def __init__(self,
@@ -73,32 +45,19 @@ class DataIterator():             #切记这里的训练时段和测试时段的
         for line in self.data.values:
             if (line[0], line[1]) not in self.id_dict and line[0] != line[1]:
                 self.id_dict[(int(line[0]), int(line[1]))] = 1
-                if line[0] not in self.id_index:self.id_index[int(line[0])]=len(self.id_index)
-                if line[1] not in self.id_index:self.id_index[int(line[1])]=len(self.id_index)
 
         # 生成邻接矩阵
         # id_dict = sorted(self.id_dict) # dtype : list
         self.adj = np.zeros(shape=[len(self.id_dict), len(self.id_dict)],dtype=np.int32)
         self.adjacent(self.adj)
-        print(self.adj)
-
-        # 初始化每时刻的输入
-        self.input=np.zeros(shape=[self.para.site_num**2, self.para.features])
-        self.init_input(self.input)
 
         self.length=self.data.values.shape[0]  #data length
         self.max,self.min=self.get_max_min()   # max and min are list type, used for the later normalization
         self.normalize=normalize
         if self.normalize:self.normalization() #normalization
 
-    def init_input(self,input):
-        for i in range(self.para.site_num):
-            for j in range(self.para.site_num):
-                return
-
     def adjacent(self,adj):
         node_ids=dict()
-        keys=list(self.id_index.keys())
         index=0
 
         # 定义节点，即节点id化，路即为节点
@@ -106,19 +65,15 @@ class DataIterator():             #切记这里的训练时段和测试时段的
             node_ids[(id[0], id[1])]=index
             index+=1
 
-        # 链接矩阵
-        self.link={key:[] for key in keys}
-        for key_pair in self.id_dict:
-            self.link[key_pair[0]].append(key_pair[1])
-
         # 邻接矩阵初始化
         for i,node_i in enumerate(node_ids):
             for j,node_j in enumerate(node_ids):
                 if node_i==node_j:continue
-                if node_i[0]==node_j[0] or node_i[1]==node_j[0]: adj[i][j]=1
+                if node_j[1] == node_i[0]: adj[i][j] = 1
+                # if node_i[0]==node_j[0] or node_i[1]==node_j[0]: adj[i][j]=1
 
-        if not os.path.exists('/Users/guojianzou/Documents/同济大学/智慧公路云平台/OD/data/adjacent.csv'):
-            file = open('/Users/guojianzou/Documents/同济大学/智慧公路云平台/OD/data/adjacent.csv', 'w', encoding='utf-8')
+        if not os.path.exists('data/training_data/adjacent.csv'):
+            file = open('data/training_data/adjacent.csv', 'w', encoding='utf-8')
             writer = csv.writer(file)
             writer.writerow(['src_FID', 'nbr_FID'])
             for i in range(adj.shape[0]):
@@ -140,17 +95,19 @@ class DataIterator():             #切记这里的训练时段和测试时段的
         '''
         self.min_list=[]
         self.max_list=[]
-        print('the shape of features is :',self.data.values.shape[1])
+        # print('the shape of features is :',self.data.values.shape[1])
         for i in range(self.data.values.shape[1]):
-            self.min_list.append(round(float(min(self.data[list(self.data.keys())[i]].values)),3))
-            self.max_list.append(round(float(max(self.data[list(self.data.keys())[i]].values)),3))
+            self.min_list.append(min(self.data[list(self.data.keys())[i]].values))
+            self.max_list.append(max(self.data[list(self.data.keys())[i]].values))
         print('the max feature list is :',self.max_list)
         print('the min feature list is :', self.min_list)
         return self.max_list,self.min_list
 
     def normalization(self):
-        for i,key in enumerate(list(self.data.keys())):
-            self.data[key]=round((self.data[key] - np.array(self.min[i])) / (np.array(self.max[i]) - np.array(self.min[i]+self.min_value)), 6)
+        k=list(self.data.keys())
+        k.reverse()
+        for i,key in enumerate(k[:2]):
+            self.data[key]=(self.data[key] - np.array(self.min[-(i+1)])) / (np.array(self.max[-(i+1)]) - np.array(self.min[-(i+1)]+self.min_value))
 
     def generator_(self):
         '''
@@ -162,13 +119,18 @@ class DataIterator():             #切记这里的训练时段和测试时段的
         shape=self.data.values.shape
 
         if self.is_training:
-            low,high=0,int(shape[0]//para.site_num * self.data_divide)*para.site_num
+            low,high=24*6*para.site_num, int(shape[0]//para.site_num * self.data_divide)*para.site_num
         else:
             low,high=int(shape[0]//para.site_num * self.data_divide) *para.site_num, shape[0]
 
         while low+para.site_num*(para.input_length + para.output_length)<= high:
-            yield (np.array(self.data.values[low:low+self.time_size*para.site_num]),
-                   self.data.values[low + self.time_size*para.site_num : low + self.time_size*para.site_num+self.prediction_size*para.site_num,-1:shape[1]])
+            label=self.data.values[low + self.time_size * para.site_num: low + (self.time_size + self.prediction_size) * para.site_num,-2:-1]
+            label=np.concatenate([label[i * para.site_num:(i + 1) * para.site_num, :] for i in range(self.prediction_size)], axis=1)
+
+            yield (self.data.values[low:low+self.time_size*para.site_num, 6:7],
+                   self.data.values[low:low+(self.time_size+self.prediction_size)*para.site_num, 4],
+                   self.data.values[low:low + (self.time_size+self.prediction_size)* para.site_num, 5],
+                   label)
             if self.is_training: low += self.window_step*para.site_num
             else:low+=self.prediction_size*para.site_num
         return
@@ -181,7 +143,7 @@ class DataIterator():             #切记这里的训练时段和测试时段的
         :return:
         '''
         self.is_training=is_training
-        dataset=tf.data.Dataset.from_generator(self.generator_,output_types=(tf.float32,tf.float32))
+        dataset=tf.data.Dataset.from_generator(self.generator_,output_types=(tf.float32,tf.int32, tf.int32, tf.float32))
 
         if self.is_training:
             dataset=dataset.shuffle(buffer_size=int(self.data.values.shape[0]//self.para.site_num * self.data_divide-self.time_size-self.prediction_size)//self.window_step)
@@ -190,18 +152,19 @@ class DataIterator():             #切记这里的训练时段和测试时段的
         iterator=dataset.make_one_shot_iterator()
 
         return iterator.get_next()
-#
+# #
 if __name__=='__main__':
     para = parameter(argparse.ArgumentParser())
     para = para.get_para()
 
-    iter=DataIterator(site_id=0,normalize=False,hp=para)
+    iter=DataIterator(site_id=0,normalize=False,hp=para, time_size=6, prediction_size=3)
     print(iter.data.keys())
     # print(iter.data.loc[iter.data['ZoneID']==0])
-    next=iter.next_batch(32,1)
+    next=iter.next_batch(1,1, False)
     with tf.Session() as sess:
         for _ in range(4):
             x,y=sess.run(next)
             print(x.shape)
             print(y.shape)
-            print(y)
+            print(x[0])
+            print(y[0])

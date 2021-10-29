@@ -134,10 +134,10 @@ def normalize_adj(adj):
     :param adj: Symmetrically normalize adjacency matrix
     :return:
     '''
-    adj = sp.coo_matrix(adj)
-    rowsum = np.array(adj.sum(1))
-    d_inv_sqrt = np.power(rowsum, -0.5).flatten()
-    d_inv_sqrt[np.isinf(d_inv_sqrt)] = 0.
+    adj = sp.coo_matrix(adj) # 转化为稀疏矩阵表示的形式
+    rowsum = np.array(adj.sum(1)) # 原连接矩阵每一行的元素和
+    d_inv_sqrt = np.power(rowsum, -0.5).flatten() #先根号，再求倒数，然后flatten返回一个折叠成一维的数组
+    d_inv_sqrt[np.isinf(d_inv_sqrt)] = 0. #
     d_mat_inv_sqrt = sp.diags(d_inv_sqrt)
 
     return adj.dot(d_mat_inv_sqrt).transpose().dot(d_mat_inv_sqrt).tocoo()
@@ -149,18 +149,29 @@ def preprocess_adj(adj):
     preprocessing of adjacency matrix for simple GCN model and conversion to tuple representation.
     :return:
     '''
+    # 邻接矩阵 加上 单位矩阵
+    '''
+    [[1,0,0],[0,1,0],[0,0,1]]
+    '''
     adj_normalized = normalize_adj(adj + sp.eye(adj.shape[0]))
     print('adj_normalized shape is : ', adj_normalized.shape)
 
     return sparse_to_tuple(adj_normalized)
 
 
-def construct_feed_dict(features, support, labels, placeholders):
+
+def construct_feed_dict(features, adj, labels,  day, hour, placeholders):
     """Construct feed dictionary."""
     feed_dict = dict()
+    feed_dict.update({placeholders['position']: np.array([[i for i in range(49)]],dtype=np.int32)})
     feed_dict.update({placeholders['labels']: labels})
+    feed_dict.update({placeholders['day']: day})
+    feed_dict.update({placeholders['hour']: hour})
     feed_dict.update({placeholders['features']: features})
-    feed_dict.update({placeholders['support'][i]: support[i] for i in range(len(support))})
+    feed_dict.update({placeholders['indices_i']: adj[0]})
+    feed_dict.update({placeholders['values_i']: adj[1]})
+    feed_dict.update({placeholders['dense_shape_i']: adj[2]})
+    # feed_dict.update({placeholders['support'][i]: support[i] for i in range(len(support))})
     feed_dict.update({placeholders['num_features_nonzero']: features[1].shape})
     return feed_dict
 
