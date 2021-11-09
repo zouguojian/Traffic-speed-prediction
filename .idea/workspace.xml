@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="24bdc666-7506-4335-a92c-dcef4fd05f11" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/pollution/pollution1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/pollution/process.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/pollution/process.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gcn/model/model.ckpt.meta" beforeDir="false" afterPath="$PROJECT_DIR$/gcn/model/model.ckpt.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gcn_model/data_process.py" beforeDir="false" afterPath="$PROJECT_DIR$/gcn_model/data_process.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_attention.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_attention.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +28,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="csv" value="54" />
+          <entry key="csv" value="57" />
           <entry key="delete_path" value="4" />
           <entry key="py" value="155" />
           <entry key="txt" value="11" />
@@ -35,43 +36,31 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="PLAIN_TEXT" value="69" />
+          <entry key="PLAIN_TEXT" value="72" />
           <entry key="Python" value="155" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="10755" />
+          <entry key="py" value="11239" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="10755" />
+          <entry key="Python" value="11239" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/run_attention.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="72" column="117" selection-start-line="72" selection-start-column="117" selection-end-line="72" selection-end-column="117" />
+            <state relative-caret-position="296">
+              <caret line="74" column="58" lean-forward="true" selection-start-line="74" selection-start-column="58" selection-end-line="74" selection-end-column="58" />
               <folding>
                 <element signature="e#503#534#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/data/pollution/process.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="123" lean-forward="true" selection-start-line="123" selection-end-line="123" />
-              <folding>
-                <element signature="e#45#54#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -117,8 +106,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gcn_model/data_process.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1770">
-              <caret line="123" column="83" selection-start-line="123" selection-start-column="21" selection-end-line="123" selection-end-column="83" />
+            <state relative-caret-position="175">
+              <caret line="146" column="55" lean-forward="true" selection-start-line="146" selection-start-column="55" selection-end-line="146" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/training_data/train.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1696275">
+              <caret line="113085" column="28" selection-start-line="113085" selection-start-column="28" selection-end-line="113086" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -151,6 +149,7 @@
       <find>48</find>
       <find>[78.4805   89.762    86.662125]</find>
       <find>supports</find>
+      <find>500</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -177,16 +176,16 @@
         <option value="$PROJECT_DIR$/gcn_model/models.py" />
         <option value="$PROJECT_DIR$/gcn_model/layers.py" />
         <option value="$PROJECT_DIR$/gcn_model/utils.py" />
-        <option value="$PROJECT_DIR$/run_attention.py" />
         <option value="$PROJECT_DIR$/inference.py" />
-        <option value="$PROJECT_DIR$/gcn_model/data_process.py" />
         <option value="$PROJECT_DIR$/API/inference.py" />
         <option value="$PROJECT_DIR$/data/pollution/process.py" />
+        <option value="$PROJECT_DIR$/gcn_model/data_process.py" />
+        <option value="$PROJECT_DIR$/run_attention.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="76" />
+    <option name="x" value="17" />
     <option name="y" value="23" />
     <option name="width" value="1402" />
     <option name="height" value="796" />
@@ -213,6 +212,12 @@
               <item name="Traffic-speed-prediction" type="462c0819:PsiDirectoryNode" />
               <item name="data" type="462c0819:PsiDirectoryNode" />
               <item name="pollution" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Traffic-speed-prediction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Traffic-speed-prediction" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="training_data" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Traffic-speed-prediction" type="b2602c69:ProjectViewProjectNode" />
@@ -248,7 +253,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.process">
+  <component name="RunManager" selected="Python.run_attention">
     <configuration name="inference (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Traffic-speed-prediction" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -363,8 +368,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.process" />
         <item itemvalue="Python.run_attention" />
+        <item itemvalue="Python.process" />
         <item itemvalue="Python.inference (1)" />
         <item itemvalue="Python.inference" />
         <item itemvalue="Python.test" />
@@ -385,15 +390,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="76" y="23" width="1402" height="796" extended-state="0" />
-    <editor active="true" />
+    <frame x="17" y="23" width="1402" height="796" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20347574" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32954547" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.38920453" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4588068" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -411,11 +415,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/data_all.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-116862" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/train.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-441802">
@@ -553,13 +552,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/training_data/train.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="622">
-          <caret line="113085" column="28" selection-start-line="113085" selection-start-column="28" selection-end-line="113086" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gcn_model/data_read.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="27">
@@ -676,16 +668,6 @@
         <state relative-caret-position="-4737" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/run_attention.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="72" column="117" selection-start-line="72" selection-start-column="117" selection-end-line="72" selection-end-column="117" />
-          <folding>
-            <element signature="e#503#534#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gcn_model/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="975">
@@ -717,13 +699,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gcn_model/data_process.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1770">
-          <caret line="123" column="83" selection-start-line="123" selection-start-column="21" selection-end-line="123" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/decoder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1410">
@@ -739,10 +714,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data/pollution/process.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="123" lean-forward="true" selection-start-line="123" selection-end-line="123" />
+        <state relative-caret-position="447">
+          <caret line="130" column="25" lean-forward="true" selection-start-line="130" selection-start-column="25" selection-end-line="130" selection-end-column="25" />
           <folding>
             <element signature="e#45#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/training_data/train.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1696275">
+          <caret line="113085" column="28" selection-start-line="113085" selection-start-column="28" selection-end-line="113086" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/pollution/train_p.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="74">
+          <caret line="55" column="23" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gcn_model/data_process.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="146" column="55" lean-forward="true" selection-start-line="146" selection-start-column="55" selection-end-line="146" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run_attention.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="74" column="58" lean-forward="true" selection-start-line="74" selection-start-column="58" selection-end-line="74" selection-end-column="58" />
+          <folding>
+            <element signature="e#503#534#0" expanded="true" />
           </folding>
         </state>
       </provider>

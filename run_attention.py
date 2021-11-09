@@ -69,6 +69,10 @@ class Model(object):
                                        name='input_features'),
             'labels': tf.placeholder(tf.float32, shape=[None, self.para.site_num, self.para.output_length],
                                      name='labels'),
+            'features_p':tf.placeholder(tf.float32, shape=[None, None],
+                                       name='input_features_p'),
+            'labels_p': tf.placeholder(tf.float32, shape=[None, self.para.output_length],
+                                         name='labels_p'),
             'dropout': tf.placeholder_with_default(0., shape=(), name='input_dropout'),
             'num_features_nonzero': tf.placeholder(tf.int32, name='input_zero')  # helper variable for sparse dropout
         }
@@ -482,7 +486,7 @@ class Model(object):
                 iterate.time_size + iterate.prediction_size)) // iterate.window_step)
                        * self.para.epochs // self.para.batch_size):
 
-            x, day, hour, label = self.sess.run(next_elements)
+            x, day, hour, label, x_p, label_p = self.sess.run(next_elements)
             features = np.reshape(x, [-1, self.para.site_num, self.para.features])
             day = np.reshape(day, [-1, self.para.site_num])
             hour = np.reshape(hour, [-1, self.para.site_num])
@@ -540,7 +544,7 @@ class Model(object):
                             - iterate_test.length // self.para.site_num * iterate_test.data_divide
                             - (
                                     iterate_test.time_size + iterate_test.prediction_size)) // iterate_test.prediction_size) // self.para.batch_size):
-            x, day, hour, label = self.sess.run(next_)
+            x, day, hour, label, x_p, label_p= self.sess.run(next_)
             features = np.reshape(x, [-1, self.para.site_num, self.para.features])
             day = np.reshape(day, [-1, self.para.site_num])
             hour = np.reshape(hour, [-1, self.para.site_num])
