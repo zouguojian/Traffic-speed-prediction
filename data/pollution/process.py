@@ -15,11 +15,11 @@ import datetime
 def pollution():
     rootdir = '/Users/guojianzou/Downloads/站点_20200101-20201231'
 
-    # '1146A'
-    # 3271A
+    # 2924A
+    # 1488A
 
     keys=['Time', 'AQI', 'PM2.5', 'PM2.5_24h', 'PM10', 'PM10_24h', 'SO2', 'SO2_24h', 'NO2', 'NO2_24h', 'O3', 'O3_24h', 'O3_8h', 'O3_8h_24h', 'CO', 'CO_24h']
-    file = open('pollution_2020.csv', 'w', encoding='utf-8')
+    file = open('pollution1.csv', 'w', encoding='utf-8')
     writer = csv.writer(file)
     writer.writerow(keys)
 
@@ -29,7 +29,7 @@ def pollution():
            path = os.path.join(rootdir,list[i])
            if os.path.isfile(path):
               print(path)
-              data=pd.read_csv(path,usecols=['date','hour','type','1146A']).values
+              data=pd.read_csv(path,usecols=['date','hour','type','1488A']).values
               # data=np.transpose(data,[1,0])
               print(data.shape)
 
@@ -43,23 +43,27 @@ def pollution():
                   writer.writerow([date]+feaure.tolist())
     file.close()
 
+# pollution()
 
-import matplotlib.pyplot as plt
 
-data1=pd.read_csv('train_p.csv', encoding='utf-8').values[:,8]
-# data2=pd.read_csv('pollution_2021.csv', encoding='utf-8').values[:500,1]
-
-plt.figure()
-# Label is observed value,Blue
-plt.plot(data1, 'b*:', label=u'actual value')
-# Predict is predicted value，Red
-# plt.plot(np.concatenate((data1,data2),axis=0), 'r*:', label=u'predicted value')
-# use the legend
-# plt.legend()
-plt.xlabel("time(hours)", fontsize=17)
-plt.ylabel("pm$_{10}$ (ug/m$^3$)", fontsize=17)
-plt.title("the prediction of pm$_{10}$", fontsize=17)
-plt.show()
+# import matplotlib.pyplot as plt
+#
+# data1=pd.read_csv('pollution.csv', encoding='utf-8').values[:,6][:5000]
+# data2=pd.read_csv('pollution1.csv', encoding='utf-8').values[:,6][:5000]
+# # data2=pd.read_csv('pollution_2021.csv', encoding='utf-8').values[:500,1]
+#
+# plt.figure()
+# # Label is observed value,Blue
+# plt.plot(data1, 'b*:', label=u'actual value')
+# plt.plot(data2, 'r*:', label=u'actual value')
+# # Predict is predicted value，Red
+# # plt.plot(np.concatenate((data1,data2),axis=0), 'r*:', label=u'predicted value')
+# # use the legend
+# # plt.legend()
+# plt.xlabel("time(hours)", fontsize=17)
+# plt.ylabel("pm$_{10}$ (ug/m$^3$)", fontsize=17)
+# plt.title("the prediction of pm$_{10}$", fontsize=17)
+# plt.show()
 
 def combine_pollution():
     data1=pd.read_csv('pollution_2020.csv', encoding='utf-8').values
