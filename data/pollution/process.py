@@ -66,23 +66,18 @@ def pollution():
 # plt.show()
 
 def combine_pollution():
-    data1=pd.read_csv('pollution_2020.csv', encoding='utf-8').values
-    data2=pd.read_csv('pollution_2021.csv', encoding='utf-8').values
+    data1=pd.read_csv('pollution.csv', encoding='utf-8').values
 
     keys=['Time', 'AQI', 'PM2.5', 'PM2.5_24h', 'PM10', 'PM10_24h', 'SO2', 'SO2_24h', 'NO2', 'NO2_24h', 'O3', 'O3_24h', 'O3_8h', 'O3_8h_24h', 'CO', 'CO_24h']
     file = open('pollution_train.csv', 'w', encoding='utf-8')
     writer = csv.writer(file)
     writer.writerow(keys)
 
-    for line in data1[4355:]:
-        writer.writerow(line)
-    for line in data2[:5792]:
+    for line in data1[2893:5843]:
         writer.writerow(line)
 
     file.close()
 # combine_pollution()
-
-
 
 # 线性插值
 def liner_insert(d1,key_0,key,x,y):
@@ -125,7 +120,7 @@ def train_():
         writer.writerow(list(d1.values[i]))
     file.close()
 
-# train_()
+train_()
 
 
 def ymdh():
