@@ -160,7 +160,7 @@ def preprocess_adj(adj):
 
 
 
-def construct_feed_dict(features, adj, labels,  day, hour, placeholders):
+def construct_feed_dict(features, adj, labels,  day, hour, x_p, label_p, placeholders):
     """Construct feed dictionary."""
     feed_dict = dict()
     feed_dict.update({placeholders['position']: np.array([[i for i in range(49)]],dtype=np.int32)})
@@ -171,6 +171,8 @@ def construct_feed_dict(features, adj, labels,  day, hour, placeholders):
     feed_dict.update({placeholders['indices_i']: adj[0]})
     feed_dict.update({placeholders['values_i']: adj[1]})
     feed_dict.update({placeholders['dense_shape_i']: adj[2]})
+    feed_dict.update({placeholders['features_p']: x_p})
+    feed_dict.update({placeholders['labels_p']: label_p})
     # feed_dict.update({placeholders['support'][i]: support[i] for i in range(len(support))})
     feed_dict.update({placeholders['num_features_nonzero']: features[1].shape})
     return feed_dict

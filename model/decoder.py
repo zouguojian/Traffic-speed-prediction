@@ -46,6 +46,28 @@ class lstm(object):
         h_tld  = tf.layers.dense(tf.concat([h_t, c_t], axis=1),units=c_t.shape[-1],activation=tf.nn.relu) #[batch, h]
         return h_tld
 
+    def cnn(self,x=None):
+        '''
+        :param x:
+        :return:
+        '''
+        with tf.variable_scope('cnn_layer', reuse=tf.AUTO_REUSE):
+            filter1 = tf.Variable(initial_value=tf.random_normal(shape=[3, self.nodes, 32]), name='filter1')
+            layer1=tf.nn.conv1d(value=x,filters=filter1,stride=3,padding='VALID')
+            # bn1 = tf.layers.batch_normalization(layer1, training=self.placeholders['is_training'])
+            relu1 = tf.nn.relu(layer1)
+
+            print('relu1 shape is : ', relu1.shape)
+
+            cnn_shape = relu1.get_shape().as_list()
+            nodes = cnn_shape[1] * cnn_shape[2]
+            cnn_out = tf.reshape(relu1, [-1, nodes])
+            s=tf.layers.dense(inputs=cnn_out, units=self.nodes, activation=tf.nn.relu)
+
+            pre=tf.layers.dense(inputs=s, units=1, activation=tf.nn.relu)
+            print('cnn pre shape is : ',pre.shape)
+        return pre
+
     def decoding(self,encoder_hs):
         '''
         :param h_state:
@@ -70,9 +92,10 @@ class lstm(object):
         :param encoder_hs: [batch, time ,site num, hidden size]
         :param gcn:
         :param site_num:
-        :return: [batch, site num, prediction size]
+        :return: [batch, site num, prediction size], [batch, prediction size]
         '''
         pres = list()
+        pres_p=list()
         shape=encoder_hs.shape
         h_states=encoder_hs[:,-1,:,:]
         encoder_hs = tf.reshape(tf.transpose(encoder_hs, perm=[0, 2, 1, 3]),shape=[shape[0] * shape[2], shape[1], shape[3]])
@@ -88,8 +111,13 @@ class lstm(object):
             # compute the attention state
             h_state = self.attention(h_t=h_state, encoder_hs=encoder_hs)  # attention
             h_states=tf.reshape(h_state,shape=[-1,site_num,self.nodes])
+
+            pre_p=self.cnn(h_states)
             results = tf.layers.dense(inputs=h_state, units=1, name='layer', reuse=tf.AUTO_REUSE, activation=tf.nn.relu)
             pre=tf.reshape(results,shape=[-1,site_num])
             # to store the prediction results for road nodes on each time
             pres.append(tf.expand_dims(pre, axis=0))
-        return tf.transpose(tf.concat(pres, axis=0), perm=[1, 2, 0],name='output_y')
+            pres_p.append(pre_p)
+
+        return tf.transpose(tf.concat(pres, axis=0), perm=[1, 2, 0],name='output_y'),\
+               tf.transpose(tf.concat(pres_p,axis=0),perm=[1,0])

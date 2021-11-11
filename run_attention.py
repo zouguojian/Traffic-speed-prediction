@@ -64,15 +64,11 @@ class Model(object):
             'indices_i': tf.placeholder(dtype=tf.int64, shape=[None, None],name='input_indices'),
             'values_i': tf.placeholder(dtype=tf.float32, shape=[None],name='input_values'),
             'dense_shape_i': tf.placeholder(dtype=tf.int64, shape=[None],name='input_dense_shape'),
-            # None : batch _size * time _size
-            'features': tf.placeholder(tf.float32, shape=[None, self.para.site_num, self.para.features],
-                                       name='input_features'),
-            'labels': tf.placeholder(tf.float32, shape=[None, self.para.site_num, self.para.output_length],
-                                     name='labels'),
-            'features_p':tf.placeholder(tf.float32, shape=[None, None],
-                                       name='input_features_p'),
-            'labels_p': tf.placeholder(tf.float32, shape=[None, self.para.output_length],
-                                         name='labels_p'),
+            # None: batch size * time size
+            'features': tf.placeholder(tf.float32, shape=[None, self.para.site_num, self.para.features], name='input_features'),
+            'labels': tf.placeholder(tf.float32, shape=[None, self.para.site_num, self.para.output_length], name='labels'),
+            'features_p':tf.placeholder(tf.float32, shape=[None, self.para.input_length, self.para.features_p], name='input_features_p'),
+            'labels_p': tf.placeholder(tf.float32, shape=[None, self.para.output_length], name='labels_p'),
             'dropout': tf.placeholder_with_default(0., shape=(), name='input_dropout'),
             'num_features_nonzero': tf.placeholder(tf.int32, name='input_zero')  # helper variable for sparse dropout
         }
@@ -104,23 +100,6 @@ class Model(object):
         :return:
         '''
 
-        '''
-        feedforward and BN layer
-        output shape:[batch, time_size,field_size,new_features]
-        '''
-        # normal=normalization.Normalization(inputs=self.placeholders['features'],out_size=self.para.features,is_training=self.para.is_training)
-        # normal.normal()
-
-        # with tf.variable_scope('position_gcn'):
-        #     self.p_emb = embedding(self.placeholders['position'], vocab_size=self.para.site_num, num_units=self.para.position_units,
-        #                             scale=True, scope="position_embed")
-        #     p_gcn=self.model_func(self.placeholders, input_dim=self.para.position_units, para=self.para)
-        #     p_emd=p_gcn.predict(self.p_emb)
-        #     p_emd = tf.reshape(p_emd, shape=[1, self.para.site_num, self.para.gcn_output_size])
-        #     p_emd=tf.expand_dims(p_emd,axis=0)
-        #     p_emd=tf.tile(p_emd,[self.para.batch_size, self.para.input_length, 1, 1])
-        #     print('p_emd shape is : ', p_emd.shape)
-
         with tf.variable_scope('position'):
             p_emd = embedding(self.placeholders['position'], vocab_size=self.para.site_num,
                               num_units=self.para.position_units,
@@ -147,7 +126,6 @@ class Model(object):
             print('h_emd shape is : ', self.h_emd.shape)
 
         # create model
-
         if self.para.model_name == 'gcn':
             '''
             return, the gcn output --- for example, inputs.shape is :  (batch, 3, 162, 32)
@@ -265,7 +243,7 @@ class Model(object):
 
                 # this step use to encoding the input series data
                 '''
-                rlstm, return --- for example ,output shape is :(32, 3, 162, 128)
+                lstm, return --- for example ,output shape is :(32, 3, 162, 128)
                 axis=0: bath size
                 axis=1: input data time size
                 axis=2: numbers of the nodes
@@ -281,9 +259,14 @@ class Model(object):
                                               self.para.gcn_output_size])
                 # trick
                 inputs = inputs + encoder_outs + self.p_emd
+                x_p = tf.layers.dense(self.placeholders['features_p'],units=self.para.gcn_output_size)
+                # x_p = tf.reshape(x_p,shape=[self.para.batch_size, self.para.input_length, self.para.gcn_output_size])
+                x_p = tf.expand_dims(x_p,axis=2)
+                x_p = tf.tile(input=x_p,multiples=[1,1,self.para.site_num,1])
+
+                inputs=tf.concat([inputs, x_p],axis=-1)
                 inputs = tf.transpose(inputs, perm=[0, 2, 1, 3])
-                inputs = tf.reshape(inputs, shape=[self.para.batch_size * self.para.site_num, self.para.input_length,
-                                                   self.para.gcn_output_size])
+                inputs = tf.reshape(inputs, shape=[self.para.batch_size * self.para.site_num, self.para.input_length, 2*self.para.gcn_output_size])
 
                 h_states, c_states = encoder_init.encoding(inputs)
                 h_states = tf.reshape(h_states, shape=[self.para.batch_size, self.para.site_num, self.para.input_length,
@@ -326,10 +309,16 @@ class Model(object):
                                             self.para.hidden_size,
                                             placeholders=self.placeholders)
 
-            self.pres = decoder_init.gcn_decoding(h_states, gcn=decoder_gcn, site_num=self.para.site_num)
-            print('the pre output shape is : ',self.pres.shape)
-            self.cross_entropy = tf.reduce_mean(
-                tf.sqrt(tf.reduce_mean(tf.square(self.pres + 1e-10 - self.placeholders['labels']), axis=0)))
+            self.pres, self.pres_p = decoder_init.gcn_decoding(h_states, gcn=decoder_gcn, site_num=self.para.site_num)
+
+            print('pres shape is : ', self.pres.shape)
+            print('pres_p shape is : ', self.pres.shape)
+
+            loss1=tf.reduce_mean(tf.sqrt(tf.reduce_mean(tf.square(self.pres + 1e-10 - self.placeholders['labels']), axis=0)))
+            loss2=tf.reduce_mean(tf.sqrt(tf.reduce_mean(tf.square(self.pres_p + 1e-10 - self.placeholders['labels_p']), axis=0)))
+            weights=tf.Variable(initial_value=tf.constant(value=0.5, dtype=tf.float32),name='loss_weight')
+
+            self.cross_entropy = weights*loss1 + (1.0-weights)*loss2
 
         elif self.para.model_name == 'lstm':
             # this step use to encoding the input series data
@@ -381,9 +370,6 @@ class Model(object):
 
             self.cross_entropy = tf.reduce_mean(
                 tf.sqrt(tf.reduce_mean(tf.square(self.pres + 1e-10 - self.placeholders['labels']), axis=0)))
-
-        print(self.cross_entropy)
-        print('cross shape is : ', self.cross_entropy.shape)
 
         tf.summary.scalar('cross_entropy', self.cross_entropy)
         # backprocess and update the parameters
@@ -490,7 +476,7 @@ class Model(object):
             features = np.reshape(x, [-1, self.para.site_num, self.para.features])
             day = np.reshape(day, [-1, self.para.site_num])
             hour = np.reshape(hour, [-1, self.para.site_num])
-            feed_dict = construct_feed_dict(features, self.adj, label, day, hour, self.placeholders)
+            feed_dict = construct_feed_dict(features, self.adj, label, day, hour, x_p, label_p, self.placeholders)
             feed_dict.update({self.placeholders['dropout']: self.para.dropout})
 
             summary, loss, _ = self.sess.run((merged, self.cross_entropy, self.train_op), feed_dict=feed_dict)
@@ -504,7 +490,7 @@ class Model(object):
                 if max_rmse > rmse_error:
                     print("the validate average rmse loss value is : %.6f" % (rmse_error))
                     max_rmse = rmse_error
-                    self.saver.save(self.sess, save_path=self.para.save_path + 'model.ckpt')
+                    # self.saver.save(self.sess, save_path=self.para.save_path + 'model.ckpt')
 
                     # if os.path.exists('model_pb'): shutil.rmtree('model_pb')
                     # builder = tf.saved_model.builder.SavedModelBuilder('model_pb')
@@ -549,7 +535,7 @@ class Model(object):
             day = np.reshape(day, [-1, self.para.site_num])
             hour = np.reshape(hour, [-1, self.para.site_num])
 
-            feed_dict = construct_feed_dict(features, self.adj, label, day, hour, self.placeholders)
+            feed_dict = construct_feed_dict(features, self.adj, label, day, hour, x_p, label_p, self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
 
             pre = self.sess.run((self.pres), feed_dict=feed_dict)

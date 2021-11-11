@@ -20,6 +20,7 @@ class parameter(object):
         #每个点表示a->b路线，目前8个收费站
         self.parser.add_argument('--position_units', type=int, default=64, help='embedding size')
         self.parser.add_argument('--features', type=int, default=1, help='numbers of the feature')
+        self.parser.add_argument('--features_p', type=int, default=15, help='numbers of the feature pollution')
         self.parser.add_argument('--normalize', type=bool, default=True, help='normalize')
         self.parser.add_argument('--input_length', type=int, default=6, help='input length')
         self.parser.add_argument('--output_length', type=int, default=1, help='output length')
