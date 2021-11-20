@@ -272,8 +272,7 @@ def label_smoothing(inputs, epsilon=0.1):
 class Transformer():
     def __init__(self, arg):
         self.is_training = arg.is_training
-        self.features = arg.features
-        self.hidden_units = arg.position_units
+        self.hidden_units = arg.emb_size
         self.batch = arg.batch_size
         self.input_length = arg.input_length
         self.site_num = arg.site_num
@@ -292,9 +291,7 @@ class Transformer():
         # Encoder
         with tf.variable_scope("encoder"):
             # embedding
-            self.en_emb = tf.reshape(speed, shape=[self.batch * self.input_length, self.site_num, self.features])
-            self.en_emb = tf.layers.dense(self.en_emb, units=self.hidden_units, name='speed_emb')
-
+            self.en_emb = tf.reshape(speed, shape=[self.batch * self.input_length, self.site_num, self.hidden_units])
             day = tf.reshape(day, shape=[self.batch * self.input_length, self.site_num, self.hidden_units])
             hour = tf.reshape(hour, shape=[self.batch * self.input_length, self.site_num, self.hidden_units])
             position = tf.reshape(position, shape=[self.batch * self.input_length, self.site_num, self.hidden_units])

@@ -44,7 +44,7 @@ class Model(object):
         return outputs
 
 class GCN(Model):
-    def __init__(self, placeholders, input_dim, para, day=None, hour=None, position=None, supports=None):
+    def __init__(self, placeholders, input_dim, para, supports=None):
         '''
         :param placeholders:
         :param input_dim:
@@ -52,9 +52,6 @@ class GCN(Model):
         '''
         super(GCN, self).__init__()
 
-        self.day=day
-        self.hour=hour
-        self.position=position
         self.input_dim = input_dim  # input features dimension
         self.para=para
 
@@ -66,14 +63,8 @@ class GCN(Model):
         self.build()  # build model
 
     def _build(self):
-        day= tf.reshape(self.day,shape=[-1, self.para.site_num, self.para.gcn_output_size])
-        hour= tf.reshape(self.hour,shape=[-1, self.para.site_num, self.para.gcn_output_size])
-        position=tf.reshape(self.position,shape=[-1, self.para.site_num, self.para.gcn_output_size])
 
-        self.layers.append(GraphConvolution(day=day,
-                                            hour=hour,
-                                            position=position,
-                                            input_dim=self.input_dim,
+        self.layers.append(GraphConvolution(input_dim=self.input_dim,
                                             output_dim=self.para.hidden1,
                                             placeholders=self.placeholders,
                                             supports=self.supports,
@@ -83,10 +74,7 @@ class GCN(Model):
                                             sparse_inputs=False,
                                             res_name='layer1'))
 
-        self.layers.append(GraphConvolution(day=day,
-                                            hour=hour,
-                                            position=position,
-                                            input_dim=self.para.hidden1,
+        self.layers.append(GraphConvolution(input_dim=self.para.hidden1,
                                             output_dim=self.para.hidden1,
                                             placeholders=self.placeholders,
                                             supports=self.supports,
@@ -96,10 +84,7 @@ class GCN(Model):
                                             sparse_inputs=False,
                                             res_name='layer3'))
 
-        self.layers.append(GraphConvolution(day=day,
-                                            hour=hour,
-                                            position=position,
-                                            input_dim=self.para.hidden1,
+        self.layers.append(GraphConvolution(input_dim=self.para.hidden1,
                                             output_dim=self.para.hidden1,
                                             placeholders=self.placeholders,
                                             supports=self.supports,
@@ -109,10 +94,7 @@ class GCN(Model):
                                             sparse_inputs=False,
                                             res_name='layer4'))
 
-        self.layers.append(GraphConvolution(day=day,
-                                            hour=hour,
-                                            position=position,
-                                            input_dim=self.para.hidden1,
+        self.layers.append(GraphConvolution(input_dim=self.para.hidden1,
                                             output_dim=self.output_dim,
                                             placeholders=self.placeholders,
                                             supports=self.supports,

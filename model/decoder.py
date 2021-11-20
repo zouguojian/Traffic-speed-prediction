@@ -52,9 +52,8 @@ class lstm(object):
         :return:
         '''
         with tf.variable_scope('cnn_layer', reuse=tf.AUTO_REUSE):
-            filter1 = tf.Variable(initial_value=tf.random_normal(shape=[3, self.nodes, 32]), name='filter1')
-            layer1=tf.nn.conv1d(value=x,filters=filter1,stride=3,padding='VALID')
-            # bn1 = tf.layers.batch_normalization(layer1, training=self.placeholders['is_training'])
+            filter1 = tf.Variable(initial_value=tf.random_normal(shape=[3, 64, 32]), name='filter1')
+            layer1=tf.nn.conv1d(value=x,filters=filter1,stride=3,padding='SAME')
             relu1 = tf.nn.relu(layer1)
 
             print('relu1 shape is : ', relu1.shape)
@@ -87,7 +86,7 @@ class lstm(object):
             h.append(results)
         return tf.squeeze(tf.transpose(tf.convert_to_tensor(h),[1,2,0]),axis=1)
 
-    def gcn_decoding(self, encoder_hs, gcn=None, site_num=None):
+    def gcn_decoding(self, encoder_hs, gcn=None, gan=None, site_num=None, x_p=None, day=None, hour=None, position=None):
         '''
         :param encoder_hs: [batch, time ,site num, hidden size]
         :param gcn:
@@ -103,21 +102,31 @@ class lstm(object):
 
         for i in range(self.predict_time):
             # gcn for decoder processing, there is no question
-            encoder_outs = gcn.predict(h_states)
-            gcn_outs = tf.reshape(encoder_outs, shape=[self.batch_size, 1, encoder_outs.shape[-1]])
+            out_day=day[:,i,:,:]
+            out_hour=hour[:,i,:,:]
+            h_states = tf.layers.dense(inputs=h_states, units=out_day.shape[-1], reuse=tf.AUTO_REUSE)
+            features=tf.add_n([h_states,out_day,out_hour,position[:,-1,:,:]])
 
-            h_state, state = tf.nn.dynamic_rnn(cell=self.mlstm_cell,inputs=gcn_outs, initial_state=initial_state, dtype=tf.float32)
+            gcn_outs = gcn.predict(features) # gcn
+
+            gan.input_length=1
+            x = gan.encoder(speed=h_states, day=out_day, hour=out_hour, position=position[:,-1,:,:]) # gan
+
+            features=tf.add_n([gcn_outs, x, position[:,-1,:,:]])
+            features = tf.reshape(features, shape=[self.batch_size, 1, features.shape[-1]])
+
+            h_state, state = tf.nn.dynamic_rnn(cell=self.mlstm_cell,inputs=features, initial_state=initial_state, dtype=tf.float32)
             initial_state = state
+
             # compute the attention state
             h_state = self.attention(h_t=h_state, encoder_hs=encoder_hs)  # attention
             h_states=tf.reshape(h_state,shape=[-1,site_num,self.nodes])
 
-            pre_p=self.cnn(h_states)
+            pre_p=self.cnn(x_p)
             results = tf.layers.dense(inputs=h_state, units=1, name='layer', reuse=tf.AUTO_REUSE, activation=tf.nn.relu)
             pre=tf.reshape(results,shape=[-1,site_num])
             # to store the prediction results for road nodes on each time
-            pres.append(tf.expand_dims(pre, axis=0))
+            pres.append(tf.expand_dims(pre, axis=-1))
             pres_p.append(pre_p)
 
-        return tf.transpose(tf.concat(pres, axis=0), perm=[1, 2, 0],name='output_y'),\
-               tf.transpose(tf.concat(pres_p,axis=0),perm=[1,0])
+        return tf.concat(pres, axis=-1,name='output_y'), tf.concat(pres_p,axis=-1,name='output_y_p')
