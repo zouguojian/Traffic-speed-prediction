@@ -187,6 +187,8 @@ def prediction(features=None, days=None, hours=None, num_roads=49):
 train_data=pd.read_csv('train.csv', encoding='utf-8')
 features, days, hours=feature_split(data=train_data.values)
 
+print(features.shape, days.shape, hours.shape)
+
 # features=np.random.random([6,49,1])
 # days=np.random.randint(low=1,high=20,size=[7, 49],dtype=np.int32)
 # hours = np.random.randint(low=0, high=20, size=[7, 49],dtype=np.int32)

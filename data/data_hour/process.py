@@ -134,6 +134,10 @@ def save_train(file_path=None, train_path=None, year=2020):
                         writer.writerow(line)
         file.close()
 
+
+def zero_insert():
+    return
+
 if __name__=='__main__':
     print('!!!........................beginning.........................!!!')
     save_train(file_path=delete_path,train_path=train_path,year=2020)

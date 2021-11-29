@@ -18,13 +18,14 @@ class parameter(object):
         self.parser.add_argument('--site_num', type=int, default=49, help='total number of road')
 
         #每个点表示a->b路线，目前8个收费站
-        self.parser.add_argument('--position_units', type=int, default=64, help='embedding size')
+        self.parser.add_argument('--emb_size', type=int, default=64, help='embedding size')
         self.parser.add_argument('--features', type=int, default=1, help='numbers of the feature')
+        self.parser.add_argument('--features_p', type=int, default=15, help='numbers of the feature pollution')
         self.parser.add_argument('--normalize', type=bool, default=True, help='normalize')
         self.parser.add_argument('--input_length', type=int, default=6, help='input length')
-        self.parser.add_argument('--output_length', type=int, default=1, help='output length')
+        self.parser.add_argument('--output_length', type=int, default=3, help='output length')
 
-        self.parser.add_argument('--model_name', type=str, default='gcn_encoder_decoder', help='model string')
+        self.parser.add_argument('--model_name', type=str, default='m_cnn', help='model string')
         self.parser.add_argument('--hidden1', type=int, default=32, help='number of units in hidden layer 1')
         self.parser.add_argument('--gcn_output_size', type=int, default=64, help='model string')
         self.parser.add_argument('--weight_decay', type=float, default=5e-4, help='weight for L2 loss on embedding matrix')

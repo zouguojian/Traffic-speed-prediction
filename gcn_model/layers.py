@@ -10,7 +10,6 @@ def sparse_dropout(x, keep_prob, noise_shape):
     random_tensor = keep_prob
     random_tensor += tf.random_uniform(noise_shape)
     dropout_mask = tf.cast(tf.floor(random_tensor), dtype=tf.bool)
-    print(dropout_mask.shape)
     pre_out = tf.sparse_retain(x, dropout_mask)
     return pre_out * (1. / keep_prob)
 
@@ -41,9 +40,6 @@ class GraphConvolution():
     """
 
     def __init__(self,
-                 day,
-                 hour,
-                 position,
                  input_dim,
                  output_dim,
                  placeholders,
@@ -59,9 +55,6 @@ class GraphConvolution():
             self.dropout = placeholders['dropout']
         else:
             self.dropout = 0.
-        self.day = day
-        self.hour = hour
-        self.position = position
         self.vars = {}
         self.act = act
         self.support = supports
@@ -101,9 +94,6 @@ class GraphConvolution():
                               sparse=self.sparse_inputs, dim=self.input_dim)
             else:
                 pre_sup = self.vars['weights_' + str(i)]
-
-            # trick
-            # pre_sup=tf.layers.dense(tf.concat([pre_sup,self.day,self.hour],axis=-1),units=self.output_dim,name='dense_connect_'+self.res_name+str(i))
 
             support = dot(self.support[i], pre_sup, sparse=True, dim=self.output_dim)
             supports.append(support)
