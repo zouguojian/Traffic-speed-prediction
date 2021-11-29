@@ -36,6 +36,7 @@ class DataIterator():             #切记这里的训练时段和测试时段的
         self.window_step=window_step           # windows step
         self.para=hp
         self.source_data=self.get_source_data(train_path)
+
         self.source_train_p=self.get_source_data(train_p_path)
 
         # self.data=self.source_data.loc[self.source_data['ZoneID']==self.site_id]

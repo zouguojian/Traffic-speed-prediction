@@ -142,7 +142,6 @@ class Model(object):
                                                     self.para.site_num,
                                                     self.para.gcn_output_size])
             print('p_emd shape is : ', self.g_p_emd.shape)
-            tf.squeeze()
 
         # encoder
         print('#................................in the encoder step......................................#')

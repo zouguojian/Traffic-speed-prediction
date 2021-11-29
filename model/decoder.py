@@ -31,7 +31,7 @@ class lstm(object):
 
     def attention(self, h_t, encoder_hs):
         '''
-        h_t for decoder, the shape is [batch, h]
+        h_t for decoder, the shape is [batch, 1, h]
         encoder_hs for encoder, the shape is [batch, time ,h]
         :param h_t:
         :param encoder_hs:
@@ -114,6 +114,8 @@ class lstm(object):
 
             features=tf.add_n([gcn_outs, x, position[:,-1,:,:]])
             features = tf.reshape(features, shape=[self.batch_size, 1, features.shape[-1]])
+
+            print('features shape is : ',features.shape)
 
             h_state, state = tf.nn.dynamic_rnn(cell=self.mlstm_cell,inputs=features, initial_state=initial_state, dtype=tf.float32)
             initial_state = state
