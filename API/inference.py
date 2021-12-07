@@ -197,6 +197,7 @@ pres=prediction(features=features,days=days,hours=hours, num_roads=49)
 pres=pres.transpose([1, 0, 2])
 
 pres=np.array([re_recover(np.reshape(road_label, [-1])) for road_label in pres])
+
 pres_dict={}
 pres_dict={(int(train_data.values[i][0]), int(train_data.values[i][1])): pres[i] for i in range(49)}
 
