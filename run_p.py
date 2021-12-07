@@ -23,6 +23,7 @@ from gcn_model.gat import embedding
 from comparison_model_p.lstm import lstm
 from comparison_model_p.bi_lstm import b_lstm
 from comparison_model_p.cnn import st_cnn
+from comparison_model_p.rlstm_lstm import rlstm_inf
 
 import pandas as pd
 import scipy.sparse as sp
@@ -225,6 +226,37 @@ class Model(object):
             print('#................................in the decoder step......................................#')
             # this step to presict the polutant concentration
             self.pres=encoder_init.decoding(features)
+            print('pres shape is : ', self.pres.shape)
+
+        elif self.para.model_name=='rlstm':
+            # features=tf.layers.dense(self.placeholders['features'], units=self.para.emb_size) #[-1, site num, emb_size]
+            features = tf.reshape(self.placeholders['features_p'], shape=[self.para.batch_size,
+                                                                         self.para.input_length,
+                                                                         self.para.features_p])
+
+            # this step use to encoding the input series data
+            '''
+            lstm, return --- for example ,output shape is :(32, 3, 162, 128)
+            axis=0: bath size
+            axis=1: input data time size
+            axis=2: numbers of the nodes
+            axis=3: output feature size
+            '''
+            encoder_init = rlstm_inf(self.para.batch_size,
+                                    predict_time=self.para.output_length,
+                                    layer_num=self.para.hidden_layer,
+                                    nodes=self.para.hidden_size,
+                                    is_training=self.para.is_training,
+                                    placeholders=self.placeholders)
+
+            h_states= encoder_init.encoding(features)
+
+            # h_states=tf.transpose(h_states,perm=[1, 0, 2])
+
+            # decoder
+            print('#................................in the decoder step......................................#')
+            # this step to presict the polutant concentration
+            self.pres=encoder_init.decoding(h_states)
             print('pres shape is : ', self.pres.shape)
 
         self.loss = tf.reduce_mean(
