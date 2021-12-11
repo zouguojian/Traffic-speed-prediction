@@ -5,7 +5,7 @@ import tensorflow as tf
 def normalize(inputs,
               epsilon=1e-8,
               scope="ln",
-              reuse=None):
+              reuse=tf.AUTO_REUSE):
     '''Applies layer normalization.
 
     Args:
@@ -38,7 +38,7 @@ def embedding(inputs,
               zero_pad=True,
               scale=True,
               scope="embedding",
-              reuse=None):
+              reuse=tf.AUTO_REUSE):
     '''Embeds a given tensor.
     Args:
       inputs: A `Tensor` with type `int32` or `int64` containing the ids
@@ -117,7 +117,7 @@ def multihead_attention(key_emb,
                         is_training=True,
                         causality=False,
                         scope="multihead_attention",
-                        reuse=None):
+                        reuse=tf.AUTO_REUSE):
     '''Applies multihead attention.
 
     Args:
@@ -183,7 +183,7 @@ def multihead_attention(key_emb,
         outputs *= query_masks  # broadcasting. (N, T_q, C)
 
         # Dropouts
-        outputs = tf.layers.dropout(outputs, rate=dropout_rate, training=tf.convert_to_tensor(is_training))
+        # outputs = tf.layers.dropout(outputs, rate=dropout_rate, training=tf.convert_to_tensor(is_training))
 
         # Weighted sum
         outputs = tf.matmul(outputs, V_)  # ( h*N, T_q, C/h)
@@ -200,7 +200,7 @@ def multihead_attention(key_emb,
     return outputs
 
 
-def feedforward(inputs, num_units=[2048, 512], scope="multihead_attention", reuse=None):
+def feedforward(inputs, num_units=[2048, 512], scope="multihead_attention", reuse=tf.AUTO_REUSE):
     '''Point-wise feed forward net.
 
     Args:
@@ -277,9 +277,9 @@ class Transformer():
         self.input_length = arg.input_length
         self.site_num = arg.site_num
 
-        self.num_heads = 8
+        self.num_heads = 1
         self.num_blocks = 4
-        self.dropout_rate = arg.dropout
+        self.dropout_rate = 0.0
 
     def encoder(self, speed=None, day=None, hour=None, position=None):
         '''
@@ -292,20 +292,20 @@ class Transformer():
         with tf.variable_scope("encoder"):
             # embedding
             self.en_emb = tf.reshape(speed, shape=[self.batch * self.input_length, self.site_num, self.hidden_units])
-            day = tf.reshape(day, shape=[self.batch * self.input_length, self.site_num, self.hidden_units])
-            hour = tf.reshape(hour, shape=[self.batch * self.input_length, self.site_num, self.hidden_units])
-            position = tf.reshape(position, shape=[self.batch * self.input_length, self.site_num, self.hidden_units])
+            # day = tf.reshape(day, shape=[self.batch * self.input_length, self.site_num, self.hidden_units])
+            # hour = tf.reshape(hour, shape=[self.batch * self.input_length, self.site_num, self.hidden_units])
+            # position = tf.reshape(position, shape=[self.batch * self.input_length, self.site_num, self.hidden_units])
             # trick
-            self.en_emb = tf.add_n([self.en_emb, day, hour])
+            # self.en_emb = tf.add_n([self.en_emb])
             # self.en_emb=tf.layers.dense(tf.concat([self.en_emb,day,hour],axis=-1),units=self.hidden_units,name='add_speed_emb')
 
-            self.enc = self.en_emb + position
+            self.enc = self.en_emb
 
             # 这里我们设计放置一个GCN, 和GAN的相加结果
             ## Dropout
-            self.enc = tf.layers.dropout(self.enc,
-                                         rate=self.dropout_rate,
-                                         training=tf.convert_to_tensor(self.is_training))
+            # self.enc = tf.layers.dropout(self.enc,
+            #                              rate=self.dropout_rate,
+            #                              training=tf.convert_to_tensor(self.is_training))
             ## Blocks
             for i in range(self.num_blocks):
                 with tf.variable_scope("num_blocks_{}".format(i)):
@@ -321,6 +321,6 @@ class Transformer():
                                                    causality=False)
                     ### Feed Forward
                     self.enc = feedforward(self.enc, num_units=[4 * self.hidden_units, self.hidden_units])
-                    self.enc = self.enc + self.en_emb
+                    self.enc = self.enc+self.en_emb
         print('enc shape is : ', self.enc.shape)
         return self.enc
