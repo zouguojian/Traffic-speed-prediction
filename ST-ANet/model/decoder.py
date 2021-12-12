@@ -1,4 +1,5 @@
 # -- coding: utf-8 --
+from model.t_attention import T_attention
 import tensorflow as tf
 
 class lstm(object):
@@ -90,7 +91,7 @@ class lstm(object):
             # time = tf.layers.dense(inputs=time, units=self.nodes, reuse=tf.AUTO_REUSE)
             h_states = tf.layers.dense(inputs=h_states, units=out_day.shape[-1], reuse=tf.AUTO_REUSE)
             # features=tf.add_n([h_states,time])
-            features = h_states
+            # features = h_states
 
             gan.input_length = 1
             x = gan.encoder(speed=h_states, day=out_day, hour=out_hour, position=position[:, -1, :, :])  # gan
@@ -106,7 +107,8 @@ class lstm(object):
             initial_state = state
 
             # compute the attention state
-            h_state = self.attention(h_t=h_state, encoder_hs=encoder_hs)  # attention # 注意修改
+            h_state = T_attention(hiddens=encoder_hs,hidden=h_state, hidden_units= shape[-1])  # attention # 注意修改
+            # h_state = self.attention(h_t=h_state, encoder_hs=encoder_hs)  # attention # 注意修改
             h_states = tf.reshape(h_state, shape=[-1, site_num, self.nodes])
 
             results = tf.layers.dense(inputs=h_state, units=1, name='layer', reuse=tf.AUTO_REUSE)
