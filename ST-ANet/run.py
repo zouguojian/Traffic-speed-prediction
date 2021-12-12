@@ -109,6 +109,17 @@ class Model(object):
 
             print('encoder gan outs shape is : ', x.shape)
 
+            x = tf.reshape(x, shape=[self.para.batch_size, self.para.input_length, self.para.site_num,
+                                     self.para.emb_size])
+            # trick
+            inputs = tf.add_n([x, in_position])
+            # inputs=tf.add_n([inputs, x_p])
+            inputs = tf.transpose(inputs, perm=[0, 2, 1, 3])
+            inputs = tf.reshape(inputs, shape=[self.para.batch_size * self.para.site_num, self.para.input_length,
+                                               self.para.emb_size])
+            # encoder_outs = tf.transpose(x, perm=[0, 2, 1, 3])# 注意修改
+            # encoder_outs=tf.reshape(encoder_outs, shape=[self.para.batch_size * self.para.site_num, self.para.input_length,
+            #                                               self.para.gcn_output_size])# 注意修改
             # this step use to encoding the input series data
             '''
             lstm, return --- for example ,output shape is :(32, 3, 162, 128)
@@ -122,27 +133,36 @@ class Model(object):
                                              self.para.hidden_size,
                                              self.para.is_training,
                                              placeholders=self.placeholders)
-
-            x = tf.reshape(x, shape=[self.para.batch_size, self.para.input_length, self.para.site_num,
-                                     self.para.emb_size])
-            # trick
-            inputs = tf.add_n([x, in_position])
-
-            # inputs=tf.add_n([inputs, x_p])
-            inputs = tf.transpose(inputs, perm=[0, 2, 1, 3])
-            inputs = tf.reshape(inputs, shape=[self.para.batch_size * self.para.site_num, self.para.input_length,
-                                               self.para.gcn_output_size])
-
-            # encoder_outs = tf.transpose(x, perm=[0, 2, 1, 3])# 注意修改
-            # encoder_outs=tf.reshape(encoder_outs, shape=[self.para.batch_size * self.para.site_num, self.para.input_length,
-            #                                               self.para.gcn_output_size])# 注意修改
             h_states, c_states = encoder_init.encoding(inputs)  # 注意修改
             h_states = tf.reshape(h_states, shape=[self.para.batch_size, self.para.site_num, self.para.input_length,
                                                    self.para.hidden_size])
             h_states = tf.transpose(h_states, perm=[0, 2, 1, 3])
-
             print('encoder h states shape is : ', h_states.shape)
 
+            with tf.variable_scope(name_or_scope='dependent_lstm'):
+                # this step use to encoding the input series data
+                '''
+                lstm, return --- for example ,output shape is :(32, 3, 162, 128)
+                axis=0: bath size
+                axis=1: input data time size
+                axis=2: numbers of the nodes
+                axis=3: output feature size
+                '''
+                encoder_dep = encoder_lstm.lstm(self.para.batch_size * self.para.site_num,
+                                                 self.para.hidden_layer,
+                                                 self.para.hidden_size,
+                                                 self.para.is_training,
+                                                 placeholders=self.placeholders)
+                features_dep=tf.reshape(features,[self.para.batch_size, self.para.input_length, self.para.site_num, self.para.emb_size])
+                inputs_dep = tf.transpose(features_dep, perm=[0, 2, 1, 3])
+                inputs_dep = tf.reshape(inputs_dep, shape=[self.para.batch_size * self.para.site_num, self.para.input_length,
+                                                   self.para.emb_size])
+                h_states_dep, c_states_dep = encoder_dep.encoding(inputs_dep)
+                h_states_dep = tf.reshape(h_states_dep, shape=[self.para.batch_size, self.para.site_num, self.para.input_length,
+                                                                self.para.hidden_size])
+                h_states_dep = tf.transpose(h_states_dep, perm=[0, 2, 1, 3])
+
+            h_states = tf.add_n([h_states,h_states_dep])
         # decoder
         print('#................................in the decoder step......................................#')
         with tf.variable_scope(name_or_scope='decoder'):

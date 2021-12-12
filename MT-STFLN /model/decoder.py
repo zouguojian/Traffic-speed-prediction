@@ -2,6 +2,8 @@
 
 import tensorflow as tf
 
+from model.t_attention import T_attention
+
 class lstm(object):
     def __init__(self,batch_size,predict_time,layer_num=1,nodes=128,placeholders=None):
         '''
@@ -121,7 +123,8 @@ class lstm(object):
             initial_state = state
 
             # compute the attention state
-            h_state = self.attention(h_t=h_state, encoder_hs=encoder_hs)  # attention
+            h_state = T_attention(hiddens=encoder_hs, hidden=h_state, hidden_units=shape[-1])  # attention # 注意修改
+            # h_state = self.attention(h_t=h_state, encoder_hs=encoder_hs)  # attention
             h_states=tf.reshape(h_state,shape=[-1,site_num,self.nodes])
 
             pre_p=self.cnn(x_p)
