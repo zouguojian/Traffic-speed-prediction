@@ -5,7 +5,7 @@ Model file:
 2. ST-ANet: Spatio-temporal Attention learning network
 
 
-Both manuscripts have been submitted to IEEE Transactions on Intelligent Transportation Systems TITS journal！！！
+manuscript_1 has been submitted to IEEE Transactions on Intelligent Transportation Systems TITS journal！！！
 Both codes have been uploaded in the Git-Hub page
 
 
