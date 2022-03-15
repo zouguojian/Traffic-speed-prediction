@@ -19,7 +19,7 @@ Both codes have been uploaded in the Git-Hub page
         self.parser.add_argument('--is_training', type=bool, default=True, help='is training')
         self.parser.add_argument('--epochs', type=int, default=100, help='epoch')
         self.parser.add_argument('--step', type=int, default=1, help='step')
-        self.parser.add_argument('--batch_size', type=int, default=32, help='batch size')
+        self.parser.add_argument('--batch_size', type=int, default=128, help='batch size')
         self.parser.add_argument('--learning_rate', type=float, default=0.0005, help='learning rate')
         self.parser.add_argument('--dropout', type=float, default=0.3, help='drop out')
         self.parser.add_argument('--site_num', type=int, default=49, help='total number of road')
