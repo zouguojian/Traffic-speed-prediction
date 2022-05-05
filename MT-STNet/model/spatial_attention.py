@@ -175,6 +175,7 @@ def multihead_attention(key_emb,
 
         # Activation
         outputs = tf.nn.softmax(outputs)  # (h*N, T_q, T_k)
+        weights=outputs
 
         # Query Masking
         query_masks = tf.sign(tf.abs(tf.reduce_sum(que_emb, axis=-1)))  # (N, T_q)
@@ -197,7 +198,7 @@ def multihead_attention(key_emb,
         # Normalize
         # outputs = normalize(outputs) # (N, T_q, C)
 
-    return outputs
+    return outputs,weights
 
 
 def feedforward(inputs, num_units=[2048, 512], scope="multihead_attention", reuse=None):
@@ -310,7 +311,7 @@ class Transformer():
             for i in range(self.num_blocks):
                 with tf.variable_scope("num_blocks_{}".format(i)):
                     ### Multihead Attention
-                    self.enc = multihead_attention(key_emb=self.en_emb,
+                    self.enc,self.weights = multihead_attention(key_emb=self.en_emb,
                                                    que_emb=self.en_emb,
                                                    queries=self.enc,
                                                    keys=self.enc,
@@ -323,4 +324,4 @@ class Transformer():
                     self.enc = feedforward(self.enc, num_units=[4 * self.hidden_units, self.hidden_units])
                     self.enc = self.enc + self.en_emb
         print('enc shape is : ', self.enc.shape)
-        return self.enc
+        return self.enc,self.weights

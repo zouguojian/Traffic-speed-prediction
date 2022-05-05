@@ -5,7 +5,6 @@ import argparse
 from model.hyparameter import parameter
 import pandas as pd
 
-train_file='/Users/guojianzou/Traffic-flow-prediction/MT-STNet/data/train.csv'
 class DataClass(object):
     def __init__(self, hp=None):
         '''
@@ -25,7 +24,7 @@ class DataClass(object):
         self.get_data(self.hp.file_train)
         self.length=self.data.shape[0]                        # data length
         self.get_max_min(self.data)                           # max and min values' dictionary
-        self.normalization(self.data, ['flow'], hp.normalize) # normalization
+        self.normalization(self.data, ['speed'], hp.normalize) # normalization
 
     def get_data(self, file_path=None):
         '''
@@ -78,7 +77,7 @@ class DataClass(object):
             yield (data[low * self.site_num : (low + self.input_length) * self.site_num, 5:6],
                    data[low * self.site_num : (low + self.input_length + self.output_length) * self.site_num, 2],
                    data[low * self.site_num : (low + self.input_length + self.output_length) * self.site_num, 3],
-                   data[low * self.site_num : (low + self.input_length + self.output_length) * self.site_num, 4]//5,
+                   data[low * self.site_num : (low + self.input_length + self.output_length) * self.site_num, 4]//15,
                    label)
             if self.is_training:
                 low += self.step

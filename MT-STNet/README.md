@@ -26,10 +26,10 @@ tf.disable_v2_behavior()；
 
 > Embedding size is 256  
 
-MAE is : 6.119343
-RMSE is : 9.470411
-R is: 0.972230
-R^$2$ is: 0.94452
+MAE is : 6.096133  
+RMSE is : 9.411343  
+R is: 0.972302  
+R^$2$ is: 0.945214  
 
 没加gcn
 MAE is : 6.133067
