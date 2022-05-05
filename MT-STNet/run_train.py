@@ -127,7 +127,7 @@ class Model(object):
             print('h_emd shape is : ', self.h_emd.shape)
 
         with tf.variable_scope('mimute'):
-            self.m_emb = embedding(self.placeholders['minute'], vocab_size=12, num_units=self.hp.emb_size,
+            self.m_emb = embedding(self.placeholders['minute'], vocab_size=4, num_units=self.hp.emb_size,
                                    scale=False, scope="minute_embed")
             self.m_emd = tf.reshape(self.m_emb,
                                     shape=[self.hp.batch_size, self.hp.input_length + self.hp.output_length,
@@ -169,7 +169,7 @@ class Model(object):
             in_position = self.p_emd[:, :self.hp.input_length, :, :]
 
             encoder=Encoder_ST(hp=self.hp, placeholders=self.placeholders, model_func=self.model_func)
-            encoder_out=encoder.encoder_spatio_temporal(features=features,
+            encoder_out,self.weights=encoder.encoder_spatio_temporal(features=features,
                                                         day=in_day,
                                                         hour=in_hour,
                                                         minute=in_mimute,
@@ -285,11 +285,11 @@ class Model(object):
         if not self.hp.is_training:
             print('the model weights has been loaded:')
             self.saver.restore(self.sess, model_file)
-            # self.saver.save(self.sess, save_path='gcn/model/' + 'model.ckpt')
+            # self.saver.save(self.sess, save_path='weights/weights/' + 'model.ckpt')
 
         iterate_test = data_load.DataClass(hp=self.hp)
         test_next = iterate_test.next_batch(batch_size=self.hp.batch_size, epoch=1, is_training=False)
-        max, min = iterate_test.max_dict['flow'], iterate_test.min_dict['flow']
+        max, min = iterate_test.max_dict['speed'], iterate_test.min_dict['speed']
         print(max, min)
 
         # '''
@@ -306,7 +306,8 @@ class Model(object):
             feed_dict = construct_feed_dict(features, self.adj, label, day, hour, minute, self.placeholders, site_num=self.hp.site_num)
             feed_dict.update({self.placeholders['dropout']: 0.0})
 
-            pre = self.sess.run((self.pre), feed_dict=feed_dict)
+            pre,weights = self.sess.run((self.pre,self.weights), feed_dict=feed_dict)
+            print(weights.shape,weights)
             label_list.append(label)
             predict_list.append(pre)
 

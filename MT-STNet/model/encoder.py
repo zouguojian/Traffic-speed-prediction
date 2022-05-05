@@ -48,7 +48,7 @@ class Encoder_ST(object):
         features = tf.reshape(x, shape=[-1, self.hp.site_num, self.hp.emb_size])
 
         m = Transformer(self.hp)
-        x = m.encoder(inputs=features,
+        x,weights = m.encoder(inputs=features,
                       input_length=self.hp.input_length,
                       day=day,
                       hour=hour,
@@ -78,7 +78,7 @@ class Encoder_ST(object):
         w_1 = tf.Variable(tf.truncated_normal(shape=[self.hp.emb_size,self.hp.emb_size]), name='w_1')
         w_2 = tf.Variable(tf.truncated_normal(shape=[self.hp.emb_size,self.hp.emb_size]), name='w_2')
         bias = tf.Variable(tf.truncated_normal(shape=[self.hp.emb_size]), name='bias')
-        z = tf.nn.sigmoid(tf.add(tf.add_n([tf.matmul(x,w_1), tf.matmul(encoder_gcn_out,w_2)]),bias))
+        z = tf.nn.sigmoid(tf.add(tf.add_n([tf.layers.dense(x,self.hp.emb_size,name='w_1'), tf.layers.dense(x,self.hp.emb_size,name='w_2')]),bias))
         encoder_out = tf.multiply(z, x) + tf.multiply(1 - z, encoder_gcn_out)
         encoder_out = tf.reshape(encoder_out, shape=[self.hp.batch_size, self.hp.input_length, self.hp.site_num, self.hp.emb_size])
 
@@ -92,4 +92,4 @@ class Encoder_ST(object):
         # trick
         # encoder_out = tf.add_n([x, encoder_outs, self.p_emd])
         # encoder_out = x + encoder_gcn_out
-        return encoder_out
+        return encoder_out,weights
