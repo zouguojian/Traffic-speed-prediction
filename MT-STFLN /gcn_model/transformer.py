@@ -157,6 +157,7 @@ def multihead_attention(key_emb,
         outputs = outputs / (K_.get_shape().as_list()[-1] ** 0.5)
 
         # Key Masking
+        """ 对key的填充部分就行mask，如填充了0的地方 """
         key_masks = tf.sign(tf.abs(tf.reduce_sum(key_emb, axis=-1))) # (N, T_k)
         key_masks = tf.tile(key_masks, [num_heads, 1]) # (h*N, T_k)
         key_masks = tf.tile(tf.expand_dims(key_masks, 1), [1, tf.shape(queries)[1], 1]) # (h*N, T_q, T_k)
@@ -177,6 +178,7 @@ def multihead_attention(key_emb,
         outputs = tf.nn.softmax(outputs) # (h*N, T_q, T_k)
 
         # Query Masking
+        """ 对query的填充部分就行mask，如填充了0的地方 """
         query_masks = tf.sign(tf.abs(tf.reduce_sum(que_emb, axis=-1))) # (N, T_q)
         query_masks = tf.tile(query_masks, [num_heads, 1]) # (h*N, T_q)
         query_masks = tf.tile(tf.expand_dims(query_masks, -1), [1, 1, tf.shape(keys)[1]]) # (h*N, T_q, T_k)
@@ -359,7 +361,7 @@ class Transformer():
                                                     num_heads=self.num_heads,
                                                     dropout_rate=self.dropout_rate,
                                                     is_training=self.is_training,
-                                                    causality=True,
+                                                    causality=False,
                                                     scope='vanilla_attention')
                     ### Feed Forward
                     self.outputs = feedforward(self.dec, num_units=[4*self.hidden_units, self.hidden_units])
