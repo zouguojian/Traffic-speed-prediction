@@ -13,7 +13,7 @@ import datetime
 
 
 def pollution():
-    rootdir = '/Users/guojianzou/Downloads/站点_20200101-20201231'
+    rootdir = '/Users/guojianzou/Downloads/站点_20210101-20210904'
 
     # 2924A
     # 1488A
@@ -66,7 +66,7 @@ def pollution():
 # plt.show()
 
 def combine_pollution():
-    data1=pd.read_csv('pollution.csv', encoding='utf-8').values
+    data1=pd.read_csv('pollution1.csv', encoding='utf-8').values
 
     keys=['Time', 'AQI', 'PM2.5', 'PM2.5_24h', 'PM10', 'PM10_24h', 'SO2', 'SO2_24h', 'NO2', 'NO2_24h', 'O3', 'O3_24h', 'O3_8h', 'O3_8h_24h', 'CO', 'CO_24h']
     file = open('pollution_train.csv', 'w', encoding='utf-8')
@@ -120,7 +120,7 @@ def train_():
         writer.writerow(list(d1.values[i]))
     file.close()
 
-train_()
+# train_()
 
 
 def ymdh():
@@ -137,3 +137,5 @@ def ymdh():
     file.close()
 
 # ymdh()
+
+
