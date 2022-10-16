@@ -170,7 +170,10 @@ def label_smoothing(inputs, epsilon=0.1):
 class BridgeTransformer():
     def __init__(self, arg):
         self.arg = arg
+        self.emb_size=self.arg.emb_size
         self.is_training = arg.is_training
+        self.input_length=self.arg.input_length
+        self.output_length=self.arg.output_length
         self.hidden_units = arg.emb_size
         self.batch = arg.batch_size
         self.site_num = arg.site_num
@@ -179,28 +182,36 @@ class BridgeTransformer():
         self.num_blocks = arg.num_blocks
         self.dropout_rate = arg.dropout
 
-    def encoder(self, hiddens, hidden, hidden_units=64, num_heads=1, num_blocks = 1, dropout_rate = 0.0, is_training=True):
+    def encoder(self, hiddens, hidden, num_heads=1, num_blocks = 1):
         '''
-        :param inputs: [batch , time, site num, hidden size]
-        :param day: [batch , time, site num, hidden size]
-        :param hour: [batch , time, site num, hidden size]
-        :return:
+        :param hiddens: [N, input_length, emb_size]
+        :param hidden: [N, output_length, emb_size]
+        :param hidden_units:
+        :param num_heads:
+        :param num_blocks:
+        :param dropout_rate:
+        :param is_training:
+        :return: [N, output_length, site_num, emb_size]
         '''
-
         with tf.variable_scope("encoder"):
-            enc = tf.layers.dense(hiddens, hidden_units, name='enc', reuse=tf.AUTO_REUSE)
-            dec = tf.layers.dense(hidden, hidden_units, name='dec', reuse=tf.AUTO_REUSE)
+            encoder_outs= tf.reshape(tf.transpose(hiddens,[0,2,1,3]), shape=[-1, self.input_length, self.emb_size])
+            decoder_outs= tf.reshape(tf.transpose(hidden,[0,2,1,3]), shape=[-1, self.output_length, self.emb_size])
+
+            enc = tf.layers.dense(encoder_outs, self.hidden_units, name='enc')
+            dec = tf.layers.dense(decoder_outs, self.hidden_units, name='dec')
             ## Blocks
             for i in range(num_blocks):
                 with tf.variable_scope("num_blocks_{}".format(i)):
                     ### Multihead Attention
                     dec = multihead_attention(queries=dec,
                                               keys=enc,
-                                              num_units=hidden_units,
+                                              num_units=self.hidden_units,
                                               num_heads=num_heads,
-                                              dropout_rate=dropout_rate,
-                                              is_training=is_training)
+                                              dropout_rate=self.dropout_rate,
+                                              is_training=self.is_training)
                     ### Feed Forward
-                    dec = feedforward(dec, num_units=[4 * hidden_units, hidden_units])
-        print('temporal_attention layer output, dec shape is : ', dec.shape)
+                    dec = feedforward(dec, num_units=[4 * self.hidden_units, self.hidden_units])
+        dec=tf.reshape(dec,shape=[-1, self.site_num, self.output_length, self.hidden_units])
+        dec=tf.transpose(dec, [0, 2, 1, 3])
+        print('bridge layer output, dec shape is : ', dec.shape)
         return dec

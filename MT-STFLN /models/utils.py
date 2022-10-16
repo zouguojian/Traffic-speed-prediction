@@ -160,21 +160,22 @@ def preprocess_adj(adj):
 
 
 
-def construct_feed_dict(features, adj, labels,  day, hour, x_p, label_p, placeholders):
+def construct_feed_dict(x_s, adj, label_s, day, hour, minute, x_p, label_p, placeholders):
     """Construct feed dictionary."""
     feed_dict = dict()
-    feed_dict.update({placeholders['position']: np.array([[i for i in range(49)]],dtype=np.int32)})
-    feed_dict.update({placeholders['labels']: labels})
+    feed_dict.update({placeholders['position']: np.array([[i for i in range(108)]],dtype=np.int32)})
+    feed_dict.update({placeholders['labels_s']: label_s})
     feed_dict.update({placeholders['day']: day})
     feed_dict.update({placeholders['hour']: hour})
-    feed_dict.update({placeholders['features']: features})
+    feed_dict.update({placeholders['minute']: minute})
+    feed_dict.update({placeholders['features_s']: x_s})
     feed_dict.update({placeholders['indices_i']: adj[0]})
     feed_dict.update({placeholders['values_i']: adj[1]})
     feed_dict.update({placeholders['dense_shape_i']: adj[2]})
     feed_dict.update({placeholders['features_p']: x_p})
     feed_dict.update({placeholders['labels_p']: label_p})
     # feed_dict.update({placeholders['support'][i]: support[i] for i in range(len(support))})
-    feed_dict.update({placeholders['num_features_nonzero']: features[1].shape})
+    feed_dict.update({placeholders['num_features_nonzero']: x_s[0].shape})
     return feed_dict
 
 
@@ -200,3 +201,49 @@ def chebyshev_polynomials(adj, k):
 
     return sparse_to_tuple(t_k)
 
+import matplotlib.pyplot as plt
+def describe(label, predict):
+    '''
+    :param label:
+    :param predict:
+    :param prediction_size:
+    :return:
+    '''
+    plt.figure()
+    # Label is observed value,Blue
+    plt.plot(label[0:], 'b', label=u'actual value')
+    # Predict is predicted value，Red
+    plt.plot(predict[0:], 'r', label=u'predicted value')
+    # use the legend
+    plt.legend()
+    # plt.xlabel("time(hours)", fontsize=17)
+    # plt.ylabel("pm$_{2.5}$ (ug/m$^3$)", fontsize=17)
+    # plt.title("the prediction of pm$_{2.5}", fontsize=17)
+    plt.show()
+
+def metric(pred, label):
+    with np.errstate(divide='ignore', invalid='ignore'):
+        mask = np.not_equal(label, 0)
+        mask = mask.astype(np.float32)
+        mask /= np.mean(mask)
+        mae = np.abs(np.subtract(pred, label)).astype(np.float32)
+        rmse = np.square(mae)
+        mape = np.divide(mae, label)
+        # mae = np.nan_to_num(mae * mask)
+        # wape = np.divide(np.sum(mae), np.sum(label))
+        mae = np.mean(mae)
+        # rmse = np.nan_to_num(rmse * mask)
+        rmse = np.sqrt(np.mean(rmse))
+        mape = np.nan_to_num(mape * mask)
+        mape = np.mean(mape)
+        cor = np.mean(np.multiply((label - np.mean(label)),
+                                  (pred - np.mean(pred)))) / (np.std(pred) * np.std(label))
+        sse = np.sum((label - pred) ** 2)
+        sst = np.sum((label - np.mean(label)) ** 2)
+        r2 = 1 - sse / sst  # r2_score(y_actual, y_predicted, multioutput='raw_values')
+        print('mae is : %.6f'%mae)
+        print('rmse is : %.6f'%rmse)
+        print('mape is : %.6f'%mape)
+        print('r is : %.6f'%cor)
+        print('r$^2$ is : %.6f'%r2)
+    return mae, rmse, mape, cor, r2

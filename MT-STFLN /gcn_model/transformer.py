@@ -166,6 +166,7 @@ def multihead_attention(key_emb,
         outputs = tf.where(tf.equal(key_masks, 0), paddings, outputs) # (h*N, T_q, T_k)
 
         # Causality = Future blinding
+        '''下三角，屏蔽未来的影响'''
         if causality:
             diag_vals = tf.ones_like(outputs[0, :, :]) # (T_q, T_k)
             tril = tf.linalg.LinearOperatorLowerTriangular(diag_vals).to_dense() # (T_q, T_k)

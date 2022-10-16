@@ -187,7 +187,7 @@ class TemporalTransformer():
         :return:
         '''
 
-        with tf.variable_scope("encoder"):
+        with tf.variable_scope("entemporal_coder"):
             enc = tf.layers.dense(hiddens, hidden_units, name='enc', reuse=tf.AUTO_REUSE)
             dec = tf.layers.dense(hidden, hidden_units, name='dec', reuse=tf.AUTO_REUSE)
             ## Blocks

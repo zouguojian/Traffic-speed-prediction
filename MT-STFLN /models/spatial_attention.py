@@ -213,7 +213,7 @@ class SpatialTransformer():
         :return:
         '''
 
-        with tf.variable_scope("encoder"):
+        with tf.variable_scope("spatial_encoder"):
             # embedding
             self.en_emb = tf.reshape(inputs, shape=[self.batch * input_length, self.site_num, self.hidden_units])
             day = tf.reshape(day, shape=[self.batch * input_length, self.site_num, self.hidden_units])
