@@ -1,8 +1,11 @@
 # Traffic-speed-prediction
 
-Model file: 
-1. MT-STGIN [[codes link]](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN%20): Multi-task learning network for highway traffic speed prediction
-2. ST-ANet [[codes link]](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/ST-ANet): Spatio-temporal Attention learning network
+## Model Item
+### 1. MT-STGIN [[codes link]](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN%20)
+>Multi-task learning network for highway traffic speed prediction
+
+### 2. ST-ANet [[codes link]](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/ST-ANet)
+>Spatio-temporal Attention learning network
 
 
 MT-STGIN has been submitted to IEEE Transactions on Intelligent Transportation Systems TITS journal!!! 
