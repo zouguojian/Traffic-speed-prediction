@@ -11,10 +11,10 @@
 >Spatiotemporal Encoder-Decoder Neural Network
 
 
-MT-STGIN has been submitted to IEEE Transactions on Intelligent Transportation Systems TITS journal!!!   
-RST-Net has been submitted to IEEE Transactions on Intelligent Transportation Systems TITS journal!!!   
+MT-STGIN has been submitted to IEEE Transactions on Intelligent Transportation Systems TITS journal;  
+RST-Net has been submitted to IEEE Transactions on Intelligent Transportation Systems TITS journal;   
 ST-ANet has been accepted in Computer Engineering;  
-Both codes have been uploaded in the Git-Hub page [[codes link]](https://github.com/zouguojian/Traffic-speed-prediction)  
+Both codes have been uploaded in the Git-Hub page [[codes link]](https://github.com/zouguojian/Traffic-speed-prediction).  
 
 
 #### For MT-STGIN and baselines, the HyperParameters setting as followings:  
