@@ -17,7 +17,7 @@ ST-ANet has been accepted in Computer Engineering;
 Both codes have been uploaded in the Git-Hub page [[codes link]](https://github.com/zouguojian/Traffic-speed-prediction)  
 
 
-#### For MT-STFLN and baselines, the HyperParameters setting as followings:  
+#### For MT-STGIN and baselines, the HyperParameters setting as followings:  
         self.parser.add_argument('--save_path', type=str, default='gcn/', help='save path')
         # you can select one path address used to save the model's parameters;
         # and modify the default path name, such as default='gcn/'.
