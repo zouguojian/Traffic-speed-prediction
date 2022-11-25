@@ -2,5 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/RST-Net/baseline/dcrnn" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/RST-Net/baseline/stgrat" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/STGIN/baseline/st_grat" vcs="Git" />
   </component>
 </project>

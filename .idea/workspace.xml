@@ -1,7 +1,193 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="24bdc666-7506-4335-a92c-dcef4fd05f11" name="Default Changelist" comment="" />
+    <list default="true" id="24bdc666-7506-4335-a92c-dcef4fd05f11" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /.idea/MT-STFLN .iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/adjacent.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/data_hour/insert_replace_zero.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/data_hour/process.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/data_hour/sample.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/pollution/generator_15min.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/pollution/process.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/pollution/train_final.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/pollution/train_p.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/pollution/train_p_.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/speed/adjacent.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/speed/combine_15.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/speed/distances.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/speed/dragon_dragon_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/speed/dragon_dragon_60.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/speed/dragon_toll_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/speed/dragon_toll_60.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/speed/station_index.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/speed/toll_dragon_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/speed/toll_dragon_60.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/speed/train_15.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/speed/train_15.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/speed/收费站_门架_5分钟.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/speed/门架_收费站_5分钟.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /data/speed/门架_门架_5分钟.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /inference.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/bridge.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/bridge_lstm.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/data_next.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/decoder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/embedding.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/encoder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/hyparameter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/inference.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/inits.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/layers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/lstm.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/metrics.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/spatial_attention.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/st_block.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/temporal_attention.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /models/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /results/AST-GAT.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /results/BILSTM.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /results/FI-RNN.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /results/GMAN.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /results/LSTM.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /results/MDL.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /results/PSPNN.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /results/STGIN.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /results/T-GCN.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /run_dynamic_inference.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /run_train.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /utils/layers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MT-STGIN /visualize.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/PEMS" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/PEMSD4/PEMSD4.dyna" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/PEMSD4/PEMSD4.geo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/PEMSD4/PEMSD4.rel" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/PEMSD4/SE.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/PEMSD4/adjacent.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/PEMSD4/config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/PEMSD4/pems04.npz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/node2vec/generateSE.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/node2vec/node2vec.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/we/SE.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/we/adjacent.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/we/adjacent.npz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/we/adjacent.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/we/data_pro.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/we/train.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/data/we/train.npz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/log(PEMS)" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /.idea/MT-STFLN .iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /API/adjacent.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /API/inference.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /API/model.pb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model/arima.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model/bi_lstm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model/cnn.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model/cnn_b.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model/convlstm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model/fi_gru.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model/gman.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model/ha.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model/multi_convlstm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model/rnn_lstm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model/svm_inf.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model/tf_untils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model_p/bi_lstm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model_p/cnn.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model_p/lstm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model_p/rlstm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model_p/rlstm_lstm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model_p/trans/lstm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /comparison_model_p/trans/trans.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /data/adjacent.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /gcn_model/data_process.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /gcn_model/data_read.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /gcn_model/gat.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /gcn_model/hyparameter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /gcn_model/inits.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /gcn_model/layers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /gcn_model/metrics.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /gcn_model/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /gcn_model/transformer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /gcn_model/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /inference.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /loss.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /model/data_process.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /model/decoder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /model/encoder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /model/encoder_lstm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /model/encoder_rlstm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /model/hyparameter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /model/model_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /model/normalization.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /model/rlstm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /model/t_attention.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/bridge.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/bridge_lstm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/data_next.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/decoder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/embedding.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/encoder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/hyparameter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/inference.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/inits.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/layers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/lstm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/metrics.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/spatial_attention.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/st_block.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/temporal_attention.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /models/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /results/results_label.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /results/results_predict.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /run_attention.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /run_gcn_rlstm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /run_model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /run_p.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /run_train.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /train_run_p.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /utils/layers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /weights/lstm/checkpoint" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /weights/lstm/model.ckpt.data-00000-of-00001" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /weights/lstm/model.ckpt.index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /weights/lstm/model.ckpt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /weights/mt_stfln/checkpoint" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /weights/mt_stfln/model.ckpt.data-00000-of-00001" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /weights/mt_stfln/model.ckpt.index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /weights/mt_stfln/model.ckpt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /weights/trans/checkpoint" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /weights/trans/model.ckpt.data-00000-of-00001" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /weights/trans/model.ckpt.index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STFLN /weights/trans/model.ckpt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/STGIN/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/STGIN/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STGIN/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/STGIN/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STGIN/baseline/gman/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/STGIN/baseline/gman/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STGIN/baseline/st_grat" beforeDir="false" afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STGIN/baseline/st_grat/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STGIN/baseline/st_grat/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STGIN/baseline/st_grat/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/STGIN/baseline/st_grat/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STGIN/baseline/svm/svm.py" beforeDir="false" afterPath="$PROJECT_DIR$/STGIN/baseline/svm/svm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STGIN/results/LSTM.csv" beforeDir="false" afterPath="$PROJECT_DIR$/STGIN/results/LSTM.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STGIN/run_baseline.py" beforeDir="false" afterPath="$PROJECT_DIR$/STGIN/run_baseline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STGIN/run_gman.py" beforeDir="false" afterPath="$PROJECT_DIR$/STGIN/run_gman.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/STGIN/visualize.py" beforeDir="false" afterPath="$PROJECT_DIR$/STGIN/visualize.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,49 +198,73 @@
     <session id="1090125863">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="21" />
-          <entry key="project.open.time.1" value="3" />
+          <entry key="project.closed" value="22" />
+          <entry key="project.open.time.1" value="4" />
           <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.4" value="8" />
           <entry key="project.open.time.5" value="4" />
           <entry key="project.open.time.6" value="2" />
-          <entry key="project.opened" value="21" />
+          <entry key="project.opened" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="csv" value="68" />
           <entry key="delete_path" value="4" />
-          <entry key="py" value="275" />
+          <entry key="py" value="296" />
           <entry key="txt" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="83" />
-          <entry key="Python" value="275" />
+          <entry key="Python" value="296" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="16714" />
+          <entry key="py" value="17135" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="16714" />
+          <entry key="Python" value="17135" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MT-STFLN /run_attention.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MT-STGIN /run_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="29" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+            <state relative-caret-position="169">
+              <caret line="212" column="19" lean-forward="true" selection-start-line="212" selection-start-column="19" selection-end-line="212" selection-end-column="19" />
+              <folding>
+                <element signature="e#503#534#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MT-STGIN /models/st_block.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-729">
+              <caret line="78" column="21" lean-forward="true" selection-start-line="78" selection-start-column="21" selection-end-line="78" selection-end-column="21" />
+              <folding>
+                <element signature="e#22#77#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MT-STGIN /models/hyparameter.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-20">
+              <caret line="5" column="26" lean-forward="true" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -91,14 +301,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/gcn_model/base_gattn.py" />
-        <option value="$PROJECT_DIR$/utils/layers.py" />
-        <option value="$PROJECT_DIR$/gcn_model/data_read.py" />
-        <option value="$PROJECT_DIR$/data/data_min/process.py" />
-        <option value="$PROJECT_DIR$/model/encoder.py" />
-        <option value="$PROJECT_DIR$/t.py" />
-        <option value="$PROJECT_DIR$/gcn_model/transformer.py" />
-        <option value="$PROJECT_DIR$/model/encoder_lstm.py" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$USER_HOME$/.conda/envs/prediction/lib/python3.6/site-packages/tensorflow/python/client/session.py" />
         <option value="$PROJECT_DIR$/inference.py" />
@@ -139,20 +341,33 @@
         <option value="$PROJECT_DIR$/run_attention.py" />
         <option value="$PROJECT_DIR$/data/data_hour/insert_replace_zero.py" />
         <option value="$PROJECT_DIR$/MT-STFLN /run_attention.py" />
+        <option value="$PROJECT_DIR$/MT-STGIN /models/utils.py" />
+        <option value="$PROJECT_DIR$/MT-STGIN /models/data_next.py" />
+        <option value="$PROJECT_DIR$/MT-STGIN /models/encoder.py" />
+        <option value="$PROJECT_DIR$/MT-STGIN /models/inference.py" />
+        <option value="$PROJECT_DIR$/MT-STGIN /models/hyparameter.py" />
+        <option value="$PROJECT_DIR$/MT-STGIN /models/decoder.py" />
+        <option value="$PROJECT_DIR$/MT-STGIN /run_train.py" />
+        <option value="$PROJECT_DIR$/MT-STGIN /models/spatial_attention.py" />
+        <option value="$PROJECT_DIR$/MT-STGIN /models/temporal_attention.py" />
+        <option value="$PROJECT_DIR$/MT-STGIN /models/bridge.py" />
+        <option value="$PROJECT_DIR$/MT-STGIN /models/st_block.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="24" />
-    <option name="y" value="24" />
+    <option name="y" value="23" />
     <option name="width" value="1416" />
     <option name="height" value="796" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -163,25 +378,37 @@
             <path>
               <item name="Traffic-speed-prediction" type="b2602c69:ProjectViewProjectNode" />
               <item name="Traffic-speed-prediction" type="462c0819:PsiDirectoryNode" />
-              <item name="MT-STFLN " type="462c0819:PsiDirectoryNode" />
+              <item name="MT-STGIN " type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Traffic-speed-prediction" type="b2602c69:ProjectViewProjectNode" />
               <item name="Traffic-speed-prediction" type="462c0819:PsiDirectoryNode" />
-              <item name="MT-STFLN " type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="MT-STGIN " type="462c0819:PsiDirectoryNode" />
+              <item name="baseline" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Traffic-speed-prediction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Traffic-speed-prediction" type="462c0819:PsiDirectoryNode" />
+              <item name="MT-STGIN " type="462c0819:PsiDirectoryNode" />
+              <item name="baseline" type="462c0819:PsiDirectoryNode" />
+              <item name="gman" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Traffic-speed-prediction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Traffic-speed-prediction" type="462c0819:PsiDirectoryNode" />
+              <item name="MT-STGIN " type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/guojianzou/Traffic-speed-prediction/gcn_model/data_process.py" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -195,28 +422,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.insert_replace_zero">
-    <configuration name="inference" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Traffic-speed-prediction" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/API" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/API/inference.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.run_train">
     <configuration name="insert_replace_zero" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Traffic-speed-prediction" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -280,6 +486,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="run_train" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Traffic-speed-prediction" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MT-STGIN " />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MT-STGIN /run_train.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="svm_inf" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Traffic-speed-prediction" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -304,17 +531,17 @@
     <list>
       <item itemvalue="Python.run_model" />
       <item itemvalue="Python.svm_inf" />
-      <item itemvalue="Python.inference" />
       <item itemvalue="Python.run_p" />
       <item itemvalue="Python.insert_replace_zero" />
+      <item itemvalue="Python.run_train" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.run_train" />
         <item itemvalue="Python.insert_replace_zero" />
         <item itemvalue="Python.run_p" />
         <item itemvalue="Python.run_model" />
         <item itemvalue="Python.svm_inf" />
-        <item itemvalue="Python.inference" />
       </list>
     </recent_temporary>
   </component>
@@ -332,14 +559,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="24" y="24" width="1416" height="796" extended-state="0" />
+    <frame x="24" y="23" width="1416" height="796" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23010753" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32954547" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.38920453" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.19602273" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39914772" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -357,25 +585,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/train.csv" />
-    <entry file="file://$PROJECT_DIR$/comparison_model/ha.py" />
-    <entry file="file://$PROJECT_DIR$/comparison_model/hmm.py" />
-    <entry file="file://$PROJECT_DIR$/comparison_model/arima.py" />
-    <entry file="file://$PROJECT_DIR$/comparison_model/svm.py" />
-    <entry file="file://$PROJECT_DIR$/gcn_model/layers.py" />
-    <entry file="file://$PROJECT_DIR$/comparison_model/lstm.py" />
-    <entry file="file://$PROJECT_DIR$/comparison_model/fi_rnns.py" />
-    <entry file="file://$PROJECT_DIR$/comparison_model/svm_inf.py" />
-    <entry file="file://$PROJECT_DIR$/comparison_model/convlstm.py" />
-    <entry file="file://$PROJECT_DIR$/comparison_model/fi_gru.py" />
-    <entry file="file://$PROJECT_DIR$/test.py" />
-    <entry file="file://$PROJECT_DIR$/comparison_model/rnn_lstm.py" />
-    <entry file="file://$PROJECT_DIR$/comparison_model/multi_convlstm.py" />
-    <entry file="file://$PROJECT_DIR$/run_model.py" />
-    <entry file="file://$PROJECT_DIR$/inference.py" />
-    <entry file="file://$PROJECT_DIR$/comparison_model/bi_lstm.py" />
-    <entry file="file://$PROJECT_DIR$/comparison_model_p/bi_lstm.py" />
-    <entry file="file://$PROJECT_DIR$/comparison_model/cnn_b.py" />
     <entry file="file://$PROJECT_DIR$/comparison_model/cnn.py" />
     <entry file="file://$PROJECT_DIR$/model/encoder_rlstm.py" />
     <entry file="file://$PROJECT_DIR$/model/encoder.py" />
@@ -429,6 +638,152 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="18" column="29" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.conda/envs/prediction/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="522" selection-start-line="522" selection-end-line="522" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MT-STGIN /models/inits.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#22#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MT-STGIN /models/spatial_attention.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="610">
+          <caret line="221" column="17" lean-forward="true" selection-start-line="221" selection-start-column="17" selection-end-line="221" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MT-STGIN /models/encoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="18" column="54" lean-forward="true" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MT-STGIN /models/inference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="21" column="63" selection-start-line="21" selection-start-column="63" selection-end-line="21" selection-end-column="63" />
+          <folding>
+            <element signature="e#22#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MT-STGIN /models/temporal_attention.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="205" column="18" lean-forward="true" selection-start-line="205" selection-start-column="18" selection-end-line="205" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MT-STGIN /models/bridge.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="199" column="20" selection-start-line="199" selection-start-column="20" selection-end-line="199" selection-end-column="23" />
+          <folding>
+            <element signature="e#22#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MT-STGIN /models/data_next.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="11" lean-forward="true" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+          <folding>
+            <element signature="e#22#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MT-STGIN /baseline/gman/tf_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="706">
+          <caret line="53" column="34" lean-forward="true" selection-start-line="53" selection-start-column="34" selection-end-line="53" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MT-STGIN /models/decoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="52" lean-forward="true" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/STGIN/run_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3298" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/STGIN/models/bridge.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2343" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/STGIN/models/decoder.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/STGIN/models/encoder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-69" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MT-STGIN /run_dynamic_inference.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1577">
+          <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+          <folding>
+            <element signature="e#503#534#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MT-STGIN /models/st_block.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-729">
+          <caret line="78" column="21" lean-forward="true" selection-start-line="78" selection-start-column="21" selection-end-line="78" selection-end-column="21" />
+          <folding>
+            <element signature="e#22#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MT-STGIN /run_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="212" column="19" lean-forward="true" selection-start-line="212" selection-start-column="19" selection-end-line="212" selection-end-column="19" />
+          <folding>
+            <element signature="e#503#534#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MT-STGIN /models/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="928">
+          <caret line="236" column="74" selection-start-line="236" selection-start-column="74" selection-end-line="236" selection-end-column="74" />
+          <folding>
+            <element signature="e#22#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MT-STGIN /models/hyparameter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-20">
+          <caret line="5" column="26" lean-forward="true" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
         </state>
       </provider>
     </entry>
