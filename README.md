@@ -2,7 +2,7 @@
 
 ## Model Item
 ### 1. MT-STGIN [[codes link]](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN)
->Multi-task learning Network for Highway Traffic Speed Prediction
+>Multi-Task-Based Spatiotemporal Generative Inference Network: A Novel Framework for Predicting the Highway Traffic Speed
 
 * Note that, for the MT-STGIN program, it should be reproduced on the TensorFlow version >= 1.13.1. 
 If not, there are some problems will appear in the running stage.
