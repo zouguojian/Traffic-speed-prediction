@@ -7,7 +7,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import learning_curve
 from sklearn.svm import SVR
 
-file='/Users/guojianzou/Traffic-speed-prediction/STGIN/data/speed/'
+file='/Users/guojianzou/Traffic-speed-prediction/MT-STGIN/data/speed/'
 
 class svm_i():
     def __init__(self,
@@ -106,8 +106,8 @@ class svm_i():
             predict_index=time_step
 
             segment=[38, 39, 40, 43, 37]
-            # for site in range(108):
-            for site in segment:
+            for site in range(0, 28):
+            # for site in segment:
                 data1=self.data[(self.data['node']==self.data.values[site][0])]
                 x = data1.values[:, -1]
 
@@ -115,7 +115,7 @@ class svm_i():
 
                 train_size = int(len(x) * 0.8)
                 train_x, train_y, test_x, test_y = x[:train_size],y[:train_size,predict_index], x[train_size:],y[train_size:,predict_index]
-                print(train_x.shape, train_y.shape, test_x.shape,test_y.shape)
+                # print(train_x.shape, train_y.shape, test_x.shape,test_y.shape)
                 # print(data1.shape)
                 # svr = GridSearchCV(SVR(kernel='rbf', gamma=0.1), cv=5,
                 #                    param_grid={"C": [1e0, 1e1, 1e2, 1e3],
