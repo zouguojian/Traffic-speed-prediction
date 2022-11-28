@@ -1,7 +1,7 @@
 # Traffic-speed-prediction
 
 ## Model Item
-### 1. MT-STGIN [[codes link]](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN%20)
+### 1. MT-STGIN [[codes link]](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN)
 >Multi-task learning Network for Highway Traffic Speed Prediction
 
 * Note that, for the MT-STGIN program, it should be reproduced on the TensorFlow version >= 1.13.1. 

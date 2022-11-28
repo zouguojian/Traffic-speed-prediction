@@ -2,29 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24bdc666-7506-4335-a92c-dcef4fd05f11" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/MT-STGIN/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MT-STGIN/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/baseline/gman/tf_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/baseline/gman/tf_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/models/bridge.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/models/bridge.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/models/bridge_lstm.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/models/bridge_lstm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/models/data_next.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/models/data_next.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/models/embedding.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/models/embedding.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/models/hyparameter.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/models/hyparameter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/models/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/models/inference.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/models/inits.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/models/inits.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/models/layers.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/models/layers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/models/lstm.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/models/lstm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/models/mask.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/models/mask.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/models/metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/models/metrics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/models/spatial_attention.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/models/spatial_attention.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/models/st_block.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/models/st_block.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/models/temporal_attention.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/models/temporal_attention.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/models/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/models/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/run_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/run_train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/weights/MT-STGIN-3/model.ckpt.data-00000-of-00001" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/weights/MT-STGIN-3/model.ckpt.data-00000-of-00001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/weights/MT-STGIN-3/model.ckpt.index" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/weights/MT-STGIN-3/model.ckpt.index" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/weights/MT-STGIN-3/model.ckpt.meta" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/weights/MT-STGIN-3/model.ckpt.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -51,14 +28,14 @@
         <counts>
           <entry key="csv" value="68" />
           <entry key="delete_path" value="4" />
-          <entry key="md" value="2" />
+          <entry key="md" value="4" />
           <entry key="py" value="370" />
           <entry key="txt" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Markdown" value="2" />
+          <entry key="Markdown" value="4" />
           <entry key="PLAIN_TEXT" value="84" />
           <entry key="Python" value="370" />
         </counts>
@@ -93,12 +70,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MT-STGIN/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="572">
-                <caret line="49" column="86" selection-start-line="49" selection-start-column="86" selection-end-line="49" selection-end-column="86" />
+              <first_editor relative-caret-position="214">
+                <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="89">
+                <caret line="7" column="65" lean-forward="true" selection-start-line="7" selection-start-column="65" selection-end-line="7" selection-end-column="65" />
               </first_editor>
               <second_editor />
             </state>
@@ -179,7 +168,6 @@
         <option value="$PROJECT_DIR$/MT-STGIN /run_train.py" />
         <option value="$PROJECT_DIR$/MT-STGIN /models/utils.py" />
         <option value="$PROJECT_DIR$/MT-STGIN/baseline/gman/tf_utils.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/MT-STGIN/models/bridge.py" />
         <option value="$PROJECT_DIR$/MT-STGIN/models/spatial_attention.py" />
         <option value="$PROJECT_DIR$/MT-STGIN/models/bridge_lstm.py" />
@@ -198,6 +186,7 @@
         <option value="$PROJECT_DIR$/MT-STGIN/models/hyparameter.py" />
         <option value="$PROJECT_DIR$/MT-STGIN/run_train.py" />
         <option value="$PROJECT_DIR$/MT-STGIN/README.md" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -387,6 +376,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="32" y="106" width="1416" height="796" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23010753" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -588,16 +578,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-389">
-            <caret line="14" column="62" lean-forward="true" selection-start-line="14" selection-start-column="62" selection-end-line="14" selection-end-column="62" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MT-STGIN/models/bridge.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -744,8 +724,18 @@
     <entry file="file://$PROJECT_DIR$/MT-STGIN/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="572">
-            <caret line="49" column="86" selection-start-line="49" selection-start-column="86" selection-end-line="49" selection-end-column="86" />
+          <first_editor relative-caret-position="214">
+            <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="89">
+            <caret line="7" column="65" lean-forward="true" selection-start-line="7" selection-start-column="65" selection-end-line="7" selection-end-column="65" />
           </first_editor>
           <second_editor />
         </state>
