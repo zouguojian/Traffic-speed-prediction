@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24bdc666-7506-4335-a92c-dcef4fd05f11" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STGIN/run_rst.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
