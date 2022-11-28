@@ -1,9 +1,5 @@
 # -- coding: utf-8 --
-import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
-import numpy as np
-import argparse
-import pandas as pd
+from models.inits import *
 
 class DataClass(object):
     def __init__(self, hp=None):

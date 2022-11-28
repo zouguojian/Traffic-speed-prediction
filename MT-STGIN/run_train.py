@@ -17,6 +17,7 @@ axis=2: represents the sparse matrix shape.
 from __future__ import division
 from __future__ import print_function
 from models.utils import *
+from models.inits import *
 from models.models import GCN
 from models.hyparameter import parameter
 from models.embedding import embedding
@@ -28,26 +29,21 @@ from models.inference import InferenceClass
 from models.data_next import DataClass
 from models.bridge import transformAttention
 
-import pandas as pd
-import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
-import numpy as np
 import os
-import argparse
 import datetime
 import csv
 
 tf.reset_default_graph()
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
-logs_path = "board"
-os.environ['CUDA_VISIBLE_DEVICES']='1'
-
-from tensorflow.compat.v1 import ConfigProto
-from tensorflow.compat.v1 import InteractiveSession
-
-config = ConfigProto()
-config.gpu_options.allow_growth = True
-session = InteractiveSession(config=config)
+# logs_path = "board"
+# os.environ['CUDA_VISIBLE_DEVICES']='1'
+#
+# from tensorflow.compat.v1 import ConfigProto
+# from tensorflow.compat.v1 import InteractiveSession
+#
+# config = ConfigProto()
+# config.gpu_options.allow_growth = True
+# session = InteractiveSession(config=config)
 
 
 class Model(object):
@@ -339,10 +335,10 @@ class Model(object):
             pre_s_list = self.re_current(pre_s_list, max_s, min_s)
 
         print('speed prediction result')
-        mae, rmse, mape, cor, r2 = metric(pre_s_list, label_s_list)  # 产生预测指标
-        # for i in range(self.para.output_length):
-        #     print('in the %d time step, the evaluating indicator'%(i+1))
-        #     metric(pre_s_list[:,:,i], label_s_list[:,:,i])
+        mae, rmse, mape, cor, r2 = metric(pre_s_list[:28], label_s_list[:28])  # 产生预测指标
+        for i in range(self.para.output_length):
+            print('in the %d time step, the evaluating indicator'%(i+1))
+            metric(pre_s_list[:28,:,i], label_s_list[:28,:,i])
 
         # describe(label_list, predict_list)   #预测值可视化
         return mae

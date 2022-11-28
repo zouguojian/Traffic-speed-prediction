@@ -1,6 +1,5 @@
 # -- coding: utf-8 --
-import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
+import tensorflow as tf
 
 def conv2d(x, output_dims, kernel_size, stride = [1, 1],
            padding = 'SAME', use_bias = True, activation = tf.nn.relu,

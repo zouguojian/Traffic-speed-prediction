@@ -1,7 +1,6 @@
 # -- coding: utf-8 --
 
-import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
+from models.inits import *
 
 class LstmClass(object):
     def __init__(self, batch_size, layer_num=1, nodes=128, placeholders=None):

@@ -1,12 +1,10 @@
 # -- coding: utf-8 --
-import numpy as np
 import pickle as pkl
 import networkx as nx
 import scipy.sparse as sp
 from scipy.sparse.linalg.eigen.arpack import eigsh
 import sys
-import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
+from models.inits import *
 from baseline.gman import tf_utils
 
 def FC(x, units, activations, bn, bn_decay, is_training, use_bias=True):

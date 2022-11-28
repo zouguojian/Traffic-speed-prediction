@@ -1,7 +1,6 @@
 # -- coding: utf-8 --
 from models.spatial_attention import SpatialTransformer
-import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
+from models.inits import *
 from models.temporal_attention import TemporalTransformer
 from baseline.gman import tf_utils
 from models.utils import *

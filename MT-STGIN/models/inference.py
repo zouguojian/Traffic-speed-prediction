@@ -1,6 +1,5 @@
 # -- coding: utf-8 --
-import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
+from models.inits import *
 from models.temporal_attention import TemporalTransformer
 
 class InferenceClass(object):
@@ -26,12 +25,12 @@ class InferenceClass(object):
         '''
         
         if self.para.model_name == 'MT-STGIN':
-            print(out_hiddens.shape)
-            results_1 = tf.layers.dense(inputs=out_hiddens[:, 0:28], units=64, name='task_1', activation=tf.nn.relu)
+            results_1 = tf.layers.dense(inputs=out_hiddens[:, 0:28], units=64, name='task_1',activation=tf.nn.relu)
+            results_2 = tf.layers.dense(inputs=out_hiddens[:, 28:52], units=64, name='task_2',activation=tf.nn.relu)
+            results_3 = tf.layers.dense(inputs=out_hiddens[:, 52:], units=64, name='task_3',activation=tf.nn.relu)
+
             results_1 = tf.layers.dense(inputs=results_1, units=1, name='task_1_1')
-            results_2 = tf.layers.dense(inputs=out_hiddens[:, 28: 52], units=64, name='task_2', activation=tf.nn.relu)
             results_2 = tf.layers.dense(inputs=results_2, units=1, name='task_2_1')
-            results_3 = tf.layers.dense(inputs=out_hiddens[:, 52:], units=64, name='task_3', activation=tf.nn.relu)
             results_3 = tf.layers.dense(inputs=results_3, units=1, name='task_3_1')
             results_speed = tf.concat([results_1, results_2, results_3], axis=1)
             results_speed = tf.transpose(results_speed, [0, 2, 1, 3])
