@@ -3,20 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a5996bb8-95b5-4352-92c4-dfa99006078b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/gman/tf_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/gman/tf_utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/bridge.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/bridge.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/bridge_lstm.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/bridge_lstm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/data_next.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/data_next.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/embedding.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/embedding.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/inference.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/inits.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/inits.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/layers.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/layers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/metrics.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/metrics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/spatial_attention.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/spatial_attention.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/st_block.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/st_block.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/temporal_attention.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/temporal_attention.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/MT-STGIN.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/MT-STGIN.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baseline/ha/ha.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/ha/ha.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,29 +20,68 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="1" />
+          <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.3" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="1" />
+          <entry key="md" value="1" />
+          <entry key="py" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="1" />
+          <entry key="Markdown" value="1" />
+          <entry key="Python" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="md" value="7" />
+          <entry key="py" value="12" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Markdown" value="7" />
+          <entry key="Python" value="12" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/run_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="275">
+              <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/baseline/ha/ha.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="29" column="32" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
+              <folding>
+                <element signature="e#23#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="167">
+                <caret line="41" column="3" lean-forward="true" selection-start-line="41" selection-start-column="3" selection-end-line="41" selection-end-column="3" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -65,6 +95,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/run_train.py" />
+        <option value="$PROJECT_DIR$/baseline/ha/ha.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -88,6 +120,11 @@
               <item name="MT-STGIN" type="b2602c69:ProjectViewProjectNode" />
               <item name="MT-STGIN" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="MT-STGIN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MT-STGIN" type="462c0819:PsiDirectoryNode" />
+              <item name="baseline" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -110,7 +147,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.ha">
+    <configuration name="ha" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="MT-STGIN" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/baseline/ha" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/baseline/ha/ha.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="run_train" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MT-STGIN" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -132,8 +190,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.run_train" />
+      <item itemvalue="Python.ha" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.ha" />
         <item itemvalue="Python.run_train" />
       </list>
     </recent_temporary>
@@ -153,22 +216,21 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="16" y="23" width="1416" height="796" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24946237" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24946237" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32954547" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.40625" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -180,8 +242,28 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/run_train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        <state relative-caret-position="275">
+          <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/baseline/ha/ha.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="29" column="32" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
+          <folding>
+            <element signature="e#23#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="167">
+            <caret line="41" column="3" lean-forward="true" selection-start-line="41" selection-start-column="3" selection-end-line="41" selection-end-column="3" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

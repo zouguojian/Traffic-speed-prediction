@@ -3,9 +3,10 @@
 import numpy as np
 import pandas as pd
 import argparse
+# from
 from models.hyparameter import parameter
 from models.utils import metric
-file='/Users/guojianzou/Traffic-speed-prediction/STGIN/data/speed/train_15.csv'
+file='/Users/guojianzou/Traffic-speed-prediction/MT-STGIN/data/speed/train_15.csv'
 
 class HA():
     def __init__(self, hp=None):
@@ -26,7 +27,7 @@ class HA():
         self.dictionary_label = []
         self.dictionary_predict = []
 
-        for site in range(0,108):
+        for site in range(80,108):
             data1=self.data[(self.data['node']==self.data.values[site][0])]
             for h in range(24):
                 data2 = data1.loc[data1['hour'] == h]

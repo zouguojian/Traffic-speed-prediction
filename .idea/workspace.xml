@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="24bdc666-7506-4335-a92c-dcef4fd05f11" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/MT-STGIN/run_rst.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MT-STGIN/baseline/ha/ha.py" beforeDir="false" afterPath="$PROJECT_DIR$/MT-STGIN/baseline/ha/ha.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,7 +14,7 @@
     <session id="1090125863">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="24" />
+          <entry key="project.closed" value="25" />
           <entry key="project.open.time.1" value="5" />
           <entry key="project.open.time.2" value="2" />
           <entry key="project.open.time.3" value="2" />
@@ -29,7 +29,7 @@
           <entry key="csv" value="68" />
           <entry key="delete_path" value="4" />
           <entry key="md" value="4" />
-          <entry key="py" value="370" />
+          <entry key="py" value="371" />
           <entry key="txt" value="12" />
         </counts>
       </usages-collector>
@@ -37,13 +37,13 @@
         <counts>
           <entry key="Markdown" value="4" />
           <entry key="PLAIN_TEXT" value="84" />
-          <entry key="Python" value="370" />
+          <entry key="Python" value="371" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="md" value="1001" />
-          <entry key="py" value="17484" />
+          <entry key="py" value="17526" />
           <entry key="txt" value="6" />
         </counts>
       </usages-collector>
@@ -51,7 +51,7 @@
         <counts>
           <entry key="Markdown" value="1001" />
           <entry key="PLAIN_TEXT" value="6" />
-          <entry key="Python" value="17484" />
+          <entry key="Python" value="17526" />
         </counts>
       </usages-collector>
     </session>
@@ -70,7 +70,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MT-STGIN/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
@@ -78,6 +78,15 @@
                 <caret line="211" column="3" selection-start-line="211" selection-start-column="3" selection-end-line="211" selection-end-column="3" />
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MT-STGIN/baseline/ha/ha.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -136,7 +145,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/comparison_model/cnn_b.py" />
         <option value="$PROJECT_DIR$/comparison_model/convlstm.py" />
         <option value="$PROJECT_DIR$/run_model.py" />
         <option value="$PROJECT_DIR$/comparison_model/multi_convlstm.py" />
@@ -187,6 +195,7 @@
         <option value="$PROJECT_DIR$/MT-STGIN/run_train.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/MT-STGIN/README.md" />
+        <option value="$PROJECT_DIR$/MT-STGIN/baseline/ha/ha.py" />
       </list>
     </option>
   </component>
@@ -214,6 +223,12 @@
               <item name="Traffic-speed-prediction" type="462c0819:PsiDirectoryNode" />
               <item name="MT-STGIN" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Traffic-speed-prediction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Traffic-speed-prediction" type="462c0819:PsiDirectoryNode" />
+              <item name="MT-STGIN" type="462c0819:PsiDirectoryNode" />
+              <item name="baseline" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -238,7 +253,28 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.run_train (1)">
+  <component name="RunManager" selected="Python.ha">
+    <configuration name="ha" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Traffic-speed-prediction" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/MT-STGIN/baseline/ha" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MT-STGIN/baseline/ha/ha.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="insert_replace_zero" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Traffic-speed-prediction" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -252,27 +288,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data/data_hour/insert_replace_zero.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="run_model" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Traffic-speed-prediction" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run_model.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -345,19 +360,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.run_model" />
       <item itemvalue="Python.run_p" />
       <item itemvalue="Python.insert_replace_zero" />
       <item itemvalue="Python.run_train" />
       <item itemvalue="Python.run_train (1)" />
+      <item itemvalue="Python.ha" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.ha" />
         <item itemvalue="Python.run_train (1)" />
         <item itemvalue="Python.run_train" />
         <item itemvalue="Python.insert_replace_zero" />
         <item itemvalue="Python.run_p" />
-        <item itemvalue="Python.run_model" />
       </list>
     </recent_temporary>
   </component>
@@ -376,14 +391,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="32" y="106" width="1416" height="796" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23010753" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32954547" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.37073863" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.41051137" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39914772" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -401,7 +415,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/data/data_hour/insert_replace_zero.py" />
     <entry file="file://$PROJECT_DIR$/MT-STFLN /run_attention.py" />
     <entry file="file://$USER_HOME$/.conda/envs/prediction/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -738,6 +751,13 @@
             <caret line="211" column="3" selection-start-line="211" selection-start-column="3" selection-end-line="211" selection-end-column="3" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MT-STGIN/baseline/ha/ha.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
         </state>
       </provider>
     </entry>
