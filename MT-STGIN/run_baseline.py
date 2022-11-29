@@ -20,7 +20,7 @@ from models.utils import *
 from models.models import GCN
 from models.hyparameter import parameter
 from models.embedding import embedding
-from models.bridge_lstm import LstmClass
+# from models.bridge_lstm import LstmClass
 from models.data_next import DataClass
 from baseline.lstm.lstm import LstmClass
 from baseline.bi_lstm.bi_lstm import BilstmClass
@@ -30,6 +30,7 @@ from baseline.firnn.fi_gru import FirnnClass
 
 import pandas as pd
 import tensorflow.compat.v1 as tf
+
 tf.disable_v2_behavior()
 import numpy as np
 import os
@@ -37,17 +38,17 @@ import argparse
 import datetime
 
 tf.reset_default_graph()
-os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
-logs_path = "board"
-
-os.environ['CUDA_VISIBLE_DEVICES']='0'
-
-from tensorflow.compat.v1 import ConfigProto
-from tensorflow.compat.v1 import InteractiveSession
-
-config = ConfigProto()
-config.gpu_options.allow_growth = True
-session = InteractiveSession(config=config)
+# os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+# logs_path = "board"
+#
+# os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+#
+# from tensorflow.compat.v1 import ConfigProto
+# from tensorflow.compat.v1 import InteractiveSession
+#
+# config = ConfigProto()
+# config.gpu_options.allow_growth = True
+# session = InteractiveSession(config=config)
 
 
 class Model(object):
@@ -70,6 +71,7 @@ class Model(object):
         self.placeholders = {
             'position': tf.placeholder(tf.int32, shape=(1, self.para.site_num), name='input_position'),
             'day': tf.placeholder(tf.int32, shape=(None, self.para.site_num), name='input_day'),
+            'd_o_w': tf.placeholder(tf.int32, shape=(None, self.para.site_num), name='input_day_of_week'),
             'hour': tf.placeholder(tf.int32, shape=(None, self.para.site_num), name='input_hour'),
             'minute': tf.placeholder(tf.int32, shape=(None, self.para.site_num), name='input_minute'),
             'indices_i': tf.placeholder(dtype=tf.int64, shape=[None, None], name='input_indices'),
@@ -80,9 +82,6 @@ class Model(object):
                                          name='input_s'),
             'labels_s': tf.placeholder(tf.float32, shape=[None, self.para.site_num, self.para.output_length],
                                        name='labels_s'),
-            'features_p': tf.placeholder(tf.float32, shape=[None, self.para.input_length, self.para.features_p],
-                                         name='input_p'),
-            'labels_p': tf.placeholder(tf.float32, shape=[None, self.para.output_length], name='labels_p'),
             'dropout': tf.placeholder_with_default(0., shape=(), name='input_dropout'),
             'num_features_nonzero': tf.placeholder(tf.int32, name='input_zero')  # helper variable for sparse dropout
         }
@@ -123,6 +122,12 @@ class Model(object):
         self.d_emd = tf.reshape(d_emb, shape=[self.para.batch_size, self.para.input_length + self.para.output_length,
                                               self.para.site_num, self.para.emb_size])
 
+        d_o_w_emb = embedding(self.placeholders['d_o_w'], vocab_size=8, num_units=self.para.emb_size, scale=False,
+                              scope="day_of_week_embed")
+        self.d_o_w_emb = tf.reshape(d_o_w_emb,
+                                    shape=[self.para.batch_size, self.para.input_length + self.para.output_length,
+                                           self.para.site_num, self.para.emb_size])
+
         h_emb = embedding(self.placeholders['hour'], vocab_size=24, num_units=self.para.emb_size, scale=False,
                           scope="hour_embed")
         self.h_emd = tf.reshape(h_emb, shape=[self.para.batch_size, self.para.input_length + self.para.output_length,
@@ -135,53 +140,53 @@ class Model(object):
 
         # encoder
         print('#................................in the encoder step....................................#')
-        if self.hp.model_name=='LSTM':
+        if self.hp.model_name == 'LSTM':
             # features=tf.layers.dense(self.placeholders['features'], units=self.para.emb_size) #[-1, site num, emb_size]
             features = tf.reshape(self.placeholders['features_s'], shape=[self.hp.batch_size,
-                                                                         self.hp.input_length,
-                                                                         self.hp.site_num,
-                                                                         self.hp.features])
+                                                                          self.hp.input_length,
+                                                                          self.hp.site_num,
+                                                                          self.hp.features])
 
             # this step use to encoding the input series data
             encoder_init = LstmClass(self.hp.batch_size * self.hp.site_num,
-                                    predict_time=self.hp.output_length,
-                                    layer_num=self.hp.hidden_layer,
-                                    nodes=self.hp.emb_size,
-                                    placeholders=self.placeholders)
+                                     predict_time=self.hp.output_length,
+                                     layer_num=self.hp.hidden_layer,
+                                     nodes=self.hp.emb_size,
+                                     placeholders=self.placeholders)
 
             inputs = tf.transpose(features, perm=[0, 2, 1, 3])
             inputs = tf.reshape(inputs, shape=[self.hp.batch_size * self.hp.site_num, self.hp.input_length,
                                                self.hp.features])
-            h_states= encoder_init.encoding(inputs)
+            h_states = encoder_init.encoding(inputs)
             # decoder
             print('#................................in the decoder step......................................#')
             # this step to presict the polutant concentration
-            self.pre=encoder_init.decoding(h_states, self.hp.site_num)
+            self.pre = encoder_init.decoding(h_states, self.hp.site_num)
             print('pres shape is : ', self.pre.shape)
 
-        elif self.hp.model_name=='BILSTM':
+        elif self.hp.model_name == 'BILSTM':
             # features=tf.layers.dense(self.placeholders['features'], units=self.para.emb_size) #[-1, site num, emb_size]
             features = tf.reshape(self.placeholders['features_s'], shape=[self.hp.batch_size,
-                                                                         self.hp.input_length,
-                                                                         self.hp.site_num,
-                                                                         self.hp.features])
+                                                                          self.hp.input_length,
+                                                                          self.hp.site_num,
+                                                                          self.hp.features])
             # this step use to encoding the input series data
             encoder_init = BilstmClass(self.hp, placeholders=self.placeholders)
             inputs = tf.transpose(features, perm=[0, 2, 1, 3])
             inputs = tf.reshape(inputs, shape=[self.hp.batch_size * self.hp.site_num,
                                                self.hp.input_length,
                                                self.hp.features])
-            h_states= encoder_init.encoding(inputs)
+            h_states = encoder_init.encoding(inputs)
             # decoder
             print('#................................in the decoder step......................................#')
             # this step to presict the polutant concentration
-            self.pre=encoder_init.decoding(h_states, self.hp.site_num)
+            self.pre = encoder_init.decoding(h_states, self.hp.site_num)
             print('pres shape is : ', self.pre.shape)
         elif self.hp.model_name == 'MDL':
             features = tf.reshape(self.placeholders['features_s'], shape=[self.hp.batch_size,
-                                                                         self.hp.input_length,
-                                                                         self.hp.site_num,
-                                                                         self.hp.features,
+                                                                          self.hp.input_length,
+                                                                          self.hp.site_num,
+                                                                          self.hp.features,
                                                                           1])
             '''
             resnet output shape is :  (32, 3, 14, 4, 32)
@@ -197,11 +202,11 @@ class Model(object):
             h_states = mul_convl.encoding(features)
             self.pre = mul_convl.decoding(h_states)
 
-        elif self.para.model_name=='PSPNN':
+        elif self.para.model_name == 'PSPNN':
             features = tf.reshape(self.placeholders['features_s'], shape=[self.para.batch_size,
-                                                                         self.para.input_length,
-                                                                         self.para.site_num,
-                                                                         self.para.features])
+                                                                          self.para.input_length,
+                                                                          self.para.site_num,
+                                                                          self.para.features])
             # this step use to encoding the input series data
             '''
             lstm, return --- for example ,output shape is :(32, 3, 162, 128)
@@ -210,26 +215,26 @@ class Model(object):
             axis=2: numbers of the nodes
             axis=3: output feature size
             '''
-            encoder_init = cnn_bilstm(self.para.batch_size ,
-                                        predict_time=self.para.output_length,
-                                        layer_num=self.para.hidden_layer,
-                                        nodes=self.para.hidden_size,
-                                        placeholders=self.placeholders)
+            encoder_init = cnn_bilstm(self.para.batch_size,
+                                      predict_time=self.para.output_length,
+                                      layer_num=self.para.hidden_layer,
+                                      nodes=self.para.hidden_size,
+                                      placeholders=self.placeholders)
             print('#................................in the decoder step......................................#')
             # this step to presict the polutant concentration
             self.pre = encoder_init.decoding(features)
             print('pres shape is : ', self.pre.shape)
 
-        elif self.para.model_name=='FI-RNN':
+        elif self.para.model_name == 'FI-RNN':
             timestamp = [self.h_emd, self.m_emd]
             position = self.p_emd
             STE = STEmbedding(position, timestamp, 0, self.para.emb_size, False, 0.99, self.para.is_training)
-            Q_STE = STE[:, :self.para.input_length,:,:]
+            Q_STE = STE[:, :self.para.input_length, :, :]
 
             features = tf.reshape(self.placeholders['features_s'], shape=[self.para.batch_size,
-                                                                         self.para.input_length,
-                                                                         self.para.site_num,
-                                                                         self.para.features])
+                                                                          self.para.input_length,
+                                                                          self.para.site_num,
+                                                                          self.para.features])
             # this step use to encoding the input series data
             '''
             lstm, return --- for example ,output shape is :(32, 3, 162, 128)
@@ -239,20 +244,20 @@ class Model(object):
             axis=3: output feature size
             '''
             encoder_init = FirnnClass(self.para.batch_size * self.para.site_num,
-                                        predict_time=self.para.output_length,
-                                        layer_num=self.para.hidden_layer,
-                                        nodes=self.para.hidden_size,
-                                        placeholders=self.placeholders)
+                                      predict_time=self.para.output_length,
+                                      layer_num=self.para.hidden_layer,
+                                      nodes=self.para.hidden_size,
+                                      placeholders=self.placeholders)
             inputs = tf.transpose(features, perm=[0, 2, 1, 3])
             inputs = tf.reshape(inputs, shape=[-1, self.para.input_length, self.para.features])
             Q_STE = tf.transpose(Q_STE, perm=[0, 2, 1, 3])
             Q_STE = tf.reshape(Q_STE, shape=[-1, self.para.input_length, self.para.emb_size])
-            h_states= encoder_init.encoding(inputs, STE=Q_STE)
+            h_states = encoder_init.encoding(inputs, STE=Q_STE)
 
             # decoder
             print('#................................in the decoder step......................................#')
             # this step to presict the polutant concentration
-            self.pre=encoder_init.decoding_(h_states, self.para.site_num)
+            self.pre = encoder_init.decoding_(h_states, self.para.site_num)
             print('pres shape is : ', self.pre.shape)
 
         self.loss1 = tf.reduce_mean(
@@ -279,7 +284,8 @@ class Model(object):
         self.saver = tf.train.Saver(var_list=tf.trainable_variables())
 
     def re_current(self, a, max, min):
-        return [num * (max - min) + min for num in a]
+        return a * (max - min) + min
+        # return [num * (max - min) + min for num in a]
 
     def run_epoch(self):
         '''
@@ -295,12 +301,13 @@ class Model(object):
         for i in range(int((iterate.length // self.para.site_num * self.para.divide_ratio - (
                 self.para.input_length + self.para.output_length)) // self.para.step)
                        * self.para.epoch // self.para.batch_size):
-            x_s, day, hour, minute, label_s, x_p, label_p = self.sess.run(train_next)
+            x_s, day, d_o_w, hour, minute, label_s = self.sess.run(train_next)
             x_s = np.reshape(x_s, [-1, self.para.input_length, self.para.site_num, self.para.features])
             day = np.reshape(day, [-1, self.para.site_num])
+            d_o_w = np.reshape(d_o_w, [-1, self.para.site_num])
             hour = np.reshape(hour, [-1, self.para.site_num])
             minute = np.reshape(minute, [-1, self.para.site_num])
-            feed_dict = construct_feed_dict(x_s, self.adj, label_s, day, hour, minute, x_p, label_p, self.placeholders)
+            feed_dict = construct_feed_dict(x_s, self.adj, label_s, day, d_o_w, hour, minute, self.placeholders)
             feed_dict.update({self.placeholders['dropout']: self.para.dropout})
 
             loss_1, _ = self.sess.run((self.loss1, self.train_op_1), feed_dict=feed_dict)
@@ -341,12 +348,13 @@ class Model(object):
                             - iterate_test.length // self.para.site_num * iterate_test.divide_ratio
                             - (
                                     self.para.input_length + self.para.output_length)) // iterate_test.output_length) // self.para.batch_size):
-            x_s, day, hour, minute, label_s, x_p, label_p = self.sess.run(test_next)
+            x_s, day, d_o_w, hour, minute, label_s = self.sess.run(test_next)
             x_s = np.reshape(x_s, [-1, self.para.input_length, self.para.site_num, self.para.features])
             day = np.reshape(day, [-1, self.para.site_num])
+            d_o_w = np.reshape(d_o_w, [-1, self.para.site_num])
             hour = np.reshape(hour, [-1, self.para.site_num])
             minute = np.reshape(minute, [-1, self.para.site_num])
-            feed_dict = construct_feed_dict(x_s, self.adj, label_s, day, hour, minute, x_p, label_p, self.placeholders)
+            feed_dict = construct_feed_dict(x_s, self.adj, label_s, day, d_o_w, hour, minute, self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
 
             pre_s = self.sess.run((self.pre), feed_dict=feed_dict)
@@ -357,18 +365,16 @@ class Model(object):
                                   [-1, self.para.site_num, self.para.output_length]).transpose([1, 0, 2])
         pre_s_list = np.reshape(np.array(pre_s_list, dtype=np.float32),
                                 [-1, self.para.site_num, self.para.output_length]).transpose([1, 0, 2])
+
         if self.para.normalize:
-            label_s_list = np.array(
-                [self.re_current(np.reshape(site_label, [-1]), max_s, min_s) for site_label in label_s_list])
-            pre_s_list = np.array(
-                [self.re_current(np.reshape(site_label, [-1]), max_s, min_s) for site_label in pre_s_list])
-        else:
-            label_s_list = np.array([np.reshape(site_label, [-1]) for site_label in label_s_list])
-            pre_s_list = np.array([np.reshape(site_label, [-1]) for site_label in pre_s_list])
+            label_s_list = self.re_current(label_s_list, max_s, min_s)
+            pre_s_list = self.re_current(pre_s_list, max_s, min_s)
+
         print('speed prediction result')
-        label_s_list = np.reshape(label_s_list, [-1])
-        pre_s_list = np.reshape(pre_s_list, [-1])
-        mae, rmse, mape, cor, r2 = metric(label_s_list, pre_s_list)  # 产生预测指标
+        mae, rmse, mape, cor, r2 = metric(pre_s_list[0:28], label_s_list[0:28])  # 产生预测指标
+        for i in range(self.para.output_length):
+            print('in the %d time step, the evaluating indicator'%(i+1))
+            metric(pre_s_list[0:28,:,i], label_s_list[0:28,:,i])
         # describe(label_list, predict_list)   #预测值可视化
         return mae
 

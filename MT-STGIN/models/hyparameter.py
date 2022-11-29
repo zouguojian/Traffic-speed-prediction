@@ -5,8 +5,8 @@ class parameter(object):
     def __init__(self,parser):
         self.parser=parser
 
-        self.parser.add_argument('--save_path', type=str, default='weights/MT-STGIN-3/', help='save path')
-        self.parser.add_argument('--model_name', type=str, default='MT-STGIN', help='training or testing model name')
+        self.parser.add_argument('--save_path', type=str, default='weights/BILSTM/', help='save path')
+        self.parser.add_argument('--model_name', type=str, default='BILSTM', help='training or testing model name')
 
         self.parser.add_argument('--divide_ratio', type=float, default=0.8, help='data_divide')
         self.parser.add_argument('--is_training', type=bool, default=True, help='is training')
@@ -31,6 +31,9 @@ class parameter(object):
         self.parser.add_argument('--gcn_output_size', type=int, default=64, help='model string')
         self.parser.add_argument('--weight_decay', type=float, default=5e-4, help='weight for L2 loss on embedding matrix')
         self.parser.add_argument('--max_degree', type=int, default=3, help='maximum Chebyshev polynomial degree')
+
+        self.parser.add_argument('--hidden_size', type=int, default=64, help='hidden size')
+        self.parser.add_argument('--hidden_layer', type=int, default=1, help='hidden layer')
 
         self.parser.add_argument('--training_set_rate', type=float, default=0.7, help='training set rate')
         self.parser.add_argument('--validate_set_rate', type=float, default=0.15, help='validate set rate')
