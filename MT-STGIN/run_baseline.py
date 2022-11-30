@@ -371,7 +371,7 @@ class Model(object):
             pre_s_list = self.re_current(pre_s_list, max_s, min_s)
 
         print('speed prediction result')
-        mae, rmse, mape, cor, r2 = metric(pre_s_list[80:], label_s_list[80:])  # 产生预测指标
+        mae, rmse, mape, cor, r2 = metric(pre_s_list, label_s_list)  # 产生预测指标
         for i in range(self.para.output_length):
             print('in the %d time step, the evaluating indicator'%(i+1))
             metric(pre_s_list[80:,:,i], label_s_list[80:,:,i])
