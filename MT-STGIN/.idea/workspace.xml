@@ -8,7 +8,6 @@
       <change afterPath="$PROJECT_DIR$/baseline/st_grat/data/node2vec/node2vec.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/baseline/st_grat/data/test.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/baseline/st_grat/log(PEMS)" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/st_grat" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/st_grat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baseline/st_grat/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/st_grat/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baseline/st_grat/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/st_grat/train.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baseline/st_grat/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/st_grat/utils.py" afterDir="false" />
@@ -189,19 +188,6 @@
             <path>
               <item name="MT-STGIN" type="b2602c69:ProjectViewProjectNode" />
               <item name="MT-STGIN" type="462c0819:PsiDirectoryNode" />
-              <item name="baseline" type="462c0819:PsiDirectoryNode" />
-              <item name="st_grat" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MT-STGIN" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MT-STGIN" type="462c0819:PsiDirectoryNode" />
-              <item name="baseline" type="462c0819:PsiDirectoryNode" />
-              <item name="st_grat" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MT-STGIN" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MT-STGIN" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -371,12 +357,12 @@
   <component name="ToolWindowManager">
     <frame x="39" y="61" width="1416" height="797" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20645161" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20645161" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37730497" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.37730497" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39914772" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
