@@ -24,7 +24,7 @@ class parameter(object):
         self.parser.add_argument('--emb_size', type=int, default=64, help='embedding size')
         self.parser.add_argument('--features', type=int, default=1, help='numbers of the feature')
         self.parser.add_argument('--normalize', type=bool, default=True, help='normalize')
-        self.parser.add_argument('--input_length', type=int, default=6, help='input length')
+        self.parser.add_argument('--input_length', type=int, default=12, help='input length')
         self.parser.add_argument('--output_length', type=int, default=6, help='output length')
         self.parser.add_argument('--predict_length', type=int, default=6, help='predict length')
 

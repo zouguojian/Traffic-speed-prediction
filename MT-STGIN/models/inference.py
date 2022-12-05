@@ -24,7 +24,12 @@ class InferenceClass(object):
         :return:
         '''
         
-        if self.para.model_name == 'MT-STGIN':
+        if self.para.model_name == 'MT-STGIN-5':
+            results_speed = tf.layers.dense(inputs=tf.transpose(out_hiddens, [0, 2, 1, 3]), units=64, activation=tf.nn.relu, name='layer_spped_1')
+            results_speed = tf.layers.dense(inputs=results_speed, units=1, activation=tf.nn.relu, name='layer_speed_2')
+            results_speed = tf.squeeze(results_speed, axis=-1, name='output_y')
+        else:
+
             results_1 = tf.layers.dense(inputs=out_hiddens[:, 0:28], units=64, name='task_1',activation=tf.nn.relu)
             results_2 = tf.layers.dense(inputs=out_hiddens[:, 28:52], units=64, name='task_2',activation=tf.nn.relu)
             results_3 = tf.layers.dense(inputs=out_hiddens[:, 52:], units=64, name='task_3',activation=tf.nn.relu)
@@ -34,10 +39,6 @@ class InferenceClass(object):
             results_3 = tf.layers.dense(inputs=results_3, units=1, name='task_3_1')
             results_speed = tf.concat([results_1, results_2, results_3], axis=1)
             results_speed = tf.transpose(results_speed, [0, 2, 1, 3])
-            results_speed = tf.squeeze(results_speed, axis=-1, name='output_y')
-        else:
-            results_speed = tf.layers.dense(inputs=tf.transpose(out_hiddens, [0, 2, 1, 3]), units=64, activation=tf.nn.relu, name='layer_spped_1')
-            results_speed = tf.layers.dense(inputs=results_speed, units=1, activation=tf.nn.relu, name='layer_speed_2')
             results_speed = tf.squeeze(results_speed, axis=-1, name='output_y')
 
         return results_speed# [N, site_num, output_length]

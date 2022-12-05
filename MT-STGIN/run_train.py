@@ -135,30 +135,34 @@ class Model(object):
             timestamp = [self.h_emd]
             position = self.p_emd
             # [-1, input_length, site num, emb_size]
-            speed = tf.transpose(self.placeholders['features_s'],perm=[0, 2, 1, 3])
-            speed = tf.reshape(speed, [-1, self.para.input_length, self.para.features])
-            speed1 = tf.layers.conv1d(inputs=speed,
-                                     filters=self.para.emb_size,
-                                     kernel_size=2,
-                                     padding='SAME',
-                                     kernel_initializer=tf.truncated_normal_initializer(),
-                                     name='conv_1',)
-            speed2 = tf.layers.conv1d(inputs=speed,
-                                     filters=self.para.emb_size,
-                                     kernel_size=3,
-                                     padding='SAME',
-                                     kernel_initializer=tf.truncated_normal_initializer(),
-                                     name='conv_2')
-            speed3 = tf.layers.conv1d(inputs=speed,
-                                     filters=self.para.emb_size,
-                                     kernel_size=1,
-                                     padding='SAME',
-                                     kernel_initializer=tf.truncated_normal_initializer(),
-                                     name='conv_3') 
-            speed = tf.add_n([speed1, speed2, speed3])
-            speed = tf.nn.relu(speed)
-            speed = tf.reshape(speed, [-1, self.para.site_num, self.para.input_length, self.para.emb_size])
-            speed = tf.transpose(speed, perm=[0, 2, 1, 3])
+            if self.para.model_name == 'MT-STGIN-1':
+                speed = FC(self.placeholders['features_s'], units=[self.para.emb_size, self.para.emb_size], activations=[tf.nn.relu, None],
+                            bn=False, bn_decay=0.99, is_training=self.para.is_training)
+            else:
+                speed = tf.transpose(self.placeholders['features_s'],perm=[0, 2, 1, 3])
+                speed = tf.reshape(speed, [-1, self.para.input_length, self.para.features])
+                speed1 = tf.layers.conv1d(inputs=speed,
+                                         filters=self.para.emb_size,
+                                         kernel_size=2,
+                                         padding='SAME',
+                                         kernel_initializer=tf.truncated_normal_initializer(),
+                                         name='conv_1',)
+                speed2 = tf.layers.conv1d(inputs=speed,
+                                         filters=self.para.emb_size,
+                                         kernel_size=3,
+                                         padding='SAME',
+                                         kernel_initializer=tf.truncated_normal_initializer(),
+                                         name='conv_2')
+                speed3 = tf.layers.conv1d(inputs=speed,
+                                         filters=self.para.emb_size,
+                                         kernel_size=1,
+                                         padding='SAME',
+                                         kernel_initializer=tf.truncated_normal_initializer(),
+                                         name='conv_3')
+                speed = tf.add_n([speed1, speed2, speed3])
+                speed = tf.nn.relu(speed)
+                speed = tf.reshape(speed, [-1, self.para.site_num, self.para.input_length, self.para.emb_size])
+                speed = tf.transpose(speed, perm=[0, 2, 1, 3])
 
             # [-1, input_length, emb_size]
             STE = STEmbedding(position, timestamp, 0, self.para.emb_size, False, 0.99, self.para.is_training)
@@ -311,6 +315,8 @@ class Model(object):
             feed_dict.update({self.placeholders['dropout']: 0.0})
             # if i == 0: begin_time = datetime.datetime.now()
             pre_s= self.sess.run((self.pres_s), feed_dict=feed_dict)
+            # print(day[0,60], hour[0,60], self.re_current(pre_s, max_s, min_s)[0,60])
+            # print(self.re_current(label_s, max_s, min_s)[0,60])
 
             # for site in range(self.para.site_num):
             #     writer.writerow([site]+list(day[self.para.input_length:,0])+

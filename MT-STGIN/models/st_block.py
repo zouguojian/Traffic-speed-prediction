@@ -86,7 +86,7 @@ class ST_Block():
             X = STAttBlock(X, STE, self.para.num_heads, self.para.emb_size // self.para.num_heads, False, 0.99, self.para.is_training)
         return X
 
-    def spatio_temporal(self, speed=None, STE=None, supports=None, causality =False):
+    def spatio_temporal(self, speed=None, STE=None, supports=None, causality=False):
         '''
         :param features: [N, site_num, emb_size]
         :param day: [N, input_length, site_num, emb_size]
@@ -94,25 +94,27 @@ class ST_Block():
         :param position:
         :return: [N, input_length, site_num, emb_size]
         '''
-        x = tf.concat([speed, STE],axis=-1)
+        x = tf.concat([speed, STE], axis=-1)
         """
         dynamic spatial correlation 提取，使用图注意力作为支撑
         """
         x_s = tf.reshape(x, shape=[-1, self.site_num, self.emb_size * 2])
         S = SpatialTransformer(self.para)
         x_s = S.encoder(inputs=x_s)
-        x_s = tf.reshape(x_s, shape=[-1, self.para.input_length, self.site_num, self.emb_size])
+        x_f = tf.reshape(x_s, shape=[-1, self.para.input_length, self.site_num, self.emb_size])
 
         """
         physical relationship 提取，图卷积网络作为支撑
         """
-        x_g = tf.reshape(speed, shape=[-1, self.site_num, self.emb_size * 1])
-        gcn = self.model_func(self.placeholders,
-                              input_dim=self.emb_size * 1,
-                              para=self.para,
-                              supports=supports)
-        x_g = gcn.predict(x_g)
-        x_g = tf.reshape(x_g, shape=[-1, self.para.input_length, self.site_num, self.emb_size])
+
+        if self.para.model_name != 'MT-STGIN-2':
+            x_g = tf.reshape(speed, shape=[-1, self.site_num, self.emb_size * 1])
+            gcn = self.model_func(self.placeholders,
+                                  input_dim=self.emb_size * 1,
+                                  para=self.para,
+                                  supports=supports)
+            x_g = gcn.predict(x_g)
+            x_g = tf.reshape(x_g, shape=[-1, self.para.input_length, self.site_num, self.emb_size])
 
         # m_head_gcn=list()
         # x_g = tf.reshape(speed, shape=[-1, self.site_num, self.emb_size * 1])
@@ -130,8 +132,12 @@ class ST_Block():
         """
         spatial - fusion gating mechanism
         """
-        z = tf.nn.sigmoid(tf.multiply(x_s, x_g))
-        x_f = tf.add(tf.multiply(z, x_s), tf.multiply(1 - z, x_g))
+        if self.para.model_name != 'MT-STGIN-2':
+            if self.para.model_name != 'MT-STGIN-3':
+                z = tf.nn.sigmoid(tf.multiply(x_f, x_g))
+                x_f = tf.add(tf.multiply(z, x_f), tf.multiply(1 - z, x_g))
+            else:
+                x_f = tf.add(x_f, x_g)
 
         # x_f = self.gatedFusion(x_s, x_g, self.para.emb_size, False, 0.99, self.para.is_training)
 
@@ -141,9 +147,9 @@ class ST_Block():
         x_t = tf.transpose(speed, perm=[0, 2, 1, 3])
         x_t = tf.reshape(x_t, shape=[-1, self.input_length, self.emb_size * 1])
         T = TemporalTransformer(self.para)
-        x_t = T.encoder(hiddens = x_t,
-                        hidden = x_t, causality=causality)
-        
+        x_t = T.encoder(hiddens=x_t,
+                        hidden=x_t, causality=causality)
+
         x_t = tf.reshape(x_t, shape=[self.batch_size, self.site_num, self.input_length, self.emb_size])
         x_t = tf.transpose(x_t, perm=[0, 2, 1, 3])
 
@@ -151,10 +157,13 @@ class ST_Block():
         spatial and temporal - fusion gating mechanism
         """
         # x_f = x_t
-        z = tf.nn.sigmoid(tf.multiply(x_f, x_t))
-        x_f = tf.add(tf.multiply(z, x_f), tf.multiply(1 - z, x_t))
+        if self.para.model_name != 'MT-STGIN-3':
+            z = tf.nn.sigmoid(tf.multiply(x_f, x_t))
+            x_f = tf.add(tf.multiply(z, x_f), tf.multiply(1 - z, x_t))
+        else:
+            x_f = tf.add(x_f, x_t)
         # x_f = self.gatedFusion(x_f, x_t, self.para.emb_size, False, 0.99, self.para.is_training)
-        return x_f #[N, input_length, site_num, emb_size]
+        return x_f  # [N, input_length, site_num, emb_size]
 
 def spatialAttention(X, STE, K, d, bn, bn_decay, is_training):
     '''

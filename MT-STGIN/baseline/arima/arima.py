@@ -38,7 +38,7 @@ def metric(pred, label):
 def evaluate_arima_model(X, arima_order,k):
     # prepare training dataset
     train_size = int(len(X) * 0.8)
-    train, test = X[train_size-100:train_size], X[train_size: train_size+500]
+    train, test = X[train_size-20:train_size], X[train_size: ]
     history = [x for x in train]
     # test = [x for x in test]
     # make predictions
@@ -52,7 +52,7 @@ def evaluate_arima_model(X, arima_order,k):
         prediction.append(yhat)
         test_list.append(test[t:t+k])
         # history.append(test[t:t+k+1])
-        history += [char for char in test[t:t+k]]
+        history = history[k:]+[char for char in test[t:t+k]]
     return test_list, prediction
 
 
@@ -74,10 +74,10 @@ if __name__ == "__main__":
     start_time = datetime.datetime.now()
     labels = []
     predicts = []
-    for site in range(90, 108): # 30 no problem
+    for site in range(80, 108): # 30 no problem
         print('site is , ',site)
         series=data.loc[data['node'] == site]
-        label, predict=evaluate_models(series.values[:,-1], p_values=6, d_values=0, q_values=1, k=6)
+        label, predict=evaluate_models(series.values[:,-1], p_values=1, d_values=0, q_values=0, k=6)
         labels.append(label)
         predicts.append(predict)
 

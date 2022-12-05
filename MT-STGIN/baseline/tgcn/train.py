@@ -125,7 +125,8 @@ class Model(object):
         self.saver = tf.train.Saver(var_list=tf.trainable_variables())
 
     def re_current(self, a, max, min):
-        return [num * (max - min) + min for num in a]
+        return a * (max - min) + min
+        # return [num * (max - min) + min for num in a]
 
     def run_epoch(self):
         '''
@@ -165,9 +166,7 @@ class Model(object):
         '''
         :return:
         '''
-        label_list = list()
-        predict_list = list()
-
+        label_s_list, pre_s_list = list(), list()
         # with tf.Session() as sess:
         model_file = tf.train.latest_checkpoint(self.hp.save_path)
         if not self.hp.is_training:
@@ -177,17 +176,17 @@ class Model(object):
 
         iterate_test = data_load.DataClass(hp=self.hp)
         test_next = iterate_test.next_batch(batch_size=self.hp.batch_size, epoch=1, is_training=False)
-        max, min = iterate_test.max_dict['speed'], iterate_test.min_dict['speed']
-        print(max, min)
+        max_s, min_s = iterate_test.max_dict['speed'], iterate_test.min_dict['speed']
+        print(max_s, min_s)
 
-        file = open('results/' + str(self.hp.model_name) + '.csv', 'w', encoding='utf-8')
-        writer = csv.writer(file)
-        writer.writerow(
-            ['road'] + ['day_' + str(i) for i in range(self.hp.output_length)] + ['hour_' + str(i) for i in range(
-                self.hp.output_length)] +
-            ['minute_' + str(i) for i in range(self.hp.output_length)] + ['label_' + str(i) for i in
-                                                                            range(self.hp.output_length)] +
-            ['predict_' + str(i) for i in range(self.hp.output_length)])
+        # file = open('/Users/guojianzou/Traffic-speed-prediction/MT-STGIN/results/' + str(self.hp.model_name) + '.csv', 'w', encoding='utf-8')
+        # writer = csv.writer(file)
+        # writer.writerow(
+        #     ['road'] + ['day_' + str(i) for i in range(self.hp.output_length)] + ['hour_' + str(i) for i in range(
+        #         self.hp.output_length)] +
+        #     ['minute_' + str(i) for i in range(self.hp.output_length)] + ['label_' + str(i) for i in
+        #                                                                     range(self.hp.output_length)] +
+        #     ['predict_' + str(i) for i in range(self.hp.output_length)])
 
         # '''
         for i in range(int((iterate_test.length // self.hp.site_num
@@ -206,47 +205,36 @@ class Model(object):
             hour = np.reshape(hour, [-1, self.hp.site_num])
             minute = np.reshape(minute, [-1, self.hp.site_num])
 
-            for site in range(self.hp.site_num):
-                writer.writerow([site]+list(day[self.hp.input_length:,0])+
-                                 list(hour[self.hp.input_length:,0])+
-                                 list(minute[self.hp.input_length:,0]*15)+
-                                 list(np.round(self.re_current(label[0][site],max,min)))+
-                                 list(np.round(self.re_current(pre[0][site],max,min))))
+            # for site in range(self.hp.site_num):
+            #     writer.writerow([site]+list(day[self.hp.input_length:,0])+
+            #                      list(hour[self.hp.input_length:,0])+
+            #                      list(minute[self.hp.input_length:,0]*15)+
+            #                      list(np.round(self.re_current(label[0][site],max_s, min_s)))+
+            #                      list(np.round(self.re_current(pre[0][site],max_s, min_s))))
 
             # if i == 0:
             #     end_t = datetime.datetime.now()
             #     total_t = end_t - begin_time
             #     print("Total running times is : %f" % total_t.total_seconds())
 
-            label_list.append(label)
-            predict_list.append(pre)
+            label_s_list.append(label)
+            pre_s_list.append(pre)
 
-        label_list = np.reshape(np.array(label_list, dtype=np.float32),
-                                [-1, self.hp.site_num, self.hp.predict_length]).transpose([1, 0, 2])
-        predict_list = np.reshape(np.array(predict_list, dtype=np.float32),
-                                  [-1, self.hp.site_num, self.hp.predict_length]).transpose([1, 0, 2])
+        label_s_list = np.reshape(np.array(label_s_list, dtype=np.float32),
+                                  [-1, self.hp.site_num, self.hp.output_length]).transpose([1, 0, 2])
+        pre_s_list = np.reshape(np.array(pre_s_list, dtype=np.float32),
+                                [-1, self.hp.site_num, self.hp.output_length]).transpose([1, 0, 2])
 
         if self.hp.normalize:
-            label_list = np.array(
-                [self.re_current(np.reshape(site_label, [-1]), max, min) for site_label in label_list])
-            predict_list = np.array(
-                [self.re_current(np.reshape(site_label, [-1]), max, min) for site_label in predict_list])
-        else:
-            label_list = np.array([np.reshape(site_label, [-1]) for site_label in label_list])
-            predict_list = np.array([np.reshape(site_label, [-1]) for site_label in predict_list])
+            label_s_list = self.re_current(label_s_list, max_s, min_s)
+            pre_s_list = self.re_current(pre_s_list, max_s, min_s)
 
-        label_all = np.reshape(np.array(label_list),newshape=[self.hp.site_num, -1, self.hp.output_length])
-        predict_all = np.reshape(np.array(predict_list), newshape=[self.hp.site_num, -1, self.hp.output_length])
-
-        label_list = np.reshape(label_list, [-1])
-        predict_list = np.reshape(predict_list, [-1])
-
-        # average_error, rmse_error, cor, R2 = accuracy(label_list, predict_list)  # 产生预测指标
-        mae, rmse, mape, cor, r2=metric(predict_list,label_list)
-
+        print('speed prediction result')
+        mae, rmse, mape, cor, r2 = metric(pre_s_list[80:], label_s_list[80:])  # 产生预测指标
         for i in range(self.hp.output_length):
             print('in the %d time step, the evaluating indicator'%(i+1))
-            metric(np.reshape(predict_all[:,:,i], [-1]), np.reshape(label_all[:,:,i], [-1]))
+            metric(pre_s_list[80:,:,i], label_s_list[80:,:,i])
+
         # self.describe(label_list, predict_list)   #预测值可视化
         return mae
 

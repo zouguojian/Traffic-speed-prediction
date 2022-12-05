@@ -1,6 +1,6 @@
 # Traffic-speed-prediction
 
-## Model Item
+## MODEL ITEM
 ### 1. MT-STGIN [[codes link]](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN)
 >Multi-Task-Based Spatiotemporal Generative Inference Network: A Novel Framework for Predicting the Highway Traffic Speed
 

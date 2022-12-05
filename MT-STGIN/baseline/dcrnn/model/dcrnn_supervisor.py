@@ -8,6 +8,7 @@ import sys
 import tensorflow as tf
 import time
 import yaml
+import csv
 
 from lib import utils, metrics
 from lib.utils import metric
@@ -267,8 +268,11 @@ class DCRNNSupervisor(object):
         # y_preds:  a list of (batch_size, horizon, num_nodes, output_dim)
         test_loss, y_preds = test_results['loss'], test_results['outputs']
         utils.add_simple_summary(self._writer, ['loss/test_loss'], [test_loss], global_step=global_step)
-
         y_preds = np.concatenate(y_preds, axis=0)
+        print(y_preds.shape)
+
+        # metric(np.concatenate(self._data['y_test'][:, :, :, 0], y_preds[:y_truth.shape[0], horizon_i, :, 0]))
+
         scaler = self._data['scaler']
         predictions = []
         y_truths = []
@@ -277,15 +281,17 @@ class DCRNNSupervisor(object):
         rmses = []
         mapes = []
         wapes = []
-        rs =[]
+        rs = []
         r2s = []
         for horizon_i in range(self._data['y_test'].shape[1]):
-            y_truth = scaler.inverse_transform(self._data['y_test'][:, horizon_i, :, 0])
+            y_truth = scaler.inverse_transform(self._data['y_test'][:, horizon_i:horizon_i + 1, :, 0])
+            y_pred = scaler.inverse_transform(y_preds[:, horizon_i:horizon_i + 1, :, 0])
+
+            y_truth = np.transpose(y_truth, [0, 2, 1])
+            y_pred = np.transpose(y_pred, [0, 2, 1])
+
             y_truths.append(y_truth)
-
-            y_pred = scaler.inverse_transform(y_preds[:y_truth.shape[0], horizon_i, :, 0])
             predictions.append(y_pred)
-
             # 五个衡量指标
             mae, rmse, mape, wape, r, r2 = metric(y_pred, y_truth)
             maes.append(mae)
@@ -294,13 +300,14 @@ class DCRNNSupervisor(object):
             wapes.append(wape)
             rs.append(r)
             r2s.append(r2)
-            self._logger.info('step %d, mae: %.6f, rmse: %.6f, mape: %.6f, wape: %.6f, r: %.6f, r^2: %.6f' % (horizon_i + 1, mae, rmse, mape, wape, r, r2))
+            self._logger.info('step %d, mae: %.6f, rmse: %.6f, mape: %.6f, wape: %.6f, r: %.6f, r^2: %.6f' % (
+            horizon_i + 1, mae, rmse, mape, wape, r, r2))
             # print('step %d, mae: %.4f, rmse: %.4f, mape: %.4f' % (i+1, mae, rmse, mape))
 
+            # mae = metrics.masked_mae_np(y_pred, y_truth, null_val=0)
+            # mape = metrics.masked_mape_np(y_pred, y_truth, null_val=0)
+            # rmse = metrics.masked_rmse_np(y_pred, y_truth, null_val=0)
 
-            mae = metrics.masked_mae_np(y_pred, y_truth, null_val=0)
-            mape = metrics.masked_mape_np(y_pred, y_truth, null_val=0)
-            rmse = metrics.masked_rmse_np(y_pred, y_truth, null_val=0)
             # self._logger.info(
             #     "Horizon {:02d}, MAE: {:.2f}, MAPE: {:.4f}, RMSE: {:.2f}".format(
             #         horizon_i + 1, mae, mape, rmse
@@ -311,18 +318,38 @@ class DCRNNSupervisor(object):
                                       ['metric/rmse', 'metric/mape', 'metric/mae', 'metric/r', 'metric/r2']],
                                      [rmse, mape, mae, r, r2],
                                      global_step=global_step)
+        # segments_index = [71, 70, 69]
+        # mae, rmse, mape, wape, r, r2 = metric(np.concatenate(predictions, axis=1)[:,segments_index], np.concatenate(y_truths, axis=1)[:,segments_index])
+        # self._logger.info('segments, mae: %.6f, rmse: %.6f, mape: %.6f, wape: %.6f, r: %.6f, r^2: %.6f' % (mae, rmse, mape, wape, r, r2))
 
-        mae, rmse, mape, wape, r, r2 = metric(np.concatenate(predictions, axis=1), np.concatenate(y_truths, axis=1))
+        print(np.concatenate(predictions, axis=-1).shape)
+        mae, rmse, mape, wape, r, r2 = metric(np.concatenate(predictions, axis=-1), np.concatenate(y_truths, axis=-1))
         maes.append(mae)
         rmses.append(rmse)
         mapes.append(mape)
         wapes.append(wape)
         rs.append(r)
         r2s.append(r2)
-        self._logger.info('average, mae: %.6f, rmse: %.6f, mape: %.6f, wape: %.6f, r: %.6f, r^2: %.6f' % (mae, rmse, mape, wape, r, r2))
+        self._logger.info('average, mae: %.6f, rmse: %.6f, mape: %.6f, wape: %.6f, r: %.6f, r^2: %.6f' % (
+        mae, rmse, mape, wape, r, r2))
         # self._logger.info('eval time: %.1f' % (time.time() - start))
         # return np.stack(maes, 0), np.stack(rmses, 0), np.stack(mapes, 0), np.stack(rs, 0), np.stack(r2s, 0)
-        
+
+        y_truth = scaler.inverse_transform(self._data['y_test'][:, :, :, 0])
+        y_pred = scaler.inverse_transform(y_preds[:, :, :, 0])
+
+        # y_truth = np.transpose(y_truth, [0, 2, 1]).astype('float')
+        # y_pred = np.transpose(y_pred, [0, 2, 1]).astype('float')
+        #
+        # file = open('/Users/guojianzou/Traffic-speed-prediction/MT-STGIN/results/DCRNN.csv', 'w', encoding='utf-8')
+        # writer = csv.writer(file)
+        # writer.writerow( ['road']+ ['label_' + str(i) for i in range(self._kwargs.get('model').get('horizon'))] +
+        #     ['predict_' + str(i) for i in range(self._kwargs.get('model').get('horizon'))])
+        #
+        # for i in range(y_truth.shape[0]):
+        #     for site in range(self._kwargs.get('model').get('num_nodes')):
+        #         writer.writerow([site]+ list(np.round(y_truth[i, site])) + list(np.round(y_pred[i, site])))
+
         outputs = {
             'predictions': predictions,
             'groundtruth': y_truths

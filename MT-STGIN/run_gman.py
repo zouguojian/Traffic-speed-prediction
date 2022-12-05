@@ -28,7 +28,7 @@ import numpy as np
 import os
 import argparse
 import datetime
-
+import csv
 tf.reset_default_graph()
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 # logs_path = "board"
@@ -218,6 +218,15 @@ class Model(object):
 
         max_s, min_s = iterate_test.max_s['speed'], iterate_test.min_s['speed']
 
+        # file = open('results/'+str(self.para.model_name)+'.csv', 'w', encoding='utf-8')
+        # writer = csv.writer(file)
+        # writer.writerow(
+        #     ['road'] + ['day_' + str(i) for i in range(self.para.output_length)] + ['hour_' + str(i) for i in range(
+        #         self.para.output_length)] +
+        #     ['minute_' + str(i) for i in range(self.para.output_length)] + ['label_' + str(i) for i in
+        #                                                                      range(self.para.output_length)] +
+        #     ['predict_' + str(i) for i in range(self.para.output_length)])
+
         # '''
         for i in range(int((iterate_test.length // self.para.site_num
                             - iterate_test.length // self.para.site_num * iterate_test.divide_ratio
@@ -233,6 +242,16 @@ class Model(object):
             feed_dict.update({self.placeholders['dropout']: 0.0})
 
             pre_s = self.sess.run((self.pre), feed_dict=feed_dict)
+
+            #
+            # for site in range(self.para.site_num):
+            #     writer.writerow([site]+list(day[self.para.input_length:,0])+
+            #                      list(hour[self.para.input_length:,0])+
+            #                      list(minute[self.para.input_length:,0]*15)+
+            #                      list(np.round(self.re_current(label_s[0][site],max_s,min_s)))+
+            #                      list(np.round(self.re_current(pre_s[0][site],max_s,min_s))))
+
+
             label_s_list.append(label_s)
             pre_s_list.append(pre_s)
 
@@ -246,7 +265,7 @@ class Model(object):
             pre_s_list = self.re_current(pre_s_list, max_s, min_s)
 
         print('speed prediction result')
-        mae, rmse, mape, cor, r2 = metric(pre_s_list[0:28], label_s_list[0:28])  # 产生预测指标
+        mae, rmse, mape, cor, r2 = metric(pre_s_list, label_s_list)  # 产生预测指标
         for i in range(self.para.output_length):
             print('in the %d time step, the evaluating indicator'%(i+1))
             metric(pre_s_list[0:28,:,i], label_s_list[0:28,:,i])

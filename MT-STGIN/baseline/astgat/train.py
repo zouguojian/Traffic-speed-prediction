@@ -206,8 +206,8 @@ class Model(object):
             #     writer.writerow([site]+list(day[self.hp.input_length:,0])+
             #                      list(hour[self.hp.input_length:,0])+
             #                      list(minute[self.hp.input_length:,0]*15)+
-            #                      list(np.round(self.re_current(label[0][site],max,min)))+
-            #                      list(np.round(self.re_current(pre[0][site],max,min))))
+            #                      list(np.round(self.re_current(label[0][site],max_s, min_s)))+
+            #                      list(np.round(self.re_current(pre[0][site],max_s, min_s))))
 
             # if i == 0:
             #     end_t = datetime.datetime.now()
@@ -225,7 +225,7 @@ class Model(object):
             pre_s_list = self.re_current(pre_s_list, max_s, min_s)
 
         print('speed prediction result')
-        mae, rmse, mape, cor, r2 = metric(pre_s_list[80:], label_s_list[80:])  # 产生预测指标
+        mae, rmse, mape, cor, r2 = metric(pre_s_list, label_s_list)  # 产生预测指标
         for i in range(self.hp.output_length):
             print('in the %d time step, the evaluating indicator'%(i+1))
             metric(pre_s_list[80:,:,i], label_s_list[80:,:,i])
