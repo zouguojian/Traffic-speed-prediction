@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5996bb8-95b5-4352-92c4-dfa99006078b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/baseline/st_grat/PEMS" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baseline/st_grat/data/node2vec/SE.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baseline/st_grat/data/node2vec/generateSE.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baseline/st_grat/data/node2vec/node2vec.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baseline/st_grat/data/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baseline/st_grat/log(PEMS)" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/st_grat/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/st_grat/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/st_grat/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/st_grat/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baseline/st_grat/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/baseline/st_grat/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,13 +40,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="md" value="153" />
+          <entry key="md" value="164" />
           <entry key="py" value="2892" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Markdown" value="153" />
+          <entry key="Markdown" value="164" />
           <entry key="Python" value="2892" />
         </counts>
       </usages-collector>
@@ -86,8 +79,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="6567">
-                <caret line="455" column="76" selection-start-line="455" selection-start-column="76" selection-end-line="455" selection-end-column="76" />
+              <first_editor relative-caret-position="213">
+                <caret line="16" column="45" lean-forward="true" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
               </first_editor>
               <second_editor />
             </state>
@@ -162,9 +155,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="39" />
-    <option name="y" value="61" />
+    <option name="y" value="23" />
     <option name="width" value="1416" />
-    <option name="height" value="797" />
+    <option name="height" value="796" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -184,6 +177,12 @@
               <item name="MT-STGIN" type="b2602c69:ProjectViewProjectNode" />
               <item name="MT-STGIN" type="462c0819:PsiDirectoryNode" />
               <item name="baseline" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MT-STGIN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MT-STGIN" type="462c0819:PsiDirectoryNode" />
+              <item name="baseline" type="462c0819:PsiDirectoryNode" />
+              <item name="st_grat" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="MT-STGIN" type="b2602c69:ProjectViewProjectNode" />
@@ -355,14 +354,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="39" y="61" width="1416" height="797" extended-state="0" />
+    <frame x="39" y="23" width="1416" height="796" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20645161" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.37730497" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3778409" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39914772" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -378,6 +378,9 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/baseline/svm/svm.py">
@@ -621,8 +624,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="6567">
-            <caret line="455" column="76" selection-start-line="455" selection-start-column="76" selection-end-line="455" selection-end-column="76" />
+          <first_editor relative-caret-position="213">
+            <caret line="16" column="45" lean-forward="true" selection-start-line="16" selection-start-column="45" selection-end-line="16" selection-end-column="45" />
           </first_editor>
           <second_editor />
         </state>

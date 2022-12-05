@@ -15,7 +15,9 @@ tf.disable_v2_behavior()；
 
 ## MT-STGIN AND BASELINES （ALL METHODS' CODES HAVE BEEN REPRODUCED） 
 #### HA  [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/ha)
+* HA: the HA model uses the average value of the historical data, at the same time every day, as the predicted value at the same time in the future prediction task.  
 #### ARIMA [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/arima)
+* ARIMA: this is a traditional time series prediction method that combines the moving average and autoregressive components in order to model the historical time series data.
 #### LSTM [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/lstm)
 #### Bi-LSTM [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/bi_lstm)
 #### FI-RNNs [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/firnn)
