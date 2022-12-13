@@ -38,9 +38,10 @@ tf.disable_v2_behavior()；
 * AST-GAT, it refers to attention-based spatiotemporal graph attention network. It consists of a self-attention-based GAT network and an attention-based LSTM network, for segment-level traffic speed prediction.
 #### DCRNN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/dcrnn)
 * DCRNN, it is a diffusion convolutional recurrent neural network, a deep learning framework incorporating spatial and temporal dependency into traffic prediction.
-#### ST-GRAT [codes link](https://github.com/zouguojian/Travel-time-prediction)
-* ST-GRAT, it is a novel spatiotemporal graph attention model based on self-attention mechanism that effectively cap- tures dynamic spatiotemporal correlations of the road network.
+#### ST-GRAT [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/st_grat)
+* ST-GRAT, it is a novel spatiotemporal graph attention model based on self-attention mechanism that effectively captures dynamic spatiotemporal correlations of the road network.
 #### MT-STGIN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN)
+* MT-STGIN, the proposed method.  
 
 ## EXPERIMENTAL RESULTS
 ### HA (Multi-steps)
