@@ -1,4 +1,4 @@
-# Traffic-speed-prediction
+# TRAFFIC-SPEED-PREDICTION
 
 ## WHAT SHOULD WE PAY ATTENTION TO FOCUS ON THE RUNNING ENVIRONMENT?
 
@@ -15,19 +15,31 @@ tf.disable_v2_behavior()；
 
 ## MT-STGIN AND BASELINES （ALL METHODS' CODES HAVE BEEN REPRODUCED） 
 #### HA  [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/ha)
-* HA: the HA model uses the average value of the historical data, at the same time every day, as the predicted value at the same time in the future prediction task.  
+* HA, the HA model uses the average value of the historical data, at the same time every day, as the predicted value at the same time in the future prediction task.  
 #### ARIMA [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/arima)
-* ARIMA: this is a traditional time series prediction method that combines the moving average and autoregressive components in order to model the historical time series data.
-#### LSTM [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/lstm)
-#### Bi-LSTM [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/bi_lstm)
+* ARIMA, this is a traditional time series prediction method that combines the moving average and autoregressive components in order to model the historical time series data.
+#### SVM [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline)
+* SVM, it refers to support vector machine, is a regression technique for short-term prediction of traffic speed.
+#### LSTM NN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/lstm)
+* LSTM NN, it is used to capture the nonlinear traffic dynamic characteristics.
+#### Bi-LSTM NN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/bi_lstm)
+* Bi-LSTM NN, it refers to bidirectional long short-term memory neural network. It models each critical path, and then uses the multiple Bi-LSTM layers stacked together in order to merge the time information.
 #### FI-RNNs [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/firnn)
+* FI-RNNs, it refers to features injected recurrent neural networks. It combines the time series data and uses a stacked RNN and encoder, in order to learn the sequential features of the traffic data.
 #### PSPNN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/pspnn)
+* PSPNN, it refers to path-based speed prediction neural network. It is composed of a CNN and a bidirectional LSTM (Bi-LSTM) network, that extract the temporal and spatial correlations of the historical data, in order to perform the path- based speed prediction.
 #### MDL [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/mdl)
+* MDL, it refers to novel mixed deep learning. This method is used to predict the lane-level short-term traffic speed. It consists of a convolutional long and short-term memory (Conv-LSTM) layer, a convolutional layer and a fully connected layer.
 #### GMAN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/gman)
+* GMAN, it refers to graph multi-attention network. This network is based on spatial and temporal attention. It predicts the traffic speed at different locations on the road network.
 #### T-GCN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/tgcn)
+* T-GCN, it combines the GCN and GRU to model the spatio-temporal correlations.
 #### AST-GAT [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/astgat)
+* AST-GAT, it refers to attention-based spatiotemporal graph attention network. It consists of a self-attention-based GAT network and an attention-based LSTM network, for segment-level traffic speed prediction.
 #### DCRNN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/dcrnn)
+* DCRNN, it is a diffusion convolutional recurrent neural network, a deep learning framework incorporating spatial and temporal dependency into traffic prediction.
 #### ST-GRAT [codes link](https://github.com/zouguojian/Travel-time-prediction)
+* ST-GRAT, it is a novel spatiotemporal graph attention model based on self-attention mechanism that effectively cap- tures dynamic spatiotemporal correlations of the road network.
 #### MT-STGIN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN)
 
 ## EXPERIMENTAL RESULTS
@@ -472,6 +484,32 @@ tf.disable_v2_behavior()；
 | MAPE           |0.184003 |0.204968 |0.187040 |0.169737 |0.149705 |0.200275 |0.182621 |
 | R              |0.928680 |0.864227 |0.933986 |0.929748 |0.933704 |0.929867 |0.930970 |
 | R<sup>2</sup>  |0.862132 |0.863204 |0.872216 |0.871358 |0.871749 |0.864245 |0.866395 |
+---
+### MT-STGIN-4 (Multi-steps) does not consider error propagation in the long-term prediction stage and uses dynamic decoding
+#### toll to gantry 
+|评价指标         |6-1 steps|6-2 steps|6-3 steps|6-4 steps|6-5 steps|6-6 steps|total avg|
+|  ----          | ----    |  ----   |  ----   |----     |----     |----     |----     |
+| MAE            |4.269177 |4.255263 |4.330823 |4.232817 |4.445578 |4.240977 |4.295773 |
+| RMSE           |7.277377 |7.453777 |7.443018 |7.183141 |7.643382 |7.080325 |7.349233 |
+| MAPE           |0.163595 |0.112126 |0.120036 |0.110333 |0.127711 |0.094917 |0.121453 |
+| R              |0.963308 |0.961557 |0.961570 |0.964093 |0.959810 |0.965060 |0.962545 |
+| R<sup>2</sup>  |0.927262 |0.924095 |0.924031 |0.928855 |0.920586 |0.930898 |0.925940 | 
+#### gantry to gantry
+|评价指标         |6-1 steps|6-2 steps|6-3 steps|6-4 steps|6-5 steps|6-6 steps|total avg|
+|  ----          | ----    |  ----   |  ----   |----     |----     |----     |----     |
+| MAE            |4.657037 |4.606904 |4.724390 |4.904016 |4.874632 |4.642570 |4.734925 |
+| RMSE           |7.947700 |7.985073 |8.429362 |8.646348 |8.433814 |7.995177 |8.244118 |
+| MAPE           |0.073029 |0.096027 |0.065073 |0.067592 |0.073453 |0.083490 |0.076444 |
+| R              |0.851478 |0.853481 |0.834795 |0.818742 |0.839001 |0.849358 |0.841105 |
+| R<sup>2</sup>  |0.722670 |0.724946 |0.693715 |0.663468 |0.700908 |0.718445 |0.704193 |
+#### gantry to toll 
+|评价指标         |6-1 steps|6-2 steps|6-3 steps|6-4 steps|6-5 steps|6-6 steps|total avg|
+|  ----          | ----    |  ----   |  ----   |----     |----     |----     |----     |
+| MAE            |6.944869 |6.924512 |6.940500 |7.088108 |6.896299 |7.067578 |6.976977 |
+| RMSE           |11.082523|11.018495|10.777887|11.025302|10.603253|11.055566|10.928588|
+| MAPE           |0.185631 |0.218505 |0.194530 |0.179919 |0.155483 |0.206151 |0.190036 |
+| R              |0.927386 |0.928301 |0.932122 |0.927786 |0.932137 |0.926865 |0.929067 |
+| R<sup>2</sup>  |0.859548 |0.860787 |0.868585 |0.860372 |0.868020 |0.858421 |0.862624 |
 ---
 ### MT-STGIN-5 (Multi-steps) removes the multi-task learning component, using two fully connected layers instead of it
 #### toll to gantry 

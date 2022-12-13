@@ -172,6 +172,8 @@ for i in range(0, MT_STGIN.shape[0], site_num):
     time.append(list(MT_STGIN[i, :19]))
 MT_STGIN_obs=np.concatenate(MT_STGIN_obs,axis=-1)
 MT_STGIN_pre=np.concatenate(MT_STGIN_pre,axis=-1)
+print(MT_STGIN[0][[1,7,13]])
+print(MT_STGIN[108*100][[1,7,13]])
 print(MT_STGIN_pre.shape,MT_STGIN_obs[0,:6])
 time=np.array(time)
 #
@@ -303,10 +305,10 @@ for i in range(8, len(STGIN_pre)):
 '''
 
 
+'''
 i,j=0,1000
 l,h=80,108
 # y=x的拟合可视化图
-# '''
 # plt.figure()
 plt.subplot(2,3,1)
 plt.scatter(DCRNN_obs[l:h,i:j],DCRNN_pre[l:h,i:j],alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'DCRNN',linewidths=1)
@@ -357,7 +359,7 @@ plt.plot(c,d,'black',linewidth=2)
 plt.xlabel("Observed traffic speed", font2)
 plt.legend(loc='upper left',prop=font2)
 plt.show()
-# '''
+'''
 
 
 # 可视化每个模型在MAPE上的一个表现，柱状图
@@ -375,20 +377,20 @@ mape_1=[DCRNN_mape_1[-1],ST_GRAT_mape_1[-1],PSPNN_mape_1[-1],MDL_mape_1[-1],GMAN
 mape_2=[DCRNN_mape_2[-1],ST_GRAT_mape_2[-1],PSPNN_mape_2[-1],MDL_mape_2[-1],GMAN_mape_2[-1],T_GCN_mape_2[-1],AST_GAT_mape_2[-1],MT_STGIN_mape_2[-1]]
 mape_3=[DCRNN_mape_3[-1],ST_GRAT_mape_3[-1],PSPNN_mape_3[-1],MDL_mape_3[-1],GMAN_mape_3[-1],T_GCN_mape_3[-1],AST_GAT_mape_3[-1],MT_STGIN_mape_3[-1]]
 plt.ylim(5,12)
-plt.xticks(range(1,10),['DCRNN','ST-GRAT','PSPNN','MDL','GMAN','T-GCN','AST-GAT','MT-STGIN'])
-plt.bar(x, rmse_1, width=width,label='ETTG dataset',color = 'red')
-plt.bar(x + width, rmse_2, width=width,label='GTG dataset',color = 'black')
-plt.bar(x + 2 * width, rmse_3, width=width,label='GTET dataset',color='salmon')
+plt.xticks(range(1,9),['DCRNN','ST-GRAT','PSPNN','MDL','GMAN','T-GCN','AST-GAT','MT-STGIN'])
+plt.bar(x, rmse_1, width=width,label='ETTG',color = 'red')
+plt.bar(x + width, rmse_2, width=width,label='GTG',color = 'black')
+plt.bar(x + 2 * width, rmse_3, width=width,label='GTET',color='salmon')
 plt.ylabel('RMSE',font2)
 # plt.title('Target time steps $Q$ = 6 ([0-30 min])',font2)
 plt.legend()
 
 plt.subplot(1,2,2)
 plt.ylim(0.0, 0.25)
-plt.xticks(range(1,10),['DCRNN','ST-GRAT','PSPNN','MDL','GMAN','T-GCN','AST-GAT','MT-STGIN'])
-plt.bar(x, mape_1, width=width,label='ETTG dataset',color = 'red')
-plt.bar(x + width, mape_2, width=width,label='GTG dataset',color = 'black')
-plt.bar(x + 2 * width, mape_3, width=width,label='GTET dataset',color='salmon')
+plt.xticks(range(1,9),['DCRNN','ST-GRAT','PSPNN','MDL','GMAN','T-GCN','AST-GAT','MT-STGIN'])
+plt.bar(x, mape_1, width=width,label='ETTG',color = 'red')
+plt.bar(x + width, mape_2, width=width,label='GTG',color = 'black')
+plt.bar(x + 2 * width, mape_3, width=width,label='GTET',color='salmon')
 plt.ylabel('MAPE',font2)
 # plt.title('Target time steps $Q$ = 6 ([0-30 min])',font2)
 plt.legend()

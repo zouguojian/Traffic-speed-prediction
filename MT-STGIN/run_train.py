@@ -184,6 +184,32 @@ class Model(object):
             axis=3: output feature size
             '''
             decoder = Decoder_ST(hp=self.para, placeholders=self.placeholders, model_func=self.model_func)
+
+            """beginning of 1D CNN for decoder"""
+            '''
+            de_speed = tf.zeros(shape=[self.para.batch_size, self.para.output_length, self.para.site_num, self.para.features])
+            speed = tf.concat([self.placeholders['features_s'][:,-self.para.pre_length:], de_speed], axis=1)
+            speed = tf.transpose(speed,perm=[0, 2, 1, 3])
+            speed = tf.reshape(speed, [-1, self.para.output_length + self.para.pre_length, self.para.features])
+            speed1 = tf.layers.conv1d(inputs=speed,
+                                    filters=self.para.emb_size,
+                                    kernel_size=6,
+                                    padding='SAME',
+                                    kernel_initializer=tf.truncated_normal_initializer(),
+                                    name='conv_4')
+            speed2 = tf.layers.conv1d(inputs=speed1,
+                                    filters=self.para.emb_size,
+                                    kernel_size=6,
+                                    padding='SAME',
+                                    kernel_initializer=tf.truncated_normal_initializer(),
+                                    name='conv_5')
+            speed = tf.add_n([speed1, speed2])
+            speed = tf.nn.relu(speed)
+            speed = tf.reshape(speed, [-1, self.para.site_num, self.para.output_length+self.para.pre_length, self.para.emb_size])
+            masked_speed = tf.transpose(speed, perm=[0, 2, 1, 3])
+            '''
+            """ending of 1D CNN for decoder"""
+
             masked_speed = tf.concat([speed[:,-self.para.pre_length:],
                                       tf.zeros(shape=[self.para.batch_size, self.para.output_length, self.para.site_num, self.para.emb_size])],
                                       axis=1)

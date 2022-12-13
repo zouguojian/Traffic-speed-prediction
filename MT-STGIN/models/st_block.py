@@ -165,6 +165,79 @@ class ST_Block():
         # x_f = self.gatedFusion(x_f, x_t, self.para.emb_size, False, 0.99, self.para.is_training)
         return x_f  # [N, input_length, site_num, emb_size]
 
+
+    def dynamic_spatio_temporal(self, speed=None, STE=None, supports=None, causality=False):
+        '''
+        :param features: [N, site_num, emb_size]
+        :param day: [N, input_length, site_num, emb_size]
+        :param hour:
+        :param position:
+        :return: [N, input_length, site_num, emb_size]
+        '''
+        # print(speed.shape, STE.shape)
+        x = tf.concat([speed, STE], axis=-1)
+        """
+        dynamic spatial correlation 提取，使用图注意力作为支撑
+        """
+        x_s = tf.reshape(x, shape=[-1, self.site_num, self.emb_size * 2])
+        S = SpatialTransformer(self.para)
+        x_s = S.encoder(inputs=x_s)
+        x_f = tf.reshape(x_s, shape=[-1, 1, self.site_num, self.emb_size])
+
+        """
+        physical relationship 提取，图卷积网络作为支撑
+        """
+
+        x_g = tf.reshape(speed, shape=[-1, self.site_num, self.emb_size * 1])
+        gcn = self.model_func(self.placeholders,
+                              input_dim=self.emb_size * 1,
+                              para=self.para,
+                              supports=supports)
+        x_g = gcn.predict(x_g)
+        x_g = tf.reshape(x_g, shape=[-1, 1, self.site_num, self.emb_size])
+
+        # m_head_gcn=list()
+        # x_g = tf.reshape(speed, shape=[-1, self.site_num, self.emb_size * 1])
+        # for i in range(2):
+        #     with tf.variable_scope("num_head_{}".format(i)):
+        #         gcn = self.model_func(self.placeholders,
+        #                               input_dim=self.emb_size * 1,
+        #                               para=self.para,
+        #                               supports=supports)
+        #         x_gcn = gcn.predict(x_g)
+        #         x_gcn = tf.reshape(x_gcn, shape=[-1, self.para.input_length, self.site_num, self.emb_size])
+        #         m_head_gcn.append(x_gcn)
+        # x_g = tf.layers.dense(tf.concat(m_head_gcn, axis=-1), self.emb_size, activation=tf.nn.relu)
+
+        """
+        spatial - fusion gating mechanism
+        """
+        z = tf.nn.sigmoid(tf.multiply(x_f, x_g))
+        x_f = tf.add(tf.multiply(z, x_f), tf.multiply(1 - z, x_g))
+        # x_f = self.gatedFusion(x_s, x_g, self.para.emb_size, False, 0.99, self.para.is_training)
+
+        """
+        dynamic temporal correlation 提取，只用注意力机制来做提取
+        """
+        x_t = tf.transpose(speed, perm=[0, 2, 1, 3])
+        x_t = tf.reshape(x_t, shape=[-1, 1, self.emb_size * 1])
+        T = TemporalTransformer(self.para)
+        x_t = T.encoder(hiddens=x_t,
+                        hidden=x_t, causality=causality)
+
+        x_t = tf.reshape(x_t, shape=[self.batch_size, self.site_num, 1, self.emb_size])
+        x_t = tf.transpose(x_t, perm=[0, 2, 1, 3])
+
+        """
+        spatial and temporal - fusion gating mechanism
+        """
+        # x_f = x_t
+        z = tf.nn.sigmoid(tf.multiply(x_f, x_t))
+        x_f = tf.add(tf.multiply(z, x_f), tf.multiply(1 - z, x_t))
+        # x_f = self.gatedFusion(x_f, x_t, self.para.emb_size, False, 0.99, self.para.is_training)
+        return x_f  # [N, 1, site_num, emb_size]
+
+
 def spatialAttention(X, STE, K, d, bn, bn_decay, is_training):
     '''
     spatial attention mechanism

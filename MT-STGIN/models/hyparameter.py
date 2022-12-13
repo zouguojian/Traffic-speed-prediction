@@ -5,8 +5,8 @@ class parameter(object):
     def __init__(self,parser):
         self.parser=parser
 
-        self.parser.add_argument('--save_path', type=str, default='weights/MT-STGIN-3/', help='save path')
-        self.parser.add_argument('--model_name', type=str, default='MT-STGIN-3', help='training or testing model name')
+        self.parser.add_argument('--save_path', type=str, default='weights/MT-STGIN-4/', help='save path')
+        self.parser.add_argument('--model_name', type=str, default='MT-STGIN-4', help='training or testing model name')
 
         self.parser.add_argument('--divide_ratio', type=float, default=0.8, help='data_divide')
         self.parser.add_argument('--is_training', type=bool, default=True, help='is training')
@@ -25,7 +25,7 @@ class parameter(object):
         self.parser.add_argument('--normalize', type=bool, default=True, help='normalize')
         self.parser.add_argument('--input_length', type=int, default=12, help='input length')
         self.parser.add_argument('--output_length', type=int, default=6, help='output length')
-        self.parser.add_argument('--pre_length', type=int, default=6, help='pre length')
+        self.parser.add_argument('--pre_length', type=int, default=6, help='pre length') #在非MT-STGIN-4情况下为6
 
         self.parser.add_argument('--hidden1', type=int, default=32, help='number of units in hidden layer 1')
         self.parser.add_argument('--gcn_output_size', type=int, default=64, help='model string')

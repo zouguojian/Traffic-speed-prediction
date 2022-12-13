@@ -17,6 +17,7 @@ axis=2: represents the sparse matrix shape.
 from __future__ import division
 from __future__ import print_function
 from models.utils import *
+from models.inits import *
 from models.models import GCN
 from models.hyparameter import parameter
 from models.embedding import embedding
@@ -28,25 +29,21 @@ from models.inference import InferenceClass
 from models.data_next import DataClass
 from models.bridge import transformAttention
 
-import pandas as pd
-import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
-import numpy as np
 import os
-import argparse
 import datetime
+import csv
 
 tf.reset_default_graph()
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
-logs_path = "board"
-os.environ['CUDA_VISIBLE_DEVICES']='0'
-
-from tensorflow.compat.v1 import ConfigProto
-from tensorflow.compat.v1 import InteractiveSession
-
-config = ConfigProto()
-config.gpu_options.allow_growth = True
-session = InteractiveSession(config=config)
+# logs_path = "board"
+# os.environ['CUDA_VISIBLE_DEVICES']='1'
+#
+# from tensorflow.compat.v1 import ConfigProto
+# from tensorflow.compat.v1 import InteractiveSession
+#
+# config = ConfigProto()
+# config.gpu_options.allow_growth = True
+# session = InteractiveSession(config=config)
 
 
 class Model(object):
@@ -68,6 +65,7 @@ class Model(object):
         self.placeholders = {
             'position': tf.placeholder(tf.int32, shape=(1, self.para.site_num), name='input_position'),
             'day': tf.placeholder(tf.int32, shape=(None, self.para.site_num), name='input_day'),
+            'd_o_w': tf.placeholder(tf.int32, shape=(None, self.para.site_num), name='input_day_of_week'),
             'hour': tf.placeholder(tf.int32, shape=(None, self.para.site_num), name='input_hour'),
             'minute': tf.placeholder(tf.int32, shape=(None, self.para.site_num), name='input_minute'),
             'indices_i': tf.placeholder(dtype=tf.int64, shape=[None, None], name='input_indices'),
@@ -75,8 +73,6 @@ class Model(object):
             'dense_shape_i': tf.placeholder(dtype=tf.int64, shape=[None], name='input_dense_shape'),
             'features_s': tf.placeholder(tf.float32, shape=[None, self.para.input_length, self.para.site_num, self.para.features], name='input_s'),
             'labels_s': tf.placeholder(tf.float32, shape=[None, self.para.site_num, self.para.output_length], name='labels_s'),
-            'features_p': tf.placeholder(tf.float32, shape=[None, self.para.input_length, self.para.features_p], name='input_p'),
-            'labels_p': tf.placeholder(tf.float32, shape=[None, self.para.output_length], name='labels_p'),
             'dropout': tf.placeholder_with_default(0., shape=(), name='input_dropout'),
             'num_features_nonzero': tf.placeholder(tf.int32, name='input_zero')  # helper variable for sparse dropout
         }
@@ -113,6 +109,11 @@ class Model(object):
         self.d_emd = tf.reshape(d_emb, shape=[self.para.batch_size, self.para.input_length + self.para.output_length,
                                               self.para.site_num, self.para.emb_size])
 
+        d_o_w_emb = embedding(self.placeholders['d_o_w'], vocab_size=8, num_units=self.para.emb_size, scale=False,
+                          scope="day_of_week_embed")
+        self.d_o_w_emb = tf.reshape(d_o_w_emb, shape=[self.para.batch_size, self.para.input_length + self.para.output_length,
+                                               self.para.site_num, self.para.emb_size])
+
         h_emb = embedding(self.placeholders['hour'], vocab_size=24, num_units=self.para.emb_size,scale=False, scope="hour_embed")
         self.h_emd = tf.reshape(h_emb, shape=[self.para.batch_size, self.para.input_length + self.para.output_length,
                                               self.para.site_num, self.para.emb_size])
@@ -123,7 +124,7 @@ class Model(object):
 
         # encoder
         print('#................................in the encoder step....................................#')
-        with tf.variable_scope(name_or_scope='encoder'):
+        with tf.variable_scope(name_or_scope='Encoder'):
             '''
             return, the gcn output --- for example, inputs.shape is :  (32, 3, 162, 32)
             axis=0: bath size
@@ -131,63 +132,104 @@ class Model(object):
             axis=2: numbers of the nodes
             axis=3: output feature size
             '''
-            timestamp = [self.h_emd, self.m_emd]
+            timestamp = [self.h_emd]
             position = self.p_emd
             # [-1, input_length, site num, emb_size]
-
-            if self.para.model_name == 'STGIN_1':
+            if self.para.model_name == 'MT-STGIN-1':
                 speed = FC(self.placeholders['features_s'], units=[self.para.emb_size, self.para.emb_size], activations=[tf.nn.relu, None],
                             bn=False, bn_decay=0.99, is_training=self.para.is_training)
             else:
                 speed = tf.transpose(self.placeholders['features_s'],perm=[0, 2, 1, 3])
                 speed = tf.reshape(speed, [-1, self.para.input_length, self.para.features])
-                speed3 = tf.layers.conv1d(inputs=speed,
+                speed1 = tf.layers.conv1d(inputs=speed,
                                          filters=self.para.emb_size,
-                                         kernel_size=3,
+                                         kernel_size=2,
                                          padding='SAME',
                                          kernel_initializer=tf.truncated_normal_initializer(),
-                                         name='conv_1')
-
-                speed2 = tf.layers.conv1d(inputs=tf.reverse(speed,axis=[1]),
+                                         name='conv_1',)
+                speed2 = tf.layers.conv1d(inputs=speed,
                                          filters=self.para.emb_size,
                                          kernel_size=3,
                                          padding='SAME',
                                          kernel_initializer=tf.truncated_normal_initializer(),
                                          name='conv_2')
-
-                speed1 = tf.layers.conv1d(inputs=speed,
+                speed3 = tf.layers.conv1d(inputs=speed,
                                          filters=self.para.emb_size,
                                          kernel_size=1,
                                          padding='SAME',
                                          kernel_initializer=tf.truncated_normal_initializer(),
                                          name='conv_3')
-                # speed2 = tf.nn.sigmoid(speed2)
-                speed2 = tf.reverse(speed2,axis=[1])
-                speed2 = tf.multiply(speed2, tf.nn.sigmoid(speed2))
-                speed3 = tf.multiply(speed3, tf.nn.sigmoid(speed3))
                 speed = tf.add_n([speed1, speed2, speed3])
+                speed = tf.nn.relu(speed)
                 speed = tf.reshape(speed, [-1, self.para.site_num, self.para.input_length, self.para.emb_size])
                 speed = tf.transpose(speed, perm=[0, 2, 1, 3])
+
             # [-1, input_length, emb_size]
             STE = STEmbedding(position, timestamp, 0, self.para.emb_size, False, 0.99, self.para.is_training)
 
             encoder = Encoder_ST(hp=self.para, placeholders=self.placeholders, model_func=self.model_func)
             encoder_outs = encoder.encoder_spatio_temporal(speed = speed,
-                                                           STE = STE[:, :self.para.input_length,:,:],
+                                                           STE = STE[:, :self.para.input_length],
                                                            supports=self.supports)
-            print('encoder encoder_outs shape is : ', encoder_outs.shape)
+            print('encoder outs shape is : ', encoder_outs.shape)
+
+        # decoder
+        print('#................................in the decoder step....................................#')
+        with tf.variable_scope(name_or_scope='Decoder'):
+            '''
+            return, the gcn output --- for example, inputs.shape is :  (32, 1, 162, 32)
+            axis=0: bath size
+            axis=1: input data time size
+            axis=2: numbers of the nodes
+            axis=3: output feature size
+            '''
+            decoder = Decoder_ST(hp=self.para, placeholders=self.placeholders, model_func=self.model_func)
+
+            """beginning of 1D CNN for decoder"""
+            # '''
+            de_speed = tf.zeros(shape=[self.para.batch_size, self.para.output_length, self.para.site_num, self.para.features])
+            speed = tf.concat([self.placeholders['features_s'][:,-self.para.pre_length:], de_speed], axis=1)
+            speed = tf.transpose(speed,perm=[0, 2, 1, 3])
+            speed = tf.reshape(speed, [-1, self.para.output_length + self.para.pre_length, self.para.features])
+            speed1 = tf.layers.conv1d(inputs=speed,
+                                    filters=self.para.emb_size,
+                                    kernel_size=6,
+                                    padding='SAME',
+                                    kernel_initializer=tf.truncated_normal_initializer(),
+                                    name='conv_4', activation=tf.nn.relu)
+            speed2 = tf.layers.conv1d(inputs=speed1,
+                                    filters=self.para.emb_size,
+                                    kernel_size=6,
+                                    padding='SAME',
+                                    kernel_initializer=tf.truncated_normal_initializer(),
+                                    name='conv_5')
+            speed = tf.add_n([speed1, speed2])
+            speed = tf.nn.relu(speed)
+            speed = tf.reshape(speed, [-1, self.para.site_num, self.para.output_length+self.para.pre_length, self.para.emb_size])
+            masked_speed = tf.transpose(speed, perm=[0, 2, 1, 3])[:, -self.para.output_length:]
+            # '''
+            """ending of 1D CNN for decoder"""
+
+            # masked_speed = tf.zeros(shape=[self.para.batch_size, self.para.output_length, self.para.site_num, self.para.emb_size])
+            print('masked speed shape is : ',masked_speed.shape)
+            decoder_outs = decoder.decoder_spatio_temporal(speed=masked_speed,
+                                                           STE = STE[:, -self.para.output_length:],
+                                                           supports=self.supports, causality=False)
+            print('decoder outs shape is : ', decoder_outs.shape)
 
         # inference
-        print('#................................in the inference step...................................#')
+        print('#...............................in the inference step...................................#')
         with tf.variable_scope(name_or_scope='inference'):
             inference=InferenceClass(para=self.para)
-            self.pres_s= inference.dynamic_inference(features=encoder_outs, STE=STE[:, self.para.input_length:,:,:])
-            print('pres_s shape is : ', self.pres_s.shape)
+            self.pres_s= inference.inference(out_hiddens=decoder_outs[:, -self.para.output_length:])
+            print('predicted speeds shape is : ', self.pres_s.shape)
 
-        self.loss1 = tf.reduce_mean(tf.sqrt(tf.reduce_mean(tf.square(self.pres_s + 1e-10 - self.placeholders['labels_s']), axis=0)))
+        # self.loss1 = tf.reduce_mean(tf.sqrt(tf.reduce_mean(tf.square(self.pres_s + 1e-10 - self.placeholders['labels_s']), axis=0)))
+        maes_1 = tf.losses.absolute_difference(self.pres_s, self.placeholders['labels_s'])
+        self.loss1 = tf.reduce_mean(maes_1)
         self.train_op_1 = tf.train.AdamOptimizer(self.para.learning_rate).minimize(self.loss1)
 
-        print('#...............................in the training step.....................................#')
+        print('#..............................in the training step.....................................#')
 
     def test(self):
         '''
@@ -207,13 +249,14 @@ class Model(object):
         self.saver = tf.train.Saver(var_list=tf.trainable_variables())
 
     def re_current(self, a, max, min):
-        return [num * (max - min) + min for num in a]
+        return a * (max - min) + min
+        # return [num * (max - min) + min for num in a]
 
     def run_epoch(self):
         '''
         from now on,the model begin to training, until the epoch to 100
         '''
-        start_time = datetime.datetime.now()
+
         max_mae = 100
         self.sess.run(tf.global_variables_initializer())
         iterate = DataClass(self.para)
@@ -223,12 +266,13 @@ class Model(object):
         for i in range(int((iterate.length // self.para.site_num * self.para.divide_ratio - (
                 self.para.input_length + self.para.output_length)) // self.para.step)
                        * self.para.epoch // self.para.batch_size):
-            x_s, day, hour, minute, label_s, x_p, label_p = self.sess.run(train_next)
+            x_s, day, d_o_w, hour, minute, label_s= self.sess.run(train_next)
             x_s = np.reshape(x_s, [-1, self.para.input_length, self.para.site_num, self.para.features])
             day = np.reshape(day, [-1, self.para.site_num])
+            d_o_w = np.reshape(d_o_w, [-1, self.para.site_num])
             hour = np.reshape(hour, [-1, self.para.site_num])
             minute = np.reshape(minute, [-1, self.para.site_num])
-            feed_dict = construct_feed_dict(x_s, self.adj, label_s, day, hour, minute, x_p, label_p, self.placeholders)
+            feed_dict = construct_feed_dict(x_s, self.adj, label_s, day, d_o_w, hour, minute, self.placeholders)
             feed_dict.update({self.placeholders['dropout']: self.para.dropout})
 
             loss_1, _ = self.sess.run((self.loss1, self.train_op_1), feed_dict=feed_dict)
@@ -241,9 +285,6 @@ class Model(object):
                     print("the validate average loss value is : %.6f" % (mae))
                     max_mae = mae
                     self.saver.save(self.sess, save_path=self.para.save_path + 'model.ckpt')
-        end_time = datetime.datetime.now()
-        total_time = end_time - start_time
-        print("Total running times is : %f" % total_time.total_seconds())
 
     def evaluate(self):
         '''
@@ -264,19 +305,43 @@ class Model(object):
         test_next = iterate_test.next_batch(batch_size=self.para.batch_size, epoch=1, is_training=False)
         max_s, min_s = iterate_test.max_s['speed'], iterate_test.min_s['speed']
 
+        # file = open('results/'+str(self.para.model_name)+'.csv', 'w', encoding='utf-8')
+        # writer = csv.writer(file)
+        # writer.writerow(
+        #     ['road'] + ['day_' + str(i) for i in range(self.para.output_length)] + ['hour_' + str(i) for i in range(
+        #         self.para.output_length)] +
+        #     ['minute_' + str(i) for i in range(self.para.output_length)] + ['label_' + str(i) for i in
+        #                                                                      range(self.para.output_length)] +
+        #     ['predict_' + str(i) for i in range(self.para.output_length)])
+
         # '''
         for i in range(int((iterate_test.length // self.para.site_num
                             - iterate_test.length // self.para.site_num * iterate_test.divide_ratio
                             - (self.para.input_length + self.para.output_length)) // iterate_test.output_length) // self.para.batch_size):
-            x_s, day, hour, minute, label_s, x_p, label_p = self.sess.run(test_next)
+            x_s, day, d_o_w, hour, minute, label_s= self.sess.run(test_next)
             x_s = np.reshape(x_s, [-1, self.para.input_length, self.para.site_num, self.para.features])
             day = np.reshape(day, [-1, self.para.site_num])
+            d_o_w = np.reshape(d_o_w, [-1, self.para.site_num])
             hour = np.reshape(hour, [-1, self.para.site_num])
             minute = np.reshape(minute, [-1, self.para.site_num])
-            feed_dict = construct_feed_dict(x_s, self.adj, label_s, day, hour, minute, x_p, label_p, self.placeholders)
+            feed_dict = construct_feed_dict(x_s, self.adj, label_s, day, d_o_w, hour, minute, self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
-
+            # if i == 0: begin_time = datetime.datetime.now()
             pre_s= self.sess.run((self.pres_s), feed_dict=feed_dict)
+            # print(day[0,60], hour[0,60], self.re_current(pre_s, max_s, min_s)[0,60])
+            # print(self.re_current(label_s, max_s, min_s)[0,60])
+
+            # for site in range(self.para.site_num):
+            #     writer.writerow([site]+list(day[self.para.input_length:,0])+
+            #                      list(hour[self.para.input_length:,0])+
+            #                      list(minute[self.para.input_length:,0]*15)+
+            #                      list(np.round(self.re_current(label_s[0][site],max_s,min_s)))+
+            #                      list(np.round(self.re_current(pre_s[0][site],max_s,min_s))))
+
+            # if i == 0:
+            #     end_t = datetime.datetime.now()
+            #     total_t = end_t - begin_time
+            #     print("Total running times is : %f" % total_t.total_seconds())
             label_s_list.append(label_s)
             pre_s_list.append(pre_s)
 
@@ -285,23 +350,14 @@ class Model(object):
         pre_s_list = np.reshape(np.array(pre_s_list, dtype=np.float32),
                                   [-1, self.para.site_num, self.para.output_length]).transpose([1, 0, 2])
         if self.para.normalize:
-            label_s_list = np.array(
-                [self.re_current(np.reshape(site_label, [-1]), max_s, min_s) for site_label in label_s_list])
-            pre_s_list = np.array(
-                [self.re_current(np.reshape(site_label, [-1]), max_s, min_s) for site_label in pre_s_list])
-        else:
-            label_s_list = np.array([np.reshape(site_label, [-1]) for site_label in label_s_list])
-            pre_s_list = np.array([np.reshape(site_label, [-1]) for site_label in pre_s_list])
-        print('speed prediction result')
-        # label_all = np.reshape(np.array(label_s_list), newshape=[self.para.site_num, self.para.output_length, -1])
-        # predict_all = np.reshape(np.array(pre_s_list), newshape=[self.para.site_num, self.para.output_length, -1])
-        label_s_list = np.reshape(label_s_list, [-1])
-        pre_s_list = np.reshape(pre_s_list, [-1])
-        mae, rmse, mape, cor, r2 = metric(label_s_list, pre_s_list)  # 产生预测指标
+            label_s_list = self.re_current(label_s_list, max_s, min_s)
+            pre_s_list = self.re_current(pre_s_list, max_s, min_s)
 
-        # for i in range(self.para.output_length):
-        #     print('in the %d time step, the evaluating indicator'%(i+1))
-        #     metric(np.reshape(label_all[:,i,:], [-1]), np.reshape(predict_all[:,i,:], [-1]))
+        print('speed prediction result')
+        mae, rmse, mape, cor, r2 = metric(pre_s_list[80:], label_s_list[80:])  # 产生预测指标
+        for i in range(self.para.output_length):
+            print('in the %d time step, the evaluating indicator'%(i+1))
+            metric(pre_s_list[80:,:,i], label_s_list[80:,:,i])
 
         # describe(label_list, predict_list)   #预测值可视化
         return mae
