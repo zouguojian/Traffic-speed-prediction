@@ -1,11 +1,10 @@
 # -- coding: utf-8 --
-import numpy as np
 import pickle as pkl
 import networkx as nx
 import scipy.sparse as sp
 from scipy.sparse.linalg.eigen.arpack import eigsh
 import sys
-import tensorflow as tf
+from models.inits import *
 from baseline.gman import tf_utils
 
 def FC(x, units, activations, bn, bn_decay, is_training, use_bias=True):
@@ -221,20 +220,20 @@ def preprocess_adj(adj):
 
 
 
-def construct_feed_dict(x_s, adj, label_s, day, hour, minute, x_p, label_p, placeholders):
+def construct_feed_dict(x_s, adj, label_s, d_of_week, day, hour, minute, mask=[],placeholders=None):
     """Construct feed dictionary."""
     feed_dict = dict()
     feed_dict.update({placeholders['position']: np.array([[i for i in range(108)]],dtype=np.int32)})
-    feed_dict.update({placeholders['labels_s']: label_s})
+    feed_dict.update({placeholders['labels']: label_s})
+    feed_dict.update({placeholders['week']: d_of_week})
     feed_dict.update({placeholders['day']: day})
     feed_dict.update({placeholders['hour']: hour})
     feed_dict.update({placeholders['minute']: minute})
-    feed_dict.update({placeholders['features_s']: x_s})
+    feed_dict.update({placeholders['features']: x_s})
     feed_dict.update({placeholders['indices_i']: adj[0]})
     feed_dict.update({placeholders['values_i']: adj[1]})
     feed_dict.update({placeholders['dense_shape_i']: adj[2]})
-    feed_dict.update({placeholders['features_p']: x_p})
-    feed_dict.update({placeholders['labels_p']: label_p})
+    feed_dict.update({placeholders['random_mask']: mask})
     # feed_dict.update({placeholders['support'][i]: support[i] for i in range(len(support))})
     feed_dict.update({placeholders['num_features_nonzero']: x_s[0].shape})
     return feed_dict
@@ -302,9 +301,9 @@ def metric(pred, label):
         sse = np.sum((label - pred) ** 2)
         sst = np.sum((label - np.mean(label)) ** 2)
         r2 = 1 - sse / sst  # r2_score(y_actual, y_predicted, multioutput='raw_values')
-        print('mae is : %.6f'%mae)
-        print('rmse is : %.6f'%rmse)
-        print('mape is : %.6f'%mape)
-        print('r is : %.6f'%cor)
-        print('r$^2$ is : %.6f'%r2)
+        print('===>>> mae is   : %.6f'%mae)
+        print('===>>> rmse is  : %.6f'%rmse)
+        print('===>>> mape is  : %.6f'%mape)
+        print('===>>> R is     : %.6f'%cor)
+        print('===>>> R$^2$ is : %.6f'%r2)
     return mae, rmse, mape, cor, r2

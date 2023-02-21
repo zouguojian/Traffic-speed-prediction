@@ -1,18 +1,6 @@
-# -- coding: utf-8 --
-
-import  matplotlib.pyplot as plt
-import numpy as np
-
 # -*- coding: utf-8 -*-
-"""
-Created on Thu Apr 19 11:09:06 2018
-
-@author: butany
-"""
-
 import matplotlib.pyplot as plt
-import pandas as pd
-import numpy as np
+from models.inits import *
 from matplotlib.ticker import MaxNLocator
 
 a=np.divide(np.array([0]),np.array([0]))

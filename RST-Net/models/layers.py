@@ -1,6 +1,5 @@
 # -- coding: utf-8 --
 from models.inits import *
-import tensorflow as tf
 
 
 def sparse_dropout(x, keep_prob, noise_shape):

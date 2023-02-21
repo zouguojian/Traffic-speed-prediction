@@ -1,9 +1,6 @@
 # -- coding: utf-8 --
 from models.spatial_attention import SpatialTransformer
-import tensorflow as tf
 from models.temporal_attention import TemporalTransformer
-from models.lstm import LstmClass
-from baseline.gman import tf_utils
 from models.utils import *
 
 class ST_Block():
@@ -99,39 +96,25 @@ class ST_Block():
         :return: [N, input_length, site_num, emb_size]
         '''
         # this step use to encoding the input series data
-        x = tf.concat([speed, STE], axis=-1)
-        # x = tf.add(speed,STE)
+        # x = tf.concat([speed, STE], axis=-1)
+        x = tf.add(speed,STE)
         # temporal correlation
-        x_t = tf.transpose(speed, perm=[0, 2, 1, 3])
+        x_t = tf.transpose(x, perm=[0, 2, 1, 3])
         x_t = tf.reshape(x_t, shape=[-1, self.input_length, self.emb_size * 1])
         T = TemporalTransformer(self.para)
         x_t = T.encoder(hiddens = x_t,
                         hidden = x_t)
-        # time series correlation
-        x_l = tf.transpose(x, perm=[0, 2, 1, 3])
-        x_l = tf.reshape(x_l, shape=[-1, self.input_length, self.emb_size * 2])
-        # x_l = tf.reshape(tf.transpose(speed,[0,2,1,3]), shape=[-1, self.para.input_length, self.para.emb_size])
-        lstm_init = LstmClass(batch_size=self.batch_size * self.site_num,
-                              layer_num=self.hidden_layer,
-                              nodes=self.hidden_size,
-                              placeholders=self.placeholders)
-        x_l, c_states = lstm_init.encoding(x_l)
-        # feature fusion
-        x_t = tf.add_n([x_t, x_l])
-        # x_t = tf.concat([x_t, x_l], axis=-1)
-        x_t = tf.layers.dense(x_t, units=self.emb_size, activation=tf.nn.relu)
-        x_t = tf.layers.dense(x_t, units=self.emb_size)
         x_t = tf.reshape(x_t, shape=[self.batch_size, self.site_num, self.input_length, self.emb_size])
         x_t = tf.transpose(x_t, perm=[0, 2, 1, 3])
 
         """ --------------------------------------------------------------------------------------- """
 
         # dynamic spatial correlation
-        x_s = tf.reshape(x, shape=[-1, self.site_num, self.emb_size * 2])
+        x_s = tf.reshape(x, shape=[-1, self.site_num, self.emb_size * 1])
         S = SpatialTransformer(self.para)
         x_s = S.encoder(inputs=x_s)
         # static spatial correlation
-        x_g = tf.reshape(speed, shape=[-1, self.site_num, self.emb_size * 1])
+        x_g = tf.reshape(x, shape=[-1, self.site_num, self.emb_size * 1])
         gcn = self.model_func(self.placeholders,
                               input_dim=self.emb_size * 1,
                               para=self.para,
@@ -147,18 +130,15 @@ class ST_Block():
         # x_g = encoder_gcn.predict(x_g)
         # x_g = tf.concat(tf.split(x_g, self.para.num_heads, axis=0), axis=2)
 
-        # x_s = tf.add_n([x_s, x_g])
-        x_s = tf.concat([x_s, x_g], axis=-1)
-        x_s = tf.layers.dense(x_s, units=self.emb_size, activation=tf.nn.relu)
-        x_s = tf.layers.dense(x_s, units=self.emb_size)
-
+        z = tf.nn.sigmoid(tf.multiply(x_s,  x_g))
+        x_s = tf.add(tf.multiply(z,  x_s), tf.multiply(1 - z,  x_g))
         x_s = tf.reshape(x_s, shape=[-1, self.input_length, self.site_num, self.emb_size])
+
         # feature fusion
-        x_f = self.gatedFusion(x_s, x_t, self.para.emb_size, False, 0.99, self.para.is_training)
-        # x_f = tf.concat([x_t, x_s], axis=-1)
-        # x_f = tf.layers.dense(x_f, units=self.emb_size, activation=tf.nn.relu)
-        # x_f = tf.layers.dense(x_f, units=self.emb_size)
-        # x_f = tf.reshape(x_f, shape=[self.batch_size, self.input_length, self.site_num, self.emb_size])
+        z = tf.nn.sigmoid(tf.multiply(x_s,  x_t))
+        x_f = tf.add(tf.multiply(z,  x_s), tf.multiply(1 - z,  x_t))
+
+        # x_f = self.gatedFusion(x_s, x_t, self.para.emb_size, False, 0.99, self.para.is_training)
 
         return x_f #[N, input_length, site_num, emb_size]
 

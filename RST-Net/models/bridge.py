@@ -1,5 +1,4 @@
 # -- coding: utf-8 --
-import tensorflow as tf
 from models.utils import *
 
 def normalize(inputs,

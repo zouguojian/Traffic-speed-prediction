@@ -1,5 +1,5 @@
 # -- coding: utf-8 --
-import tensorflow as tf
+from models.inits import tf
 
 def normalize(inputs,
               epsilon=1e-8,
@@ -79,6 +79,9 @@ def multihead_attention(queries,
 
         # Activation
         outputs = tf.nn.softmax(outputs)  # (h*N, T_q, T_k)
+        values, _ = tf.math.top_k(input=outputs, k=6)
+        min_ = tf.reduce_min(values,axis=-1,keepdims=True)
+        outputs = tf.where(tf.math.greater(outputs,min_), outputs, tf.ones_like(outputs)*(-2**32+1))
 
         # Dropouts
         # outputs = tf.layers.dropout(outputs, rate=dropout_rate, training=tf.convert_to_tensor(is_training))

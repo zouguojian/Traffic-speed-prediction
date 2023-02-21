@@ -1,6 +1,6 @@
 # -- coding: utf-8 --
 
-import tensorflow as tf
+from models.inits import tf
 
 def normalize(inputs,
               epsilon=1e-8,
@@ -197,13 +197,7 @@ class SpatialTransformer():
         :return:
         '''
         with tf.variable_scope("encoder"):
-            # trick
-            # self.enc = tf.add_n([self.en_emb, hour, minute, position])
             self.enc = inputs
-            ## Dropout
-            # self.enc = tf.layers.dropout(self.enc,
-            #                              rate=self.dropout_rate,
-            #                              training=tf.convert_to_tensor(self.is_training))
             ## Blocks
             for i in range(self.num_blocks):
                 with tf.variable_scope("num_blocks_{}".format(i)):
@@ -217,6 +211,5 @@ class SpatialTransformer():
                                                    causality=False)
                     ### Feed Forward
                     self.enc = feedforward(self.enc, num_units=[4 * self.hidden_units, self.hidden_units])
-                    # self.enc = self.enc + inputs
         print('enc shape is : ', self.enc.shape)
         return self.enc

@@ -2,7 +2,7 @@
 from models.st_block import ST_Block
 
 
-class Encoder_ST(object):
+class EncoderST(object):
     def __init__(self, hp, placeholders=None, model_func=None):
         '''
         :param hp:

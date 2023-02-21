@@ -1,9 +1,5 @@
 # -- coding: utf-8 --
-import tensorflow as tf
-import numpy as np
-import argparse
-from models.hyparameter import parameter
-import pandas as pd
+from models.inits import *
 
 class DataClass(object):
     def __init__(self, hp=None):
@@ -19,20 +15,14 @@ class DataClass(object):
         self.step=self.hp.step                         # windows step
         self.site_num=self.hp.site_num
         self.file_train_s= self.hp.file_train_s
-        self.file_train_p = self.hp.file_train_p
         self.normalize = self.hp.normalize             # data normalization
 
         self.data_s=self.get_source_data(self.file_train_s)
         self.shape_s=self.data_s.shape
-        self.data_p=self.get_source_data(self.file_train_p)
-        self.shape_p=self.data_p.shape
 
         self.length=self.data_s.shape[0]                        # data length
         self.max_s, self.min_s= self.get_max_min(self.data_s)   # max and min values' dictionary
-        self.max_p, self.min_p = self.get_max_min(self.data_p)  # max and min values' dictionary
-
         self.normalization(self.data_s, ['speed'], max_dict=self.max_s, min_dict=self.min_s, is_normalize=self.normalize)                  # normalization
-        self.normalization(self.data_p, list(self.data_p.keys())[4:], max_dict=self.max_p, min_dict=self.min_p, is_normalize=self.normalize)  # normalization
 
     def get_source_data(self,file_path=None):
         '''
@@ -73,23 +63,22 @@ class DataClass(object):
         label:   [batch, site_num, output_length]
         '''
         data_s = self.data_s.values
-        data_p = self.data_p.values
         if self.is_training:
-            low, high = 0, int(self.shape_s[0]//self.site_num * self.divide_ratio)
+            # 目的是为了获取过去一个星期在相同时间节点的交通速度情况
+            low, high = 4 * 24 * 7, int(self.shape_s[0]//self.site_num * self.divide_ratio)
         else:
             low, high = int(self.shape_s[0]//self.site_num * self.divide_ratio), int(self.shape_s[0]//self.site_num)
 
         while low + self.input_length + self.output_length <= high:
             label=data_s[(low + self.input_length) * self.site_num: (low + self.input_length + self.output_length) * self.site_num,-1:]
             label=np.concatenate([label[i * self.site_num : (i + 1) * self.site_num, :] for i in range(self.output_length)], axis=1)
-
+            date= data_s[low * self.site_num : (low + self.input_length + self.output_length) * self.site_num, 1]
             yield (data_s[low * self.site_num : (low + self.input_length) * self.site_num, 5:6],
+                   [datetime.date(int(char.split('/')[0]), int(char.split('/')[1]), int(char.split('/')[2])).weekday() for char in date],
                    data_s[low * self.site_num : (low + self.input_length + self.output_length) * self.site_num, 2],
                    data_s[low * self.site_num : (low + self.input_length + self.output_length) * self.site_num, 3],
                    data_s[low * self.site_num : (low + self.input_length + self.output_length) * self.site_num, 4]//15,
-                   label,
-                   data_p[low:low + self.input_length, 4:],
-                   data_p[low + self.input_length: low+self.input_length+self.output_length,4])
+                   label)
             if self.is_training:
                 low += self.step
             else:
@@ -109,7 +98,7 @@ class DataClass(object):
         '''
 
         self.is_training=is_training
-        dataset=tf.data.Dataset.from_generator(self.generator,output_types=(tf.float32, tf.int32, tf.int32, tf.int32, tf.float32, tf.float32, tf.float32))
+        dataset=tf.data.Dataset.from_generator(self.generator,output_types=(tf.float32, tf.int32, tf.int32, tf.int32, tf.int32, tf.float32))
 
         if self.is_training:
             dataset=dataset.shuffle(buffer_size=int(self.shape_s[0]//self.hp.site_num * self.divide_ratio-self.input_length-self.output_length)//self.step)
