@@ -79,6 +79,7 @@ class Model(object):
             'values_i': tf.placeholder(dtype=tf.float32, shape=[None], name='input_values'),
             'dense_shape_i': tf.placeholder(dtype=tf.int64, shape=[None], name='input_dense_shape'),
             'features': tf.placeholder(tf.float32, shape=[None, self.input_len, self.site_num, self.features],name='inputs'),
+            'features_all': tf.placeholder(tf.float32, shape=[None, self.input_len+self.output_len, self.site_num, self.features],name='total_inputs'),
             'labels': tf.placeholder(tf.float32, shape=[None, self.site_num, self.total_len], name='labels'),
             'dropout': tf.placeholder_with_default(0., shape=(), name='input_dropout'),
             'random_mask': tf.placeholder(tf.int32, shape=(None, self.site_num, self.total_len), name='mask'),
@@ -136,6 +137,11 @@ class Model(object):
             '''
             speed = FC(self.placeholders['features'], units=[self.emb_size, self.emb_size], activations=[tf.nn.relu, None],
                             bn=False, bn_decay=0.99, is_training=self.is_training)
+            total_speed = FC(self.placeholders['features_all'], units=[self.emb_size, self.emb_size], activations=[tf.nn.relu, None],
+                            bn=False, bn_decay=0.99, is_training=self.is_training)
+
+            speed = tf.add(speed, total_speed[:,:self.input_len])
+
             # speed = tf.transpose(self.placeholders['features'], perm=[0, 2, 1, 3]) # [-1, input_length, site num, emb_size]
             # semantic_trans = SemanticTransformer(input_len=self.input_len,emb_size=self.emb_size,site_num=self.site_num,features=self.features)
             # speed = semantic_trans.transfer(speed)
@@ -153,8 +159,8 @@ class Model(object):
             # bridge_outs = transformAttention(encoder_outs, encoder_outs, STE[:, self.para.input_length:,:,:], self.para.num_heads, self.para.emb_size // self.para.num_heads, False, 0.99, self.para.is_training)
             bridge = BridgeTransformer(self.para)
             bridge_outs = bridge.encoder(X=encoder_outs,
-                                         X_P=ste[:, :self.input_len],
-                                         X_Q=ste[:, self.input_len:])
+                                         X_P=encoder_outs,
+                                         X_Q=ste[:, self.input_len:]+total_speed[:,self.input_len:])
             print('bridge bridge_outs shape is : ', bridge_outs.shape)
 
         '''#............................in the reconstruct bridge step.............................#'''
@@ -163,15 +169,15 @@ class Model(object):
             # bridge_outs = transformAttention(encoder_outs, encoder_outs, STE[:, self.para.input_length:,:,:], self.para.num_heads, self.para.emb_size // self.para.num_heads, False, 0.99, self.para.is_training)
             reconstruct_bridge = BridgeTransformer(self.para)
             reconstruct_bridge_outs = reconstruct_bridge.encoder(X=tf.reverse(bridge_outs, axis=[1]),
-                                                                 X_P=tf.reverse(ste[:, self.input_len:], axis=[1]),
-                                                                 X_Q=tf.reverse(ste[:, :self.input_len], axis=[1]))
+                                                                 X_P=tf.reverse(bridge_outs, axis=[1]),
+                                                                 X_Q=tf.reverse(ste[:, :self.input_len]+total_speed[:,:self.input_len], axis=[1]))
             print('reconstruction bridge outs shape is : ', reconstruct_bridge_outs.shape)
 
         '''#...........................in the reconstruction encoder step..........................#'''
         with tf.variable_scope(name_or_scope='encoder', reuse=tf.AUTO_REUSE):
             reconstruct = EncoderST(hp=self.para, placeholders=self.placeholders, model_func=self.model_func)
             reconstruct_outs = reconstruct.encoder_spatio_temporal(speed=reconstruct_bridge_outs,
-                                                                   STE=tf.reverse(ste[:, :self.input_len, :, :], axis=[1]),
+                                                                   STE=tf.reverse(ste[:, :self.input_len], axis=[1]),
                                                                    supports=self.supports)
             reconstruct_outs = tf.reverse(reconstruct_outs, axis=[1])
             print('reconstruct outs shape is : ', reconstruct_outs.shape)
@@ -226,14 +232,15 @@ class Model(object):
         for i in range(int((iterate.length // self.site_num * self.divide_ratio - self.total_len))
                        * self.epochs // self.batch_size):
             random_mask = np.random.randint(low=0,high=2,size=[self.batch_size, self.site_num, self.total_len],dtype=np.int)
-            xs, d_of_week, day, hour, minute, labels = self.sess.run(train_next)
+            xs, d_of_week, day, hour, minute, labels, xs_all = self.sess.run(train_next)
             xs = np.reshape(xs, [-1, self.input_len, self.site_num, self.features])
             d_of_week = np.reshape(d_of_week, [-1, self.site_num])
             day = np.reshape(day, [-1, self.site_num])
             hour = np.reshape(hour, [-1, self.site_num])
             minute = np.reshape(minute, [-1, self.site_num])
             labels = np.concatenate((np.transpose(np.squeeze(xs, axis=-1), [0, 2, 1]), labels), axis=2)
-            feed_dict = construct_feed_dict(xs, self.adj, labels, d_of_week, day, hour, minute, mask=random_mask, placeholders=self.placeholders)
+            xs_all = np.reshape(xs_all, [-1, self.input_len+self.output_len, self.site_num, self.features])
+            feed_dict = construct_feed_dict(xs, xs_all, self.adj, labels, d_of_week, day, hour, minute, mask=random_mask, placeholders=self.placeholders)
             feed_dict.update({self.placeholders['dropout']: self.para.dropout})
             loss,_ = self.sess.run((self.loss, self.train_op), feed_dict=feed_dict)
             print("after %d steps,the training total average loss is : %.6f" % (i, loss))
@@ -261,35 +268,36 @@ class Model(object):
         test_next = iterate_test.next_batch(batch_size=self.batch_size, epoch=1, is_training=False)
         max_s, min_s = iterate_test.max_s['speed'], iterate_test.min_s['speed']
 
-        # file = open('results/'+str(self.model_name)+'.csv', 'w', encoding='utf-8')
-        # writer = csv.writer(file)
-        # writer.writerow(
-        #     ['road'] + ['day_' + str(i) for i in range(self.output_len)] + ['hour_' + str(i) for i in range(
-        #         self.para.output_length)] +
-        #     ['minute_' + str(i) for i in range(self.output_len)] + ['label_' + str(i) for i in
-        #                                                                      range(self.output_len)] +
-        #     ['predict_' + str(i) for i in range(self.output_len)])
+        file = open('results/'+str(self.model_name)+'.csv', 'w', encoding='utf-8')
+        writer = csv.writer(file)
+        writer.writerow(
+            ['road'] + ['day_' + str(i) for i in range(self.output_len)] + ['hour_' + str(i) for i in range(
+                self.para.output_length)] +
+            ['minute_' + str(i) for i in range(self.output_len)] + ['label_' + str(i) for i in
+                                                                             range(self.output_len)] +
+            ['predict_' + str(i) for i in range(self.output_len)])
 
         for i in range(int((iterate_test.length // self.site_num - iterate_test.length // self.site_num * self.divide_ratio
                             - self.total_len) // self.output_len) // self.batch_size):
             random_mask = np.ones(shape=[self.batch_size,self.site_num,self.total_len],dtype=np.int)
-            xs, d_of_week, day, hour, minute, labels= self.sess.run(test_next)
+            xs, d_of_week, day, hour, minute, labels, xs_all= self.sess.run(test_next)
             xs = np.reshape(xs, [-1, self.input_len, self.site_num, self.features])
             d_of_week = np.reshape(d_of_week, [-1, self.site_num])
             day = np.reshape(day, [-1, self.site_num])
             hour = np.reshape(hour, [-1, self.site_num])
             minute = np.reshape(minute, [-1, self.site_num])
             labels = np.concatenate((np.transpose(np.squeeze(xs, axis=-1), [0, 2, 1]), labels), axis=2)
-            feed_dict = construct_feed_dict(xs, self.adj, labels, d_of_week, day, hour, minute, mask=random_mask, placeholders=self.placeholders)
+            xs_all = np.reshape(xs_all, [-1, self.input_len + self.output_len, self.site_num, self.features])
+            feed_dict = construct_feed_dict(xs, xs_all, self.adj, labels, d_of_week, day, hour, minute, mask=random_mask, placeholders=self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
             pre_s = self.sess.run((self.pres_s), feed_dict=feed_dict)
 
-            # for site in range(self.site_num):
-            #     writer.writerow([site]+list(day[self.input_len:,0])+
-            #                      list(hour[self.input_len:,0])+
-            #                      list(minute[self.input_len:,0]*15)+
-            #                      list(np.round(self.re_current(labels[0][site,self.input_len:],max_s,min_s)))+
-            #                      list(np.round(self.re_current(pre_s[0][site,self.input_len:],max_s,min_s))))
+            for site in range(self.site_num):
+                writer.writerow([site]+list(day[self.input_len:,0])+
+                                 list(hour[self.input_len:,0])+
+                                 list(minute[self.input_len:,0]*15)+
+                                 list(np.round(self.re_current(labels[0][site,self.input_len:],max_s,min_s)))+
+                                 list(np.round(self.re_current(pre_s[0][site,self.input_len:],max_s,min_s))))
 
             labels_list.append(labels[:, :, self.input_len:])
             pres_list.append(pre_s[:, :, self.input_len:])

@@ -33,12 +33,13 @@ font1 = {'family' : 'Times New Roman',
 'size'   : 13,
 }
 plt.figure()
-k=4  # 1时候可以
-h=600
-plt.plot(range(1, h+1), RST_obs[k,:h], color='#0cdc73', label=u'Observed', linewidth=1)
-plt.plot(range(1, h+1), RST_pre[k,:h], color='red', label=u'STGIN', linewidth=1)
-plt.legend(loc='upper left', prop=font2)
-plt.ylabel("Traffic speed", font1)
-plt.show()
+# k=4  # 1时候可以
+h=1200
+for k in range(0,108):
+    plt.plot(range(1, h+1), RST_obs[k,:h], color='#0cdc73', label=u'Observed', linewidth=1)
+    plt.plot(range(1, h+1), RST_pre[k,:h], color='red', label=u'STGIN', linewidth=1)
+    plt.legend(loc='upper left', prop=font2)
+    plt.ylabel("Traffic speed", font1)
+    plt.show()
 
 

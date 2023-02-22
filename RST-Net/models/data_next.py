@@ -63,9 +63,10 @@ class DataClass(object):
         label:   [batch, site_num, output_length]
         '''
         data_s = self.data_s.values
+        total_week_len=4 * 24 * 7
         if self.is_training:
             # 目的是为了获取过去一个星期在相同时间节点的交通速度情况
-            low, high = 4 * 24 * 7, int(self.shape_s[0]//self.site_num * self.divide_ratio)
+            low, high = total_week_len, int(self.shape_s[0]//self.site_num * self.divide_ratio)
         else:
             low, high = int(self.shape_s[0]//self.site_num * self.divide_ratio), int(self.shape_s[0]//self.site_num)
 
@@ -78,9 +79,11 @@ class DataClass(object):
                    data_s[low * self.site_num : (low + self.input_length + self.output_length) * self.site_num, 2],
                    data_s[low * self.site_num : (low + self.input_length + self.output_length) * self.site_num, 3],
                    data_s[low * self.site_num : (low + self.input_length + self.output_length) * self.site_num, 4]//15,
-                   label)
+                   label,
+                   data_s[(low-total_week_len) * self.site_num: (low-total_week_len + self.input_length+self.output_length) * self.site_num, 5:6]
+                   )
             if self.is_training:
-                low += self.step
+                low += 1
             else:
                 # low += self.hp.predict_length
                 low += self.output_length
@@ -98,7 +101,7 @@ class DataClass(object):
         '''
 
         self.is_training=is_training
-        dataset=tf.data.Dataset.from_generator(self.generator,output_types=(tf.float32, tf.int32, tf.int32, tf.int32, tf.int32, tf.float32))
+        dataset=tf.data.Dataset.from_generator(self.generator,output_types=(tf.float32, tf.int32, tf.int32, tf.int32, tf.int32, tf.float32, tf.float32))
 
         if self.is_training:
             dataset=dataset.shuffle(buffer_size=int(self.shape_s[0]//self.hp.site_num * self.divide_ratio-self.input_length-self.output_length)//self.step)

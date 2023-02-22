@@ -220,7 +220,7 @@ def preprocess_adj(adj):
 
 
 
-def construct_feed_dict(x_s, adj, label_s, d_of_week, day, hour, minute, mask=[],placeholders=None):
+def construct_feed_dict(xs, xs_all, adj, label_s, d_of_week, day, hour, minute, mask=[],placeholders=None):
     """Construct feed dictionary."""
     feed_dict = dict()
     feed_dict.update({placeholders['position']: np.array([[i for i in range(108)]],dtype=np.int32)})
@@ -229,13 +229,14 @@ def construct_feed_dict(x_s, adj, label_s, d_of_week, day, hour, minute, mask=[]
     feed_dict.update({placeholders['day']: day})
     feed_dict.update({placeholders['hour']: hour})
     feed_dict.update({placeholders['minute']: minute})
-    feed_dict.update({placeholders['features']: x_s})
+    feed_dict.update({placeholders['features']: xs})
+    feed_dict.update({placeholders['features_all']: xs_all})
     feed_dict.update({placeholders['indices_i']: adj[0]})
     feed_dict.update({placeholders['values_i']: adj[1]})
     feed_dict.update({placeholders['dense_shape_i']: adj[2]})
     feed_dict.update({placeholders['random_mask']: mask})
     # feed_dict.update({placeholders['support'][i]: support[i] for i in range(len(support))})
-    feed_dict.update({placeholders['num_features_nonzero']: x_s[0].shape})
+    feed_dict.update({placeholders['num_features_nonzero']: xs[0].shape})
     return feed_dict
 
 

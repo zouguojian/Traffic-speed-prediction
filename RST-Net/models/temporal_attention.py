@@ -31,7 +31,8 @@ def normalize(inputs,
     return outputs
 
 
-def multihead_attention(queries,
+def multihead_attention(args,
+                        queries,
                         keys,
                         num_units=None,
                         num_heads=8,
@@ -79,9 +80,9 @@ def multihead_attention(queries,
 
         # Activation
         outputs = tf.nn.softmax(outputs)  # (h*N, T_q, T_k)
-        values, _ = tf.math.top_k(input=outputs, k=6)
-        min_ = tf.reduce_min(values,axis=-1,keepdims=True)
-        outputs = tf.where(tf.math.greater(outputs,min_), outputs, tf.ones_like(outputs)*(-2**32+1))
+        # values, _ = tf.math.top_k(input=outputs, k=args.temporal_top_k)
+        # min_ = tf.reduce_min(values,axis=-1,keepdims=True)
+        # outputs = tf.where(tf.math.greater(outputs,min_), outputs, tf.ones_like(outputs)*(-2**32+1))
 
         # Dropouts
         # outputs = tf.layers.dropout(outputs, rate=dropout_rate, training=tf.convert_to_tensor(is_training))
@@ -197,7 +198,8 @@ class TemporalTransformer():
             for i in range(self.num_blocks):
                 with tf.variable_scope("num_blocks_{}".format(i)):
                     ### Multihead Attention
-                    dec = multihead_attention(queries=dec,
+                    dec = multihead_attention(args=self.arg,
+                                              queries=dec,
                                               keys=enc,
                                               num_units=self.hidden_units,
                                               num_heads=self.num_heads,

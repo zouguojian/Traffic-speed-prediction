@@ -20,6 +20,7 @@ class ST_Block():
         self.features_p = self.para.features_p
         self.placeholders = placeholders
         self.input_length = input_length
+        self.channels = self.para.channels
         self.model_func = model_func
 
     def FC(self, x, units, activations, bn, bn_decay, is_training, use_bias=True):
@@ -87,6 +88,58 @@ class ST_Block():
             X = STAttBlock(X, STE, self.para.num_heads, self.para.emb_size // self.para.num_heads, False, 0.99, self.para.is_training)
         return X
 
+    def channel_combine(self, x=None):
+        '''
+        :param x: [-1, channel, site, dim]
+        :return: [-1, 1, site, dim * channel number]
+        '''
+        x = tf.concat(tf.split(x, self.channels, axis=1), axis=-1)
+        return x
+
+    def st_attention(self, x):
+        '''
+        :param x:  [-1, len, site, dim]
+        :return: [-1, len, site, dim * channel number]
+        '''
+        if self.channels>1:
+            zeros = tf.zeros(shape=[self.batch_size, self.channels-1, self.site_num, self.emb_size],dtype=tf.float32)
+            x = tf.concat([zeros, x],axis=1)
+        x = tf.concat(list(map(self.channel_combine, [x[:,i:i+self.channels] for i in range(self.input_length)])),axis=1)
+
+        return x
+
+    def site_combine(self, x=None):
+        '''
+        :param x: [-1, channel, site, dim]
+        :return: [-1, 1, site, dim * channel number]
+        '''
+        x = tf.concat(tf.split(x, self.channels, axis=1), axis=2)
+        return x
+
+    def st_holistic_attention(self, x):
+        '''
+        :param x: [-1, len, site, dim]
+        :return: [-1, len, site * channel number, dim]
+        '''
+        if self.channels>1:
+            zeros = tf.zeros(shape=[self.batch_size, self.channels-1, self.site_num, self.emb_size],dtype=tf.float32)
+            x = tf.concat([zeros, x],axis=1)
+        x = tf.concat(list(map(self.site_combine, [x[:,i:i+self.channels] for i in range(self.input_length)])),axis=1)
+        return x
+
+    def fusion_gate(self, x, y):
+        '''
+        :param x: [-1, len, site, dim]
+        :param y: [-1, len, site, dim]
+        :return: [-1, len, site, dim]
+        '''
+        x = tf.layers.dense(inputs=x,units=self.emb_size,use_bias=False,kernel_initializer=tf.initializers.truncated_normal(),name='w_1')
+        y = tf.layers.dense(inputs=y,units=self.emb_size,use_bias=True,kernel_initializer=tf.initializers.truncated_normal(),
+                            bias_initializer=tf.initializers.truncated_normal(), name='w_2')
+        z = tf.nn.sigmoid(tf.add(x, y))
+        h = tf.add(tf.multiply(z, x), tf.multiply(1 - z, y))
+        return h
+
     def spatio_temporal(self, speed=None, STE=None, supports=None):
         '''
         :param features: [N, site_num, emb_size]
@@ -95,12 +148,11 @@ class ST_Block():
         :param position:
         :return: [N, input_length, site_num, emb_size]
         '''
-        # this step use to encoding the input series data
-        # x = tf.concat([speed, STE], axis=-1)
-        x = tf.add(speed,STE)
         # temporal correlation
-        x_t = tf.transpose(x, perm=[0, 2, 1, 3])
-        x_t = tf.reshape(x_t, shape=[-1, self.input_length, self.emb_size * 1])
+        x = tf.add(speed,STE)
+        x_t = tf.transpose(speed, perm=[0, 2, 1, 3])
+        x_t = tf.reshape(x_t, shape=[-1, self.input_length, self.emb_size])
+
         T = TemporalTransformer(self.para)
         x_t = T.encoder(hiddens = x_t,
                         hidden = x_t)
@@ -110,29 +162,29 @@ class ST_Block():
         """ --------------------------------------------------------------------------------------- """
 
         # dynamic spatial correlation
-        x_s = tf.reshape(x, shape=[-1, self.site_num, self.emb_size * 1])
+        # x_s = self.st_attention(x) # 将一段时间内的相同站点不同时间的特征进行拼接，再用注意力计算
+        # x_s = tf.reshape(x_s, shape=[-1, self.site_num, self.emb_size * self.channels])
+
+        x_s = self.st_holistic_attention(x)  # 将一段时间内的不同时间不同站点的特征进行拼接，再用全局时空注意力计算
+        x_s = tf.reshape(x_s, shape=[-1, self.site_num * self.channels, self.emb_size])
+
+        # x_s = tf.reshape(x, shape=[-1, self.site_num, self.emb_size])
         S = SpatialTransformer(self.para)
         x_s = S.encoder(inputs=x_s)
+        x_s = tf.split(x_s, self.channels, axis=1)[-1]
         # static spatial correlation
-        x_g = tf.reshape(x, shape=[-1, self.site_num, self.emb_size * 1])
+        x_g = tf.reshape(x, shape=[-1, self.site_num, self.emb_size])
         gcn = self.model_func(self.placeholders,
-                              input_dim=self.emb_size * 1,
+                              input_dim=self.emb_size,
                               para=self.para,
                               supports=supports)
         x_g = gcn.predict(x_g)
 
-
-        # x_g = tf.concat(tf.split(x_g, self.para.num_heads, axis=2), axis=0)
-        # encoder_gcn = self.model_func(placeholders=self.placeholders,
-        #                                 input_dim=self.emb_size // self.para.num_heads,
-        #                                 para=self.para,
-        #                                 supports=supports)
-        # x_g = encoder_gcn.predict(x_g)
-        # x_g = tf.concat(tf.split(x_g, self.para.num_heads, axis=0), axis=2)
-
-        z = tf.nn.sigmoid(tf.multiply(x_s,  x_g))
-        x_s = tf.add(tf.multiply(z,  x_s), tf.multiply(1 - z,  x_g))
+        # z = tf.nn.sigmoid(tf.multiply(x_s,  x_g))
+        # x_s = tf.add(tf.multiply(z,  x_s), tf.multiply(1 - z,  x_g))
         x_s = tf.reshape(x_s, shape=[-1, self.input_length, self.site_num, self.emb_size])
+
+        # x_s = self.gatedFusion(x_s, x_t, self.para.emb_size, False, 0.99, self.para.is_training)
 
         # feature fusion
         z = tf.nn.sigmoid(tf.multiply(x_s,  x_t))

@@ -4,7 +4,7 @@ class parameter(object):
     def __init__(self,parser):
         self.parser=parser
 
-        self.parser.add_argument('--save_path', type=str, default='weights/RST/', help='save path')
+        self.parser.add_argument('--save_path', type=str, default='weights/RST-1/', help='save path')
         self.parser.add_argument('--model_name', type=str, default='RST', help='training or testing model name')
 
         self.parser.add_argument('--divide_ratio', type=float, default=0.8, help='data_divide')
@@ -17,8 +17,9 @@ class parameter(object):
         self.parser.add_argument('--site_num', type=int, default=108, help='total number of road')
         self.parser.add_argument('--num_heads', type=int, default=4, help='total number of head attentions')
         self.parser.add_argument('--num_blocks', type=int, default=1, help='total number of attention layers')
-        self.parser.add_argument('--spatial_top_k', type=int, default=6, help='spatial top k')
+        self.parser.add_argument('--spatial_top_k', type=int, default=8, help='spatial top k')
         self.parser.add_argument('--temporal_top_k', type=int, default=6, help='temporal top k')
+        self.parser.add_argument('--channels', type=int, default=1, help='the number of channels')
 
         #每个点表示a->b路线，目前8个收费站
         self.parser.add_argument('--emb_size', type=int, default=64, help='embedding size')
