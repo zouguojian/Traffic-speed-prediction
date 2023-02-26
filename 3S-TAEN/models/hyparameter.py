@@ -9,15 +9,15 @@ class parameter(object):
 
         self.parser.add_argument('--divide_ratio', type=float, default=0.8, help='data_divide')
         self.parser.add_argument('--is_training', type=bool, default=True, help='is training')
-        self.parser.add_argument('--epoch', type=int, default=1, help='epoch') # modify
+        self.parser.add_argument('--epoch', type=int, default=100, help='epoch') # modify
         self.parser.add_argument('--step', type=int, default=1, help='step')
-        self.parser.add_argument('--batch_size', type=int, default=8, help='batch size')  # modify
+        self.parser.add_argument('--batch_size', type=int, default=32, help='batch size')  # modify
         self.parser.add_argument('--learning_rate', type=float, default=0.0005, help='learning rate')
         self.parser.add_argument('--dropout', type=float, default=0.2, help='drop out')
         self.parser.add_argument('--site_num', type=int, default=108, help='total number of road')
         self.parser.add_argument('--num_heads', type=int, default=4, help='total number of head attentions')
         self.parser.add_argument('--num_blocks', type=int, default=1, help='total number of attention layers')
-        self.parser.add_argument('--spatial_top_k', type=int, default=8, help='spatial top k')
+        self.parser.add_argument('--spatial_top_k', type=int, default=32, help='spatial top k')
         self.parser.add_argument('--temporal_top_k', type=int, default=6, help='temporal top k')
         self.parser.add_argument('--channels', type=int, default=3, help='the number of channels')
 
