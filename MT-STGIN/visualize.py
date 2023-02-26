@@ -102,13 +102,21 @@ MT_STGIN_mape_3 =[0.183126,0.204971,0.188529,0.169706,0.149622,0.202187,0.183024
 
 font2 = {'family' : 'Times New Roman',
 'weight' : 'normal',
+<<<<<<< HEAD
 'size'   : 17,
+=======
+'size'   : 13.,
+>>>>>>> origin/main
 }
 # plt.ylabel('Loss(ug/m3)',font2)
 
 font1 = {'family' : 'Times New Roman',
 'weight' : 'normal',
+<<<<<<< HEAD
 'size'   : 15,
+=======
+'size'   : 13,
+>>>>>>> origin/main
 }
 
 
@@ -212,7 +220,11 @@ print(T_GCN_pre.shape,T_GCN_obs[0,:6])
 # print(time[100])
 
 
+<<<<<<< HEAD
 # '''
+=======
+'''
+>>>>>>> origin/main
 plt.subplot(3, 1, 1)
 print(MT_STGIN_pre.shape)
 k=1
@@ -266,7 +278,11 @@ plt.ylabel("Traffic speed", font1)
 # plt.title("Road segment 3", font1)
 
 plt.show()
+<<<<<<< HEAD
 # '''
+=======
+'''
+>>>>>>> origin/main
 
 
 '''
@@ -307,6 +323,7 @@ for i in range(8, len(STGIN_pre)):
 
 '''
 i,j=0,1000
+<<<<<<< HEAD
 l,h=0,28
 # y=x的拟合可视化图
 # plt.figure()
@@ -339,6 +356,39 @@ d=[i for i in range(150)]
 # plt.legend(loc='upper left',prop=font2)
 
 plt.subplot(1,3,1)
+=======
+l,h=80,108
+# y=x的拟合可视化图
+# plt.figure()
+plt.subplot(2,3,1)
+plt.scatter(DCRNN_obs[l:h,i:j],DCRNN_pre[l:h,i:j],alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'DCRNN',linewidths=1)
+a=[i for i in range(150)]
+b=[i for i in range(150)]
+plt.plot(a,b,'black',linewidth=2)
+#plt.scatter(a, b)
+# plt.title("Entrance tall dataset", font2)
+#设置横纵坐标的名称以及对应字体格式
+plt.ylabel("Predicted traffic speed", font2)
+plt.legend(loc='upper left',prop=font2)
+
+plt.subplot(2,3,2)
+plt.scatter(ST_GRAT_obs[l:h,i:j],ST_GRAT_pre[l:h,i:j],alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'ST-GRAT',linewidths=1)
+plt.plot(a,b,'black',linewidth=2)
+#plt.scatter(a, b)
+# plt.title("Exit tall dataset", font2)
+plt.legend(loc='upper left',prop=font2)
+
+plt.subplot(2,3,3)
+plt.scatter(T_GCN_obs[l:h,i:j],T_GCN_pre[l:h,i:j],alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'T-GCN',linewidths=1)
+c=[i for i in range(150)]
+d=[i for i in range(150)]
+plt.plot(c,d,'black',linewidth=2)
+# plt.title("Gantry dataset", font2)
+#设置横纵坐标的名称以及对应字体格式
+plt.legend(loc='upper left',prop=font2)
+
+plt.subplot(2,3,4)
+>>>>>>> origin/main
 plt.scatter(AST_GAT_obs[l:h,i:j],AST_GAT_pre[l:h,i:j],alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'AST-GAT',linewidths=1)
 plt.plot(a,b,'black',linewidth=2)
 #设置横纵坐标的名称以及对应字体格式
@@ -346,14 +396,22 @@ plt.xlabel("Observed traffic speed", font2)
 plt.ylabel("Predicted traffic speed", font2)
 plt.legend(loc='upper left',prop=font2)
 
+<<<<<<< HEAD
 plt.subplot(1,3,2)
+=======
+plt.subplot(2,3,5)
+>>>>>>> origin/main
 plt.scatter(GMAN_obs[l:h,i:j],GMAN_pre[l:h,i:j],alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'GMAN',linewidths=1)
 plt.plot(a,b,'black',linewidth=2)
 #设置横纵坐标的名称以及对应字体格式
 plt.xlabel("Observed traffic speed", font2)
 plt.legend(loc='upper left',prop=font2)
 
+<<<<<<< HEAD
 plt.subplot(1,3,3)
+=======
+plt.subplot(2,3,6)
+>>>>>>> origin/main
 plt.scatter(MT_STGIN_obs[l:h,i:j],MT_STGIN_pre[l:h,i:j],alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'MT-STGIN',linewidths=1)
 plt.plot(c,d,'black',linewidth=2)
 #设置横纵坐标的名称以及对应字体格式
@@ -401,7 +459,11 @@ plt.show()
 
 # 可视化每个模型在MAE，RMSE和MAPE上的一个表现
 '''
+<<<<<<< HEAD
 plt.figure()
+=======
+# plt.figure()
+>>>>>>> origin/main
 plt.subplot(1,3,1)
 # plt.plot(range(1,7,1),LSTM_mae,marker='P',color='red',linestyle='-', linewidth=1,label='LSTM')
 plt.plot(range(1,7,1),DCRNN_mae_3[:6],marker='h',color='blue',linestyle='-', linewidth=1,label='DCRNN')
@@ -510,4 +572,8 @@ plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
 plt.legend(loc='upper left',prop=font1)
 plt.grid(axis='y')
 plt.show()
+<<<<<<< HEAD
 '''
+=======
+# '''
+>>>>>>> origin/main
