@@ -14,11 +14,13 @@ If not, there are some problems will appear in the running stage.
 * This program has been accepted by journal of Computer Engineering, So, you can download the codes on your
 computer, and use it as your component of research or subject.
 
-### 3. 3S-TAEN [[codes link]](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/3S-TAEN)
->Spatiotemporal Encoder-Decoder Neural Network
+### 3. 3S-TBLN [[codes link]](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/3S-TBLN)
+>Spatio-temporal Bilateral Learning Neural Network
+* Note that, 3S-TBLN can be reproduced on the TensorFlow version >= 1.13.1, even the version >2.0.0. 
+* We will upload all baselines' codes.
 
 
-MT-STGIN has been submitted to IEEE Transactions on Intelligent Transportation Systems TITS journal;  
-3S-TAEN has been submitted to IEEE Transactions on Intelligent Transportation Systems TITS journal;   
+MT-STGIN has been submitted to IEEE Transactions on Intelligent Transportation Systems TITS journal (short conference version has been submitted on IEEE IV);  
+3S-TBLN has been submitted to IEEE Transactions on Intelligent Transportation Systems TITS journal;   
 ST-ANet has been accepted in Computer Engineering;  
 Above codes have been uploaded in the Git-Hub page [[codes link]](https://github.com/zouguojian/Traffic-speed-prediction).  
