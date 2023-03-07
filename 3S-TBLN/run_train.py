@@ -312,9 +312,9 @@ class Model(object):
         print('############# speed prediction result #############')
         mae, rmse, mape, cor, r2 = metric(pres_list, labels_list)  # 产生预测指标
         print('############# speed prediction result #############')
-        # for i in range(self.para.output_length):
-        #     print('in the %d time step, the evaluating indicator'%(i+1))
-        #     metric(pre_s_list[:28,:,i], label_s_list[:28,:,i])
+        for i in range(self.para.output_length):
+            print('in the %d time step, the evaluating indicator'%(i+1))
+            metric(pres_list[:,:,i], labels_list[:,:,i])
 
         # describe(label_list, predict_list)   #预测值可视化
         return mae

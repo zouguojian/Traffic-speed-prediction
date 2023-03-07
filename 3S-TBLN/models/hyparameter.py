@@ -5,15 +5,14 @@ class parameter(object):
         self.parser=parser
 
         # >>>需要根据数据集的位置和大小进行特定参数设定
-        self.parser.add_argument('--save_path', type=str, default='weights/RST/', help='save path')
-        self.parser.add_argument('--model_name', type=str, default='RST', help='training or testing model name')
+        self.parser.add_argument('--save_path', type=str, default='weights/3S-TBLN-la/', help='save path')
+        self.parser.add_argument('--model_name', type=str, default='3S-TBLN', help='training or testing model name')
         self.parser.add_argument('--file_train_s', type=str, default='data/metr-la/train_5.csv', help='training_speed file address')
         self.parser.add_argument('--file_adj', type=str,default='data/metr-la/adjacent.csv', help='adj file address')
-        self.parser.add_argument('--site_num', type=int, default=207, help='total number of road')
-        self.parser.add_argument('--granularity', type=int, default=5, help='minute granularity')
         self.parser.add_argument('--file_val', type=str, default='data/val.csv', help='validate set file address')
         self.parser.add_argument('--file_test', type=str, default='data/test.csv', help='test set file address')
-
+        self.parser.add_argument('--site_num', type=int, default=207, help='total number of road')
+        self.parser.add_argument('--granularity', type=int, default=5, help='minute granularity')
         # >>>下面参数一般不用动
         self.parser.add_argument('--divide_ratio', type=float, default=0.8, help='data_divide')
         self.parser.add_argument('--is_training', type=bool, default=True, help='is training')
