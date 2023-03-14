@@ -154,7 +154,6 @@ def res(model, valX, valTE, valY, mean, std):
     pred = np.concatenate(pred, axis=0)
     label = np.concatenate(label, axis=0)
 
-<<<<<<< HEAD
     # y_truth = np.transpose(label, [0, 2, 1]).astype('float')
     # y_pred = np.transpose(pred, [0, 2, 1]).astype('float')
 
@@ -166,19 +165,6 @@ def res(model, valX, valTE, valY, mean, std):
     # for i in range(y_truth.shape[0]):
     #     for site in range(args.N):
     #         writer.writerow([site]+ list(np.round(y_truth[i, site])) + list(np.round(y_pred[i, site])))
-=======
-    y_truth = np.transpose(label, [0, 2, 1]).astype('float')
-    y_pred = np.transpose(pred, [0, 2, 1]).astype('float')
-
-    file = open('/Users/guojianzou/Traffic-speed-prediction/MT-STGIN/results/ST-GRAT.csv', 'w', encoding='utf-8')
-    writer = csv.writer(file)
-    writer.writerow( ['road']+ ['label_' + str(i) for i in range(args.Q)] +
-        ['predict_' + str(i) for i in range(args.Q)])
-
-    for i in range(y_truth.shape[0]):
-        for site in range(args.N):
-            writer.writerow([site]+ list(np.round(y_truth[i, site])) + list(np.round(y_pred[i, site])))
->>>>>>> origin/main
 
     pred = np.transpose(pred, [0, 2, 1]) [:, :28]  # 多任务预测,数据的范围
     label = np.transpose(label, [0, 2, 1])[:, :28]
