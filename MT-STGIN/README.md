@@ -12,6 +12,13 @@ tf.disable_v2_behavior()；
 > * please click the run_train.py file; the codes are then running;
 > * Note that our TensorFlow version is 1.13.1 and can also be operated on the 1.14.0 version.
 ---
+## EXPERIMENTAL SETTINGS
+
+> The hyperparameters in our MT-STGIN model and base- lines are determined during the training process; that is, the best-performing model is selected according to the MAE on the validation set. Therefore, the validation set used in this study is closely related to the training stage, and after each epoch, the MAE obtained by the prediction model on the validation set is calculated. The specific process is as follows: for each experiment, the number of epochs is 200. After train- ing for an epoch, we test the trained model on the validation set. If the MAE of the prediction model on the validation set decreases, we update and save the model parameters. After many parameter adjustments and experiments, when the prediction effect of the prediction model on the validation set is optimal, the training process ends. Finally, the prediction result is obtained by iterating all the samples in the test set. In all experiments, we use an early-stop mechanism; that is, the number of early-stop rounds and the maximum number of epochs are set to 300 and 50, respectively. To consist with existing studies, we set the target time steps Q and historical time steps P to 6 and 12, respectively, representing the time span is 270 minutes.  
+
+> After multiple training steps, the final model framework parameters are determined. Table I presents the number of layers, nodes, output size and related hyperparameters of the MT-STGIN model. We implement the MT-STGIN and baselines in TensorFlow and PyTorch. The server’s 4 NVIDIA Tesla V100S-PCIE-32GB GPUs and 24 CPU cores are used for model training and testing. Note that the implementation codes of the proposed MT-STGIN model and baseline models are open source, and are available at the personal GitHub homepage [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN).
+
+---
 
 ## MT-STGIN AND BASELINES （ALL METHODS' CODES HAVE BEEN REPRODUCED） 
 #### HA  [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/ha)
