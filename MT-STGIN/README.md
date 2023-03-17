@@ -26,19 +26,19 @@
 > 1.  MAE (Mean Absolute Error):
 
 $$
-MAE=\frac{1}{n} \sum_{i=1}^{N}\left|\hat{Y}_{i}-Y_{i}\right|
+MAE=\frac{1}{\rm N} \sum_{i=1}^{\rm N}\left|\hat{\rm Y}_{i}-{\rm Y}_{i}\right|
 $$
 
 > 2. RMSE (Root Mean Square Error):
 
 $$
-RMSE =\sqrt{\frac{1}{N} \sum_{i=1}^{N}\left(\hat{Y}_{i}-Y_{i}\right)^{2}}
+RMSE =\sqrt{\frac{1}{\rm N} \sum_{i=1}^{\rm N}\left(\hat{\rm Y}_{i}-{\rm Y}_{i}\right)^{2}}
 $$
 
 > 3. MAPE (Mean Absolute Percentage Error):
 
 $$
-MAPE=\frac{100 \%}{N} \sum_{i=1}^{N}\left|\frac{\hat{Y}_{i}-Y_{i}}{Y_{i}}\right|
+MAPE=\frac{100 \%}{\rm N} \sum_{i=1}^{\rm N}\left|\frac{\hat{\rm Y}_{i}-{\rm Y}_{i}}{{\rm Y}_{i}}\right|
 $$
   
 ---
