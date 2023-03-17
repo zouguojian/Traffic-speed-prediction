@@ -2,15 +2,14 @@
 
 ## WHAT SHOULD WE PAY ATTENTION TO FOCUS ON THE RUNNING ENVIRONMENT?
 
-<font face="微软雅黑" >需要注意的是，需要根据requirements.txt文件中指示的包进行安装，才能正常的运行程序！！！</font>
+<font face="微软雅黑" >Note that we need to install the right packages to guarantee the model runs according to the file requirements.txt！！！</font>
   
->* first，please use the conda tool to crate a virtual environment, such as ‘conda create traffic_speed’；  
-> * active the environment, and conda activate traffic_speed；  
-> * build environment，需要安装的环境已经添加在requirements.txt中，可以用conda安装，也可以使用pip安装，如：conda install tensorflow==1.13.1；  
-> * if you have installed the last TensorFlow version, its okay，tensorflow的包按照以下方式进行导入即可：import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()；  
-> * please click the run_train.py file; the codes are then running;
-> * Note that our TensorFlow version is 1.13.1 and can also be operated on the 1.14.0 version.
+>* first, please use the conda tool to create a virtual environment, such as ‘conda create traffic speed’;  
+> * second, active the environment, and conda activate traffic speed;   
+> * third, build environment, the requirements environments have been added in the file named requirements.txt; you can use conda as an auxiliary tool to install or pip, e.g., conda install tensorflow==1.13.1;    
+> * if you have installed the last TensorFlow version, it’s okay; import tensorflow.compat.v1 as tf and tf.disable_v2_behavior();    
+> * finally, please click the run_train.py file; the codes are then running;  
+> * Note that our TensorFlow version is 1.14.1 and can also be operated on the 2.0. version.  
 ---
 ## EXPERIMENTAL SETTING  
 
