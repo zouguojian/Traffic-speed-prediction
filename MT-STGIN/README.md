@@ -23,7 +23,7 @@
 ## METRICS
 
 > In order to evaluate the prediction performance of the MT-STGIN model, three metrics are used to determine the difference between the observed values Y and the predicted values Yˆ : the root mean square error (RMSE), mean absolute error (MAE), and mean absolute percentage error (MAPE). Note that low MAE, RMSE, and MAPE values indicate a more accurate prediction performance. 
->1.  MAE (Mean Absolute Error):
+> 1.  MAE (Mean Absolute Error):
 
 $$
 MAE=\frac{1}{n} \sum_{i=1}^{n}\left|\hat{y}_{i}-y_{i}\right|
@@ -40,6 +40,7 @@ $$
 $$
 MAPE=\frac{100 \%}{n} \sum_{i=1}^{n}\left|\frac{\hat{y}_{i}-y_{i}}{y_{i}}\right|
 $$
+  
 ---
 
 ## MT-STGIN AND BASELINES （ALL METHODS' CODES HAVE BEEN REPRODUCED） 
