@@ -35,3 +35,21 @@
 ---
 ## EXPERIMENTAL RESULTS { [paper experimental results link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/paper) }
 ---
+
+**1. MAE (Mean Absolute Error):
+
+$$
+MAE=\frac{1}{n} \sum_{i=1}^{n}\left|\hat{y}_{i}-y_{i}\right|
+$$
+
+**2. RMSE (Root Mean Square Error):
+
+$$
+RMSE =\sqrt{\frac{1}{n} \sum_{i=1}^{n}\left(\hat{y}_{i}-y_{i}\right)^{2}}
+$$
+
+**3. MAPE (Mean Absolute Percentage Error):
+
+$$
+MAPE=\frac{100 \%}{n} \sum_{i=1}^{n}\left|\frac{\hat{y}_{i}-y_{i}}{y_{i}}\right|
+$$
