@@ -22,23 +22,24 @@
 ---
 ## METRICS
 
-> In order to evaluate the prediction performance of the MT-STGIN model, three metrics are used to determine the difference between the observed values $\rm Y$ and the predicted values $\rm \hat{Y}$ : the root mean square error (RMSE), mean absolute error (MAE), and mean absolute percentage error (MAPE). Note that low MAE, RMSE, and MAPE values indicate a more accurate prediction performance. 
+> In order to evaluate the prediction performance of the MT-STGIN model, three metrics are used to determine the difference between the observed values $\rm Y$ and the predicted values $\rm \hat{Y}$ : the root mean square error (RMSE), mean absolute error (MAE), and mean absolute percentage error (MAPE). Note that low MAE, RMSE, and MAPE values indicate a more accurate prediction performance.  
+
 > 1.  MAE (Mean Absolute Error):
 
 $$
-MAE=\frac{1}{\rm N} \sum_{i=1}^{\rm N}\left|\hat{\rm Y}_{i}-{\rm Y}_{i}\right|
+{\rm MAE}=\frac{1}{\rm N} \sum_{i=1}^{\rm N}\left|\hat{\rm Y}_{i}-{\rm Y}_{i}\right|
 $$
 
 > 2. RMSE (Root Mean Square Error):
 
 $$
-RMSE =\sqrt{\frac{1}{\rm N} \sum_{i=1}^{\rm N}\left(\hat{\rm Y}_{i}-{\rm Y}_{i}\right)^{2}}
+{\rm RMSE} =\sqrt{\frac{1}{\rm N} \sum_{i=1}^{\rm N}\left(\hat{\rm Y}_{i}-{\rm Y}_{i}\right)^{2}}
 $$
 
 > 3. MAPE (Mean Absolute Percentage Error):
 
 $$
-MAPE=\frac{100 \%}{\rm N} \sum_{i=1}^{\rm N}\left|\frac{\hat{\rm Y}_{i}-{\rm Y}_{i}}{{\rm Y}_{i}}\right|
+{\rm MAPE}=\frac{100 \%}{\rm N} \sum_{i=1}^{\rm N}\left|\frac{\hat{\rm Y}_{i}-{\rm Y}_{i}}{{\rm Y}_{i}}\right|
 $$
   
 ---
