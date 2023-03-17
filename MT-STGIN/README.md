@@ -26,34 +26,12 @@
 ---
 
 ## MT-STGIN AND BASELINES （ALL METHODS' CODES HAVE BEEN REPRODUCED） 
-#### HA  [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/ha)
-* HA, the HA model uses the average value of the historical data, at the same time every day, as the predicted value at the same time in the future prediction task.  
-#### ARIMA [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/arima)
-* ARIMA, this is a traditional time series prediction method that combines the moving average and autoregressive components in order to model the historical time series data.
-#### SVM [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline)
-* SVM, it refers to support vector machine, is a regression technique for short-term prediction of traffic speed.
-#### LSTM NN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/lstm)
-* LSTM NN, it is used to capture the nonlinear traffic dynamic characteristics.
-#### Bi-LSTM NN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/bi_lstm)
-* Bi-LSTM NN, it refers to bidirectional long short-term memory neural network. It models each critical path, and then uses the multiple Bi-LSTM layers stacked together in order to merge the time information.
-#### FI-RNNs [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/firnn)
-* FI-RNNs, it refers to features injected recurrent neural networks. It combines the time series data and uses a stacked RNN and encoder, in order to learn the sequential features of the traffic data.
-#### PSPNN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/pspnn)
-* PSPNN, it refers to path-based speed prediction neural network. It is composed of a CNN and a bidirectional LSTM (Bi-LSTM) network, that extract the temporal and spatial correlations of the historical data, in order to perform the path- based speed prediction.
-#### MDL [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/mdl)
-* MDL, it refers to novel mixed deep learning. This method is used to predict the lane-level short-term traffic speed. It consists of a convolutional long and short-term memory (Conv-LSTM) layer, a convolutional layer and a fully connected layer.
-#### GMAN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/gman)
-* GMAN, it refers to graph multi-attention network. This network is based on spatial and temporal attention. It predicts the traffic speed at different locations on the road network.
-#### T-GCN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/tgcn)
-* T-GCN, it combines the GCN and GRU to model the spatio-temporal correlations.
-#### AST-GAT [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/astgat)
-* AST-GAT, it refers to attention-based spatiotemporal graph attention network. It consists of a self-attention-based GAT network and an attention-based LSTM network, for segment-level traffic speed prediction.
-#### DCRNN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/dcrnn)
-* DCRNN, it is a diffusion convolutional recurrent neural network, a deep learning framework incorporating spatial and temporal dependency into traffic prediction.
-#### ST-GRAT [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/st_grat)
-* ST-GRAT, it is a novel spatiotemporal graph attention model based on self-attention mechanism that effectively captures dynamic spatiotemporal correlations of the road network.
-#### MT-STGIN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN)
-* MT-STGIN, the proposed method.  
+#### HA  [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/ha)  | ARIMA [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/arima)  
+##### SVM [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline)
+
+#### LSTM NN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/lstm) | Bi-LSTM NN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/bi_lstm) | FI-RNNs [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/firnn)
+#### PSPNN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/pspnn) | MDL [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/mdl)
+#### GMAN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/gman) | T-GCN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/tgcn) | AST-GAT [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/astgat) | DCRNN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/dcrnn) | ST-GRAT [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/st_grat) | MT-STGIN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN) 
 ---
 ## EXPERIMENTAL RESULTS { [paper experimental results link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/paper) }
 ---
