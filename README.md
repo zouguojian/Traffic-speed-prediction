@@ -20,7 +20,7 @@ computer, and use it as your component of research or subject.
 * We will upload all baselines' codes.
 
 
-MT-STGIN has been submitted to Transportation Research Part C: Emerging Technologies (short conference version has been submitted on IEEE ITSC);  
+MT-STGIN has been submitted to Expert Systems with Applications (short conference version has been submitted on IEEE ITSC);  
 3S-TBLN has been submitted to IEEE Transactions on Intelligent Transportation Systems TITS journal;   
 ST-ANet has been accepted in Computer Engineering;  
 Above codes have been uploaded in the Git-Hub page [[codes link]](https://github.com/zouguojian/Traffic-speed-prediction).  
