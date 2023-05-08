@@ -1,4 +1,4 @@
-from baseline.st_grat.data.node2vec import node2vec
+import node2vec
 import numpy as np
 import networkx as nx
 from gensim.models import Word2Vec
@@ -10,9 +10,9 @@ num_walks = 100
 walk_length = 80
 dimensions = 64
 window_size = 10
-iter = 1
-Adj_file = '/Users/guojianzou/Traffic-speed-prediction/STGIN/baseline/st_grat/data/we/adjacent.txt'
-SE_file = '/Users/guojianzou/Traffic-speed-prediction/STGIN/baseline/st_grat/data/we/SE.txt'
+iter = 100
+Adj_file = '/Users/guojianzou/Traffic-speed-prediction/MT-STGIN/baseline/st_grat/data/we/adjacent.txt'
+SE_file = '/Users/guojianzou/Traffic-speed-prediction/MT-STGIN/baseline/st_grat/data/we/SE.txt'
 
 def read_graph(edgelist):
     G = nx.read_edgelist(
