@@ -3,7 +3,7 @@
 #import numpy as np
 import tensorflow as tf
 # from tensorflow.contrib.rnn import RNNCell
-from baseline.tgcn.utils import calculate_laplacian
+from utils import calculate_laplacian
 
 class tgcnCell(tf.nn.rnn_cell.RNNCell):
     """Temporal Graph Convolutional Network """

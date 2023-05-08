@@ -1,6 +1,6 @@
 from tqdm import tqdm
 import numpy as np
-
+import datetime
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -142,12 +142,15 @@ def res(model, valX, valTE, valY, mean, std):
                 encode_state = model.encode(X)
                 decode_start = X[:, -1:, :]
                 ys = decode_start
+                start_time = datetime.datetime.now()
                 for i in range(y.shape[1]):
                     tmp = model.decode(ys, encode_state)
                     ys = torch.cat([decode_start, tmp], 1)
                     if i == y.shape[1] - 1:
                         y_hat = tmp
-
+                end_time = datetime.datetime.now()
+                total_time = end_time - start_time
+                print("Total running times is : %f" % total_time.total_seconds())
                 pred.append(y_hat.cpu().numpy() * std + mean)
                 label.append(y * std + mean)
 

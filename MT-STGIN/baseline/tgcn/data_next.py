@@ -2,7 +2,7 @@
 import tensorflow as tf
 import numpy as np
 import argparse
-from baseline.tgcn.hyparameter import parameter
+from hyparameter import parameter
 import pandas as pd
 
 class DataClass(object):

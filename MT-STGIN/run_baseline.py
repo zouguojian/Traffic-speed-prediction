@@ -356,8 +356,11 @@ class Model(object):
             minute = np.reshape(minute, [-1, self.para.site_num])
             feed_dict = construct_feed_dict(x_s, self.adj, label_s, day, d_o_w, hour, minute, self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
-
+            # start_time = datetime.datetime.now()
             pre_s = self.sess.run((self.pre), feed_dict=feed_dict)
+            # end_time = datetime.datetime.now()
+            # total_time = end_time - start_time
+            # print("Total running times is : %f" % total_time.total_seconds())
             label_s_list.append(label_s)
             pre_s_list.append(pre_s)
 

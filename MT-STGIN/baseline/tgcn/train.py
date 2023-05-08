@@ -5,11 +5,11 @@ from __future__ import print_function
 
 import pandas as pd
 import os
-from baseline.tgcn.tgcn import tgcnCell
-from baseline.tgcn.utils import *
-from baseline.tgcn.hyparameter import parameter
+from tgcn import tgcnCell
+from utils import *
+from hyparameter import parameter
 import matplotlib.pyplot as plt
-import baseline.tgcn.data_next as data_load
+import data_next as data_load
 import argparse
 import datetime
 import csv
@@ -197,10 +197,12 @@ class Model(object):
             features = np.reshape(x, [-1, self.hp.input_length, self.hp.site_num])
             feed_dict = construct_feed_dict(features, label, self.placeholders)
             feed_dict.update({self.placeholders['dropout']: 0.0})
-
+            # start_time = datetime.datetime.now()
             # if i==0: begin_time = datetime.datetime.now()
             pre = self.sess.run((self.pre), feed_dict=feed_dict)
-
+            # end_time = datetime.datetime.now()
+            # total_time = end_time - start_time
+            # print("Total running times is : %f" % total_time.total_seconds())
             day = np.reshape(day, [-1, self.hp.site_num])
             hour = np.reshape(hour, [-1, self.hp.site_num])
             minute = np.reshape(minute, [-1, self.hp.site_num])
