@@ -6,6 +6,7 @@ import pandas as pd
 import os
 import datetime
 import csv
+import math
 
 
 def uniform(shape, scale=0.05, name=None):

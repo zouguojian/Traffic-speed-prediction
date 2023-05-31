@@ -220,4 +220,4 @@ class SpatialTransformer():
                     self.dec = feedforward(self.dec, num_units=[4 * self.hidden_units, self.hidden_units])
                     self.st_weights.append(st_weights)
         print('dec shape is : ', self.dec.shape)
-        return self.dec, self.st_weights
+        return self.dec

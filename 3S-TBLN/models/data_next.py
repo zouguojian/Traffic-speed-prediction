@@ -10,7 +10,7 @@ class DataClass(object):
         self.input_length=self.hp.input_length         # time series length of input
         self.output_length=self.hp.output_length       # the length of prediction
         self.is_training=self.hp.is_training           # true or false
-        self.divide_ratio=self.hp.divide_ratio         # the divide between in training set and test set ratio
+        self.train_ratio=self.hp.train_ratio         # the train ratio between in training set and test set ratio
         self.step=self.hp.step                         # windows step
         self.site_num=self.hp.site_num
         self.granularity = self.hp.granularity
@@ -65,7 +65,7 @@ class DataClass(object):
         data_s = self.data_s.values
         total_week_len=60//(self.granularity) * 24 * 7 # 使用分钟的颗粒度对一个小时60分钟进行分割, granularity可以是5或者15
         # 目的是为了获取过去一个星期在相同时间节点的交通速度情况
-        low, high = total_week_len, int(self.length * self.divide_ratio)
+        low, high = total_week_len, int(self.length * self.train_ratio)
 
         while low + self.input_length + self.output_length <= high:
             label=data_s[(low + self.input_length) * self.site_num: (low + self.input_length + self.output_length) * self.site_num,-1:]
@@ -93,7 +93,7 @@ class DataClass(object):
                  label shape is [batch, output_length*site_num, features]
         '''
         dataset=tf.data.Dataset.from_generator(self.generator,output_types=(tf.float32, tf.int32, tf.int32, tf.int32, tf.int32, tf.float32, tf.float32))
-        dataset=dataset.shuffle(buffer_size=int(self.length * self.divide_ratio-self.input_length-self.output_length)//self.step)
+        dataset=dataset.shuffle(buffer_size=int(self.length * self.train_ratio-self.input_length-self.output_length)//self.step)
         dataset=dataset.repeat(count=epoch)
         dataset=dataset.batch(batch_size=batch_size)
         iterator=dataset.make_one_shot_iterator()
@@ -107,7 +107,7 @@ class DataClass(object):
         '''
         data_s = self.data_s.values
         total_week_len=60//(self.granularity) * 24 * 7
-        low, high = int(self.length * self.divide_ratio), int(self.length)
+        low, high = int(self.length * self.train_ratio), int(self.length)
 
         while low + self.input_length + self.output_length <= high:
             label=data_s[(low + self.input_length) * self.site_num: (low + self.input_length + self.output_length) * self.site_num,-1:]
