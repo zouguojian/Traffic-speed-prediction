@@ -60,20 +60,20 @@ $$
 ### PREDICTING PERFORMANCE COMPARISON 
 > Performance comparison of different approaches for long-term highway traffic speed prediction  
 
-<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/figs/2.png" width = "1200" height="370"/></div>  
-<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/figs/3.png" width = "1200" height="370"/></div>  
-<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/figs/4.png" width = "1200" height="370"/></div>  
+<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/figs/2.png" width = "1200" height="400"/></div>  
+<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/figs/3.png" width = "1200" height="400"/></div>  
+<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/figs/4.png" width = "1200" height="400"/></div>  
 
 ### INFLUENCE OF EACH COMPONENT
 
 > Performance of the different time steps prediction for distinguished variants  
 
-<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/figs/5.png" width = "1200" height="370"/></div>
+<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/figs/5.png" width = "1200" height="300"/></div>
 
 ### COMPUTATION COST
 
 > Computation cost during the training and inference phases (* means the model train one time on the whole training set) 
 
-<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/figs/6.png" width = "1200" height="370"/></div>
+<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/figs/6.png" width = "1200" height="400"/></div>
 
 ---
