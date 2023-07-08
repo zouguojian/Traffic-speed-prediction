@@ -56,4 +56,24 @@ $$
 #### GMAN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/gman) | T-GCN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/tgcn) | AST-GAT [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/astgat) | DCRNN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/dcrnn) | ST-GRAT [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/baseline/st_grat) | MT-STGIN [codes link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN) 
 ---
 ## EXPERIMENTAL RESULTS { [paper experimental results link](https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/paper) }
+
+
+> Performance comparison of different approaches for long-term highway traffic speed prediction  
+
+<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/figs/2.png" width = "1200" height="370"/></div>  
+<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/figs/3.png" width = "1200" height="370"/></div>  
+<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/figs/4.png" width = "1200" height="370"/></div>  
+
+## INFLUENCE OF EACH COMPONENT
+
+> Performance of the different time steps prediction for distinguished variants  
+
+<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/figs/5.png" width = "800" height="230"/></div>
+
+## COMPUTATION COST
+
+> Computation cost during the training and inference phases (* means the model train one time on the whole training set) 
+
+<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/tree/main/MT-STGIN/figs/6.png" width = "800" height="350"/></div>
+
 ---
