@@ -68,12 +68,12 @@ $$
 
 > Performance of the different time steps prediction for distinguished variants  
 
-<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/figs/5.png" width = "800" height="230"/></div>
+<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/figs/5.png" width = "1200" height="370"/></div>
 
 ### COMPUTATION COST
 
 > Computation cost during the training and inference phases (* means the model train one time on the whole training set) 
 
-<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/figs/6.png" width = "800" height="350"/></div>
+<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/figs/6.png" width = "1200" height="370"/></div>
 
 ---
