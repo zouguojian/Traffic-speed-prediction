@@ -2,11 +2,11 @@
 
 ## Long-term highway traffic speed prediction ability: row (a) presents the prediction error of each step in task ETTG; row (b) indicates the performance of each step in task GTG; row (c) reflects the prediction accuracy of each step in task GTET.
 
-<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/paper/figure/Long-term%20highway%20traffic%20speed%20prediction%20ability.png"/></div>
+<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/paper/figure/3.png"/></div>
 
 ## Degree of fit between the observed and predicted traffic speed values. (a) relevant results in task ETTG; (b) in task GTG; (c) in task GTET.
 
-<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/paper/figure/Degree%20of%20fit%20between%20the%20observed%20and%20predicted%20traffic%20speed%20values.png"/></div>
+<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/paper/figure/2.png"/></div>
 
 > To better demonstrate the performance of MT-STGIN, we compare it with the other two optimal spatiotemporal baseline models and visualize the fitting results. Figure shows the visualization results of the predictive fit ability over six target time steps, the black line indicates the linear function (as y = x), and the black dots indicate the degree of deviation between the observed and predicted values. MT- STGIN presents a significant fitting performance on ETTG, GTG, and GTET when the speed is higher than 30 km/h; the discrete degree of black dots contained in MT-STGIN is lower than that in the other two models. For example, when the traffic speeds are above 125 km/h, the black dots contained in MT- STGIN is more adjacent to the black line than in the other two state-of-the-art models. The comparison results demonstrate that MT-STGIN has excellent fitting performance for long- term highway traffic speed prediction and may express good application prospects.  
 > However, when the traffic speeds are below 30 km/h, the black dots in AST-GAT are closer to the black line than in MT-STGIN. The performance of AST-GAT on low traffic speed prediction may benefit from modeling the different scales of time series, including recent, daily-periodic, and weekly-periodic time series, but not obvious when traffic speeds are above 30 km/h. Therefore, we can incorporate the advantage of AST-GAT into MT-STGIN in future work, improving the prediction performance at low speeds.
@@ -14,7 +14,7 @@
 
 ## Degree of fit between the observed and predicted traffic speed values. (a) relevant results in task ETTG; (b) in task GTG; (c) in task GTET.
 
-<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/paper/figure/The%20visualization%20results%20for%20prediction%20over%20six-time%20steps.png"/></div>
+<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/paper/figure/3.png"/></div>
 
 > Three road segments are exampled from these three tasks, respectively, and visualized the prediction results for the six- time steps horizon. In the experiment, one hundred continuous samples are randomly sliced from the test set, and the samples’ time interval is 2021.8.13 18:30 to 2021.8.20 00:30. Figure shows that MT-STGIN can accurately fit the changing trend of traffic speed and adapt to complex speed fluctuations, compared with optimal baseline models, GMAN and AST- GAT. For example, the traffic speeds present huge differences between different types of road segments; however, the per- formance of MT-STGIN keeps steady compared with baseline models, such as the samples from 65 to 90 (between 390 and 540 in Figure). MT-STGIN still consistently achieves better results than other baselines, makes predictions close to actual observations, and conquers speed fluctuations. These properties play a vital role in future travel services and traffic control.
 
