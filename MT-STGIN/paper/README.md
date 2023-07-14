@@ -2,7 +2,7 @@
 
 ## Long-term highway traffic speed prediction ability: row (a) presents the prediction error of each step in task ETTG; row (b) indicates the performance of each step in task GTG; row (c) reflects the prediction accuracy of each step in task GTET.
 
-<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/paper/figure/3.png"/></div>
+<div align=center><img src ="https://github.com/zouguojian/Traffic-speed-prediction/blob/main/MT-STGIN/paper/figure/1.png"/></div>
 
 ## Degree of fit between the observed and predicted traffic speed values. (a) relevant results in task ETTG; (b) in task GTG; (c) in task GTET.
 
