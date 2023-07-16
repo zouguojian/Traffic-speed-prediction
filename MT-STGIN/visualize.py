@@ -102,21 +102,13 @@ MT_STGIN_mape_3 =[0.183126,0.204971,0.188529,0.169706,0.149622,0.202187,0.183024
 
 font2 = {'family' : 'Times New Roman',
 'weight' : 'normal',
-<<<<<<< HEAD
-'size'   : 17,
-=======
-'size'   : 13.,
->>>>>>> origin/main
+'size'   : 11.,
 }
 # plt.ylabel('Loss(ug/m3)',font2)
 
 font1 = {'family' : 'Times New Roman',
 'weight' : 'normal',
-<<<<<<< HEAD
-'size'   : 15,
-=======
-'size'   : 13,
->>>>>>> origin/main
+'size'   : 11,
 }
 
 
@@ -180,7 +172,7 @@ for i in range(0, MT_STGIN.shape[0], site_num):
     time.append(list(MT_STGIN[i, :19]))
 MT_STGIN_obs=np.concatenate(MT_STGIN_obs,axis=-1)
 MT_STGIN_pre=np.concatenate(MT_STGIN_pre,axis=-1)
-print(MT_STGIN[0][[1,7,13]])
+print(MT_STGIN[108*0][[0,1,7,13]])
 print(MT_STGIN[108*100][[1,7,13]])
 print(MT_STGIN_pre.shape,MT_STGIN_obs[0,:6])
 time=np.array(time)
@@ -220,24 +212,22 @@ print(T_GCN_pre.shape,T_GCN_obs[0,:6])
 # print(time[100])
 
 
-<<<<<<< HEAD
 # '''
-=======
-'''
->>>>>>> origin/main
 plt.subplot(3, 1, 1)
 print(MT_STGIN_pre.shape)
-k=1
+k=22
+total_len = 600
 # print(MT_STGIN_obs[i][j])
 # plt.xticks(['2021.8.14 6:45', '7:00', '7:15', '7:30', '7:45', '8:00'])
 # plt.xticks(range(1, 7), ['2021.8.14 6:45', '7:00', '7:15', '7:30', '7:45', '8:00'])
-plt.plot(range(1, 600+1), MT_STGIN_obs[k,:600], color='blue', label=u'Observed', linewidth=1)
-plt.plot(range(1, 600+1), MT_STGIN_pre[k,:600], color='#a55af4', label=u'MT-STGIN', linewidth=1)
-plt.plot(range(1, 600+1), DCRNN_pre[k,:600], color='#f504c9', label=u'DCRNN', linewidth=1)
-plt.plot(range(1, 600+1), GMAN_pre[k,:600], color='#d0c101', label=u'GMAN', linewidth=1)
-plt.plot(range(1, 600+1), AST_GAT_pre[k,:600], color='#82cafc', label=u'AST-GAT', linewidth=1)
-# plt.plot(range(1, 7), PSPNN_pre[i][j], marker='s', color='#0cdc73', label=u'PSPNN', linewidth=1)
-# plt.plot(range(1, 7), T_GCN_pre[i][j], marker='d', color='#ff5b00', label=u'T-GCN', linewidth=1)
+plt.plot(range(1, total_len+1), MT_STGIN_obs[k,:total_len], color='blue', label=u'Observed', linewidth=0.6)
+plt.plot(range(1, total_len+1), T_GCN_pre[k,:total_len],color='#ff5b00', label=u'T-GCN', linewidth=0.6)
+plt.plot(range(1, total_len+1), DCRNN_pre[k,:total_len],  color='#0cdc73', label=u'DCRNN', linewidth=0.6)
+plt.plot(range(1, total_len+1), GMAN_pre[k,:total_len], color='#d0c101', label=u'GMAN', linewidth=0.6)
+plt.plot(range(1, total_len+1), AST_GAT_pre[k,:total_len], color='#82cafc', label=u'AST-GAT', linewidth=0.6)
+plt.plot(range(1, total_len+1), ST_GRAT_pre[k,:total_len], color='#f504c9', label=u'ST-GRAT', linewidth=0.6)
+plt.plot(range(1, total_len+1), MT_STGIN_pre[k,:total_len], color='#a55af4', label=u'MT-STGIN', linewidth=0.6)
+
 plt.legend(loc='upper left', prop=font2)
 # plt.xlabel("Target time steps", font2)
 plt.ylabel("Traffic speed", font1)
@@ -246,15 +236,15 @@ plt.ylabel("Traffic speed", font1)
 # i,j=8,10
 # print(MT_STGIN_obs[i][j])
 plt.subplot(3, 1, 2)
-k=69
+k=66
 # plt.xticks(range(1, 7), ['2021.8.14 6:45', '7:00', '7:15', '7:30', '7:45', '8:00'])
-plt.plot(range(1, 600+1), MT_STGIN_obs[k,:600], color='blue', label=u'Observed', linewidth=1)
-plt.plot(range(1, 600+1), MT_STGIN_pre[k,:600], color='#a55af4', label=u'MT-STGIN', linewidth=1)
-plt.plot(range(1, 600+1), DCRNN_pre[k,:600], color='#f504c9', label=u'DCRNN', linewidth=1)
-plt.plot(range(1, 600+1), GMAN_pre[k,:600], color='#d0c101', label=u'GMAN', linewidth=1)
-# plt.plot(range(1, 7), PSPNN_pre[i][j], marker='s', color='#0cdc73', label=u'PSPNN', linewidth=1)
-# plt.plot(range(1, 7), T_GCN_pre[i][j], marker='d', color='#ff5b00', label=u'T-GCN', linewidth=1)
-plt.plot(range(1, 600+1), AST_GAT_pre[k,:600], color='#82cafc', label=u'AST-GAT', linewidth=1)
+plt.plot(range(1, total_len+1), MT_STGIN_obs[k,:total_len], color='blue', label=u'Observed', linewidth=0.6)
+plt.plot(range(1, total_len+1), T_GCN_pre[k,:total_len],color='#ff5b00', label=u'T-GCN', linewidth=0.6)
+plt.plot(range(1, total_len+1), DCRNN_pre[k,:total_len],  color='#0cdc73', label=u'DCRNN', linewidth=0.6)
+plt.plot(range(1, total_len+1), GMAN_pre[k,:total_len], color='#d0c101', label=u'GMAN', linewidth=0.6)
+plt.plot(range(1, total_len+1), AST_GAT_pre[k,:total_len], color='#82cafc', label=u'AST-GAT', linewidth=0.6)
+plt.plot(range(1, total_len+1), ST_GRAT_pre[k,:total_len], color='#f504c9', label=u'ST-GRAT', linewidth=0.6)
+plt.plot(range(1, total_len+1), MT_STGIN_pre[k,:total_len], color='#a55af4', label=u'MT-STGIN', linewidth=0.6)
 # plt.legend(loc='upper left', prop=font2)
 # plt.xlabel("Target time steps", font2)
 plt.ylabel("Traffic speed", font1)
@@ -263,26 +253,22 @@ plt.ylabel("Traffic speed", font1)
 # i,j=8,97
 # print(MT_STGIN_obs[i][j])
 plt.subplot(3, 1, 3)
-k=92
+k=84
 # plt.xticks(range(1, 7), ['2021.8.14 6:45', '7:00', '7:15', '7:30', '7:45', '8:00'])
-plt.plot(range(1, 600+1), MT_STGIN_obs[k,:600], color='blue', label=u'Observed', linewidth=1)
-plt.plot(range(1, 600+1), MT_STGIN_pre[k,:600], color='#a55af4', label=u'MT-STGIN', linewidth=1)
-plt.plot(range(1, 600+1), DCRNN_pre[k,:600], color='#f504c9', label=u'DCRNN', linewidth=1)
-plt.plot(range(1, 600+1), GMAN_pre[k,:600], color='#d0c101', label=u'GMAN', linewidth=1)
-plt.plot(range(1, 600+1), AST_GAT_pre[k,:600], color='#82cafc', label=u'AST-GAT', linewidth=1)
-# plt.plot(range(1, 7), PSPNN_pre[i][j], marker='s', color='#0cdc73', label=u'PSPNN', linewidth=1)
-# plt.plot(range(1, 7), T_GCN_pre[i][j], marker='d', color='#ff5b00', label=u'T-GCN', linewidth=1)
+plt.plot(range(1, total_len+1), MT_STGIN_obs[k,:total_len], color='blue', label=u'Observed', linewidth=0.6)
+plt.plot(range(1, total_len+1), T_GCN_pre[k,:total_len],color='#ff5b00', label=u'T-GCN', linewidth=0.6)
+plt.plot(range(1, total_len+1), DCRNN_pre[k,:total_len],  color='#0cdc73', label=u'DCRNN', linewidth=0.6)
+plt.plot(range(1, total_len+1), GMAN_pre[k,:total_len], color='#d0c101', label=u'GMAN', linewidth=0.6)
+plt.plot(range(1, total_len+1), AST_GAT_pre[k,:total_len], color='#82cafc', label=u'AST-GAT', linewidth=0.6)
+plt.plot(range(1, total_len+1), ST_GRAT_pre[k,:total_len], color='#f504c9', label=u'ST-GRAT', linewidth=0.6)
+plt.plot(range(1, total_len+1), MT_STGIN_pre[k,:total_len], color='#a55af4', label=u'MT-STGIN', linewidth=0.6)
 # plt.legend(loc='upper left', prop=font2)
 # plt.xlabel("Target time steps", font2)
 plt.ylabel("Traffic speed", font1)
 # plt.title("Road segment 3", font1)
-
 plt.show()
-<<<<<<< HEAD
 # '''
-=======
-'''
->>>>>>> origin/main
+
 
 
 '''
@@ -323,7 +309,6 @@ for i in range(8, len(STGIN_pre)):
 
 '''
 i,j=0,1000
-<<<<<<< HEAD
 l,h=0,28
 # y=x的拟合可视化图
 # plt.figure()
@@ -355,8 +340,9 @@ d=[i for i in range(150)]
 # #设置横纵坐标的名称以及对应字体格式
 # plt.legend(loc='upper left',prop=font2)
 
+
+
 plt.subplot(1,3,1)
-=======
 l,h=80,108
 # y=x的拟合可视化图
 # plt.figure()
@@ -388,7 +374,6 @@ plt.plot(c,d,'black',linewidth=2)
 plt.legend(loc='upper left',prop=font2)
 
 plt.subplot(2,3,4)
->>>>>>> origin/main
 plt.scatter(AST_GAT_obs[l:h,i:j],AST_GAT_pre[l:h,i:j],alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'AST-GAT',linewidths=1)
 plt.plot(a,b,'black',linewidth=2)
 #设置横纵坐标的名称以及对应字体格式
@@ -396,22 +381,15 @@ plt.xlabel("Observed traffic speed", font2)
 plt.ylabel("Predicted traffic speed", font2)
 plt.legend(loc='upper left',prop=font2)
 
-<<<<<<< HEAD
-plt.subplot(1,3,2)
-=======
 plt.subplot(2,3,5)
->>>>>>> origin/main
 plt.scatter(GMAN_obs[l:h,i:j],GMAN_pre[l:h,i:j],alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'GMAN',linewidths=1)
 plt.plot(a,b,'black',linewidth=2)
 #设置横纵坐标的名称以及对应字体格式
 plt.xlabel("Observed traffic speed", font2)
 plt.legend(loc='upper left',prop=font2)
 
-<<<<<<< HEAD
-plt.subplot(1,3,3)
-=======
+
 plt.subplot(2,3,6)
->>>>>>> origin/main
 plt.scatter(MT_STGIN_obs[l:h,i:j],MT_STGIN_pre[l:h,i:j],alpha=0.7,color='dimgray',edgecolor = "black",marker='o',label=u'MT-STGIN',linewidths=1)
 plt.plot(c,d,'black',linewidth=2)
 #设置横纵坐标的名称以及对应字体格式
@@ -458,22 +436,18 @@ plt.show()
 
 
 # 可视化每个模型在MAE，RMSE和MAPE上的一个表现
-'''
-<<<<<<< HEAD
+# '''
 plt.figure()
-=======
-# plt.figure()
->>>>>>> origin/main
 plt.subplot(1,3,1)
 # plt.plot(range(1,7,1),LSTM_mae,marker='P',color='red',linestyle='-', linewidth=1,label='LSTM')
-plt.plot(range(1,7,1),DCRNN_mae_3[:6],marker='h',color='blue',linestyle='-', linewidth=1,label='DCRNN')
-plt.plot(range(1,7,1),ST_GRAT_mae_3[:6],marker='o',color='orange',linestyle='-', linewidth=1,label='ST-GRAT')
-plt.plot(range(1,7,1), PSPNN_mae_3[:6],marker='s', color='#0cdc73',linestyle='-',linewidth=1,label='PSPNN')
-plt.plot(range(1,7,1), MDL_mae_3[:6],marker='p', color='#f504c9',linestyle='-',linewidth=1,label='MDL')
-plt.plot(range(1,7,1),GMAN_mae_3[:6],marker='^',color='#d0c101',linestyle='-', linewidth=1,label='GMAN')
-plt.plot(range(1,7,1),T_GCN_mae_3[:6],marker='d', color='#ff5b00',linestyle='-',linewidth=1,label='T-GCN')
-plt.plot(range(1,7,1), AST_GAT_mae_3[:6],marker='*', color='#82cafc',linestyle='-',linewidth=1,label='AST-GAT')
-plt.plot(range(1,7,1), MT_STGIN_mae_3[:6],marker='X', color='#a55af4',linestyle='-',linewidth=1,label='MT-STGIN')
+plt.plot(range(1,7,1), PSPNN_mae_1[:6],marker='s', color='#0cdc73',linestyle='-',linewidth=1,label='PSPNN')
+plt.plot(range(1,7,1), MDL_mae_1[:6],marker='p', color='#f504c9',linestyle='-',linewidth=1,label='MDL')
+plt.plot(range(1,7,1),T_GCN_mae_1[:6],marker='d', color='#ff5b00',linestyle='-',linewidth=1,label='T-GCN')
+plt.plot(range(1,7,1),DCRNN_mae_1[:6],marker='h',color='blue',linestyle='-', linewidth=1,label='DCRNN')
+plt.plot(range(1,7,1),GMAN_mae_1[:6],marker='^',color='#d0c101',linestyle='-', linewidth=1,label='GMAN')
+plt.plot(range(1,7,1), AST_GAT_mae_1[:6],marker='*', color='#82cafc',linestyle='-',linewidth=1,label='AST-GAT')
+plt.plot(range(1,7,1),ST_GRAT_mae_1[:6],marker='o',color='orange',linestyle='-', linewidth=1,label='ST-GRAT')
+plt.plot(range(1,7,1), MT_STGIN_mae_1[:6],marker='X', color='#a55af4',linestyle='-',linewidth=1,label='MT-STGIN')
 plt.legend(loc='upper left',prop=font1)
 plt.grid(axis='y')
 plt.ylabel('MAE',font2)
@@ -484,14 +458,14 @@ plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
 plt.subplot(1,3,2)
 # plt.xticks(range(1,8), range(0,31,5))
 # plt.plot(range(1,7,1),LSTM_rmse,marker='P',color='red',linestyle='-', linewidth=1,label='LSTM')
-plt.plot(range(1,7,1),DCRNN_rmse_3[:6],marker='h',color='blue',linestyle='-', linewidth=1,label='DCRNN')
-plt.plot(range(1,7,1),ST_GRAT_rmse_3[:6],marker='o',color='orange',linestyle='-', linewidth=1,label='ST-GRAT')
-plt.plot(range(1,7,1), PSPNN_rmse_3[:6],marker='s', color='#0cdc73',linestyle='-',linewidth=1,label='PSPNN')
-plt.plot(range(1,7,1), MDL_rmse_3[:6],marker='p', color='#f504c9',linestyle='-',linewidth=1,label='MDL')
-plt.plot(range(1,7,1),GMAN_rmse_3[:6],marker='^',color='#d0c101',linestyle='-', linewidth=1,label='GMAN')
-plt.plot(range(1,7,1),T_GCN_rmse_3[:6],marker='d', color='#ff5b00',linestyle='-',linewidth=1,label='T-GCN')
-plt.plot(range(1,7,1), AST_GAT_rmse_3[:6],marker='*', color='#82cafc',linestyle='-',linewidth=1,label='AST-GAT')
-plt.plot(range(1,7,1), MT_STGIN_rmse_3[:6],marker='X', color='#a55af4',linestyle='-',linewidth=1,label='MT-STGIN')
+plt.plot(range(1,7,1), PSPNN_rmse_1[:6],marker='s', color='#0cdc73',linestyle='-',linewidth=1,label='PSPNN')
+plt.plot(range(1,7,1), MDL_rmse_1[:6],marker='p', color='#f504c9',linestyle='-',linewidth=1,label='MDL')
+plt.plot(range(1,7,1),T_GCN_rmse_1[:6],marker='d', color='#ff5b00',linestyle='-',linewidth=1,label='T-GCN')
+plt.plot(range(1,7,1),DCRNN_rmse_1[:6],marker='h',color='blue',linestyle='-', linewidth=1,label='DCRNN')
+plt.plot(range(1,7,1),GMAN_rmse_1[:6],marker='^',color='#d0c101',linestyle='-', linewidth=1,label='GMAN')
+plt.plot(range(1,7,1), AST_GAT_rmse_1[:6],marker='*', color='#82cafc',linestyle='-',linewidth=1,label='AST-GAT')
+plt.plot(range(1,7,1),ST_GRAT_rmse_1[:6],marker='o',color='orange',linestyle='-', linewidth=1,label='ST-GRAT')
+plt.plot(range(1,7,1), MT_STGIN_rmse_1[:6],marker='X', color='#a55af4',linestyle='-',linewidth=1,label='MT-STGIN')
 plt.legend(loc='upper left',prop=font1)
 plt.grid(axis='y')
 plt.ylabel('RMSE',font2)
@@ -501,14 +475,14 @@ plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
 
 plt.subplot(1,3,3)
 # plt.plot(range(1,7,1),LSTM_mape,marker='P',color='red',linestyle='-', linewidth=1,label='LSTM')
-plt.plot(range(1,7,1),DCRNN_mape_3[:6],marker='h',color='blue',linestyle='-', linewidth=1,label='DCRNN')
-plt.plot(range(1,7,1),ST_GRAT_mape_3[:6],marker='o',color='orange',linestyle='-', linewidth=1,label='ST-GRAT')
-plt.plot(range(1,7,1), PSPNN_mape_3[:6],marker='s', color='#0cdc73',linestyle='-',linewidth=1,label='PSPNN')
-plt.plot(range(1,7,1), MDL_mape_3[:6],marker='p', color='#f504c9',linestyle='-',linewidth=1,label='MDL')
-plt.plot(range(1,7,1),GMAN_mape_3[:6],marker='^',color='#d0c101',linestyle='-', linewidth=1,label='GMAN')
-plt.plot(range(1,7,1),T_GCN_mape_3[:6],marker='d', color='#ff5b00',linestyle='-',linewidth=1,label='T-GCN')
-plt.plot(range(1,7,1), AST_GAT_mape_3[:6],marker='*', color='#82cafc',linestyle='-',linewidth=1,label='AST-GAT')
-plt.plot(range(1,7,1), MT_STGIN_mape_3[:6],marker='X', color='#a55af4',linestyle='-',linewidth=1,label='MT-STGIN')
+plt.plot(range(1,7,1), PSPNN_mape_1[:6],marker='s', color='#0cdc73',linestyle='-',linewidth=1,label='PSPNN')
+plt.plot(range(1,7,1), MDL_mape_1[:6],marker='p', color='#f504c9',linestyle='-',linewidth=1,label='MDL')
+plt.plot(range(1,7,1),T_GCN_mape_1[:6],marker='d', color='#ff5b00',linestyle='-',linewidth=1,label='T-GCN')
+plt.plot(range(1,7,1),DCRNN_mape_1[:6],marker='h',color='blue',linestyle='-', linewidth=1,label='DCRNN')
+plt.plot(range(1,7,1),GMAN_mape_1[:6],marker='^',color='#d0c101',linestyle='-', linewidth=1,label='GMAN')
+plt.plot(range(1,7,1), AST_GAT_mape_1[:6],marker='*', color='#82cafc',linestyle='-',linewidth=1,label='AST-GAT')
+plt.plot(range(1,7,1),ST_GRAT_mape_1[:6],marker='o',color='orange',linestyle='-', linewidth=1,label='ST-GRAT')
+plt.plot(range(1,7,1), MT_STGIN_mape_1[:6],marker='X', color='#a55af4',linestyle='-',linewidth=1,label='MT-STGIN')
 plt.ylabel('MAPE',font2)
 plt.xlabel('Target time steps',font2)
 # plt.title('Gantry dataset',font2)
@@ -516,7 +490,7 @@ plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
 plt.legend(loc='upper left',prop=font1)
 plt.grid(axis='y')
 plt.show()
-'''
+# '''
 
 # 可视化不同数据集上的 MAE
 '''
@@ -572,8 +546,63 @@ plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
 plt.legend(loc='upper left',prop=font1)
 plt.grid(axis='y')
 plt.show()
-<<<<<<< HEAD
 '''
-=======
-# '''
->>>>>>> origin/main
+
+import matplotlib.gridspec as gridspec
+import seaborn as sns
+sns.set_theme(style='ticks', font_scale=1.5,font='Times New Roman')
+
+l, r = 0, 100
+# 1
+data_df = pd.DataFrame(np.concatenate([np.reshape(MT_STGIN_obs[0:28, l*6: r*6],[-1,1]),np.reshape(AST_GAT_pre[0:28, l*6: r*6], [-1,1])],axis=-1), columns=['truth','prediction'])
+g = sns.jointplot(x="truth", y="prediction", data=data_df)
+g.set_axis_labels(xlabel='Observed traffic speed', ylabel='Predicted traffic speed')
+plt.show()
+# 2
+data_df = pd.DataFrame(np.concatenate([np.reshape(MT_STGIN_obs[0:28, l*6: r*6],[-1,1]),np.reshape(GMAN_pre[0:28, l*6: r*6], [-1,1])],axis=-1), columns=['truth','prediction'])
+g = sns.jointplot(x="truth", y="prediction", data=data_df)
+# g = sns.jointplot(data=MT_STAN, x="segment_label_"+str(i), y="segment_pre_"+str(i), hue="vehicle type", kind="kde")
+g.set_axis_labels(xlabel='Observed traffic speed', ylabel='Predicted traffic speed')
+plt.show()
+# 3
+data_df = pd.DataFrame(np.concatenate([np.reshape(MT_STGIN_obs[0:28, l*6: r*6],[-1,1]),np.reshape(MT_STGIN_pre[0:28, l*6: r*6], [-1,1])],axis=-1), columns=['truth','prediction'])
+g = sns.jointplot(x="truth", y="prediction", data=data_df)
+# g = sns.jointplot(data=MT_STAN, x="segment_label_"+str(i), y="segment_pre_"+str(i), hue="vehicle type", kind="kde")
+g.set_axis_labels(xlabel='Observed traffic speed', ylabel='Predicted traffic speed')
+plt.show()
+# 4
+data_df = pd.DataFrame(np.concatenate([np.reshape(MT_STGIN_obs[28:80, l*6: r*6],[-1,1]),np.reshape(AST_GAT_pre[28:80, l*6: r*6], [-1,1])],axis=-1), columns=['truth','prediction'])
+g = sns.jointplot(x="truth", y="prediction", data=data_df)
+# g = sns.jointplot(data=MT_STAN, x="segment_label_"+str(i), y="segment_pre_"+str(i), hue="vehicle type", kind="kde")
+g.set_axis_labels(xlabel='Observed traffic speed', ylabel='Predicted traffic speed')
+plt.show()
+# 5
+data_df = pd.DataFrame(np.concatenate([np.reshape(MT_STGIN_obs[28:80, l*6: r*6],[-1,1]),np.reshape(GMAN_pre[28:80, l*6: r*6], [-1,1])],axis=-1), columns=['truth','prediction'])
+g = sns.jointplot(x="truth", y="prediction", data=data_df)
+# g = sns.jointplot(data=MT_STAN, x="segment_label_"+str(i), y="segment_pre_"+str(i), hue="vehicle type", kind="kde")
+g.set_axis_labels(xlabel='Observed traffic speed', ylabel='Predicted traffic speed')
+plt.show()
+# 6
+data_df = pd.DataFrame(np.concatenate([np.reshape(MT_STGIN_obs[28:80, l*6: r*6],[-1,1]),np.reshape(MT_STGIN_pre[28:80, l*6: r*6], [-1,1])],axis=-1), columns=['truth','prediction'])
+g = sns.jointplot(x="truth", y="prediction", data=data_df)
+# g = sns.jointplot(data=MT_STAN, x="segment_label_"+str(i), y="segment_pre_"+str(i), hue="vehicle type", kind="kde")
+g.set_axis_labels(xlabel='Observed traffic speed', ylabel='Predicted traffic speed')
+plt.show()
+# 7
+data_df = pd.DataFrame(np.concatenate([np.reshape(MT_STGIN_obs[80:108, l*6: r*6],[-1,1]),np.reshape(AST_GAT_pre[80:108, l*6: r*6], [-1,1])],axis=-1), columns=['truth','prediction'])
+g = sns.jointplot(x="truth", y="prediction", data=data_df)
+# g = sns.jointplot(data=MT_STAN, x="segment_label_"+str(i), y="segment_pre_"+str(i), hue="vehicle type", kind="kde")
+g.set_axis_labels(xlabel='Observed traffic speed', ylabel='Predicted traffic speed')
+plt.show()
+# 8
+data_df = pd.DataFrame(np.concatenate([np.reshape(MT_STGIN_obs[80:108, l*6: r*6],[-1,1]),np.reshape(GMAN_pre[80:108, l*6: r*6], [-1,1])],axis=-1), columns=['truth','prediction'])
+g = sns.jointplot(x="truth", y="prediction", data=data_df)
+# g = sns.jointplot(data=MT_STAN, x="segment_label_"+str(i), y="segment_pre_"+str(i), hue="vehicle type", kind="kde")
+g.set_axis_labels(xlabel='Observed traffic speed', ylabel='Predicted traffic speed')
+plt.show()
+# 9
+data_df = pd.DataFrame(np.concatenate([np.reshape(MT_STGIN_obs[80:108, l*6: r*6],[-1,1]),np.reshape(MT_STGIN_pre[80:108, l*6: r*6], [-1,1])],axis=-1), columns=['truth','prediction'])
+g = sns.jointplot(x="truth", y="prediction", data=data_df)
+# g = sns.jointplot(data=MT_STAN, x="segment_label_"+str(i), y="segment_pre_"+str(i), hue="vehicle type", kind="kde")
+g.set_axis_labels(xlabel='Observed traffic speed', ylabel='Predicted traffic speed')
+plt.show()
