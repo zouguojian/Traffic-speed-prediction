@@ -36,8 +36,8 @@ class parameter(object):
         self.parser.add_argument('--hidden_layer', type=int, default=1, help='hidden layer')
 
         self.parser.add_argument('--training_set_rate', type=float, default=0.7, help='training set rate')
-        self.parser.add_argument('--validate_set_rate', type=float, default=0.15, help='validate set rate')
-        self.parser.add_argument('--test_set_rate', type=float, default=0.15, help='test set rate')
+        self.parser.add_argument('--validate_set_rate', type=float, default=0.1, help='validate set rate')
+        self.parser.add_argument('--test_set_rate', type=float, default=0.2, help='test set rate')
 
         self.parser.add_argument('--file_train_s', type=str, default='data/speed/train_15.csv', help='training_speed file address')
         self.parser.add_argument('--file_val', type=str, default='data/val.csv', help='validate set file address')
