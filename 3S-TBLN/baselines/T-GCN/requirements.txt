@@ -1,0 +1,6 @@
+numpy
+matplotlib
+pandas
+torch
+torchmetrics>=0.3.0
+python-dotenv
