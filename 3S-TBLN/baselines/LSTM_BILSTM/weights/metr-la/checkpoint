@@ -1,0 +1,2 @@
+model_checkpoint_path: "BI-LSTM-1"
+all_model_checkpoint_paths: "BI-LSTM-1"
