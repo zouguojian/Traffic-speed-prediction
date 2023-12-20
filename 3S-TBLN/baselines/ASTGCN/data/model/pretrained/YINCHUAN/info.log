@@ -1,0 +1,6 @@
+2023-03-21 22:02:01,543 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/pretrained/YINCHUAN
+2023-03-21 22:02:19,275 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 22:02:19,761 - model.pytorch.dcrnn_supervisor - INFO - Loaded model successfully!
+2023-03-22 10:04:38,768 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/pretrained/YINCHUAN
+2023-03-22 10:04:53,746 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-22 10:04:54,234 - model.pytorch.dcrnn_supervisor - INFO - Loaded model successfully!

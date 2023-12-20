@@ -1,0 +1,343 @@
+2023-03-21 11:23:13,523 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 11:23:35,080 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 11:23:35,081 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 11:23:35,081 - model.pytorch.dcrnn_supervisor - INFO - num_batches:375
+2023-03-21 11:23:35,830 - model.pytorch.dcrnn_supervisor - INFO - Total trainable parameters 372353
+2023-03-21 11:29:54,315 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 11:29:54,317 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 11:30:21,174 - model.pytorch.dcrnn_supervisor - INFO - Epoch [0/1000] (375) train_mae: 2.7685, val_mae: 3.4060, lr: 0.010000, 406.1s
+2023-03-21 11:30:21,178 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 0
+2023-03-21 11:30:21,179 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from inf to 3.4060, saving to data/model/pretrained/METR-LA/la_best
+2023-03-21 11:36:38,154 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 11:36:38,155 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 11:37:05,129 - model.pytorch.dcrnn_supervisor - INFO - Epoch [1/1000] (750) train_mae: 2.3198, val_mae: 3.2659, lr: 0.010000, 403.9s
+2023-03-21 11:37:05,134 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 1
+2023-03-21 11:37:05,134 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 3.4060 to 3.2659, saving to data/model/pretrained/METR-LA/la_best
+2023-03-21 11:43:23,330 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 11:43:23,331 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 11:43:50,218 - model.pytorch.dcrnn_supervisor - INFO - Epoch [2/1000] (1125) train_mae: 2.2585, val_mae: 3.1515, lr: 0.010000, 405.1s
+2023-03-21 11:43:50,222 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 2
+2023-03-21 11:43:50,223 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 3.2659 to 3.1515, saving to data/model/pretrained/METR-LA/la_best
+2023-03-21 11:50:07,399 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 11:50:07,399 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 11:50:34,404 - model.pytorch.dcrnn_supervisor - INFO - Epoch [3/1000] (1500) train_mae: 2.2172, val_mae: 3.1144, lr: 0.010000, 404.2s
+2023-03-21 11:50:34,409 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 3
+2023-03-21 11:50:34,409 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 3.1515 to 3.1144, saving to data/model/pretrained/METR-LA/la_best
+2023-03-21 11:56:51,625 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 11:56:51,626 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 11:57:18,614 - model.pytorch.dcrnn_supervisor - INFO - Epoch [4/1000] (1875) train_mae: 2.1822, val_mae: 3.0195, lr: 0.010000, 404.2s
+2023-03-21 11:57:18,618 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 4
+2023-03-21 11:57:18,619 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 3.1144 to 3.0195, saving to data/model/pretrained/METR-LA/la_best
+2023-03-21 12:03:36,607 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 12:03:36,608 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 12:04:03,569 - model.pytorch.dcrnn_supervisor - INFO - Epoch [5/1000] (2250) train_mae: 2.1612, val_mae: 2.9835, lr: 0.010000, 405.0s
+2023-03-21 12:04:03,574 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 5
+2023-03-21 12:04:03,574 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 3.0195 to 2.9835, saving to data/model/pretrained/METR-LA/la_best
+2023-03-21 12:10:22,248 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 12:10:22,248 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 12:10:49,182 - model.pytorch.dcrnn_supervisor - INFO - Epoch [6/1000] (2625) train_mae: 2.1418, val_mae: 2.9542, lr: 0.010000, 405.6s
+2023-03-21 12:10:49,188 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 6
+2023-03-21 12:10:49,188 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 2.9835 to 2.9542, saving to data/model/pretrained/METR-LA/la_best
+2023-03-21 12:17:06,540 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 12:17:06,541 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 12:17:33,362 - model.pytorch.dcrnn_supervisor - INFO - Epoch [7/1000] (3000) train_mae: 2.1235, val_mae: 2.9230, lr: 0.010000, 404.2s
+2023-03-21 12:17:33,367 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 7
+2023-03-21 12:17:33,367 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 2.9542 to 2.9230, saving to data/model/pretrained/METR-LA/la_best
+2023-03-21 12:23:51,321 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 12:23:51,322 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 12:24:18,399 - model.pytorch.dcrnn_supervisor - INFO - Epoch [8/1000] (3375) train_mae: 2.1145, val_mae: 2.9565, lr: 0.010000, 405.0s
+2023-03-21 12:30:35,953 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 12:30:35,953 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 12:31:02,852 - model.pytorch.dcrnn_supervisor - INFO - Epoch [9/1000] (3750) train_mae: 2.1000, val_mae: 2.9520, lr: 0.010000, 404.5s
+2023-03-21 12:37:21,433 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 12:37:21,434 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 12:37:48,237 - model.pytorch.dcrnn_supervisor - INFO - Epoch [10/1000] (4125) train_mae: 2.0899, val_mae: 2.8972, lr: 0.010000, 405.4s
+2023-03-21 12:37:48,242 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 10
+2023-03-21 12:37:48,242 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 2.9230 to 2.8972, saving to data/model/pretrained/METR-LA/la_best
+2023-03-21 12:44:04,371 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 12:44:04,372 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 12:44:30,962 - model.pytorch.dcrnn_supervisor - INFO - Epoch [11/1000] (4500) train_mae: 2.0815, val_mae: 2.8856, lr: 0.010000, 402.7s
+2023-03-21 12:44:30,967 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 11
+2023-03-21 12:44:30,967 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 2.8972 to 2.8856, saving to data/model/pretrained/METR-LA/la_best
+2023-03-21 12:50:44,857 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 12:50:44,858 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 12:51:11,579 - model.pytorch.dcrnn_supervisor - INFO - Epoch [12/1000] (4875) train_mae: 2.0732, val_mae: 2.9292, lr: 0.010000, 400.6s
+2023-03-21 12:57:30,075 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 12:57:30,075 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 12:57:57,190 - model.pytorch.dcrnn_supervisor - INFO - Epoch [13/1000] (5250) train_mae: 2.0664, val_mae: 2.8589, lr: 0.010000, 405.6s
+2023-03-21 12:57:57,195 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 13
+2023-03-21 12:57:57,195 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 2.8856 to 2.8589, saving to data/model/pretrained/METR-LA/la_best
+2023-03-21 13:04:18,183 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 13:04:18,184 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 13:04:45,079 - model.pytorch.dcrnn_supervisor - INFO - Epoch [14/1000] (5625) train_mae: 2.0602, val_mae: 2.8814, lr: 0.010000, 407.9s
+2023-03-21 13:11:08,796 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 13:11:08,797 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 13:11:36,227 - model.pytorch.dcrnn_supervisor - INFO - Epoch [15/1000] (6000) train_mae: 2.0569, val_mae: 2.9107, lr: 0.010000, 411.1s
+2023-03-21 13:18:02,855 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 13:18:02,856 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 13:18:30,278 - model.pytorch.dcrnn_supervisor - INFO - Epoch [16/1000] (6375) train_mae: 2.0509, val_mae: 2.9878, lr: 0.010000, 414.0s
+2023-03-21 13:24:48,856 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 13:24:48,857 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 13:25:15,800 - model.pytorch.dcrnn_supervisor - INFO - Epoch [17/1000] (6750) train_mae: 2.0450, val_mae: 2.8624, lr: 0.010000, 405.5s
+2023-03-21 13:31:34,611 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 13:31:34,612 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 13:32:01,366 - model.pytorch.dcrnn_supervisor - INFO - Epoch [18/1000] (7125) train_mae: 2.0448, val_mae: 2.9032, lr: 0.010000, 405.6s
+2023-03-21 13:38:18,288 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 13:38:18,289 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 13:38:45,313 - model.pytorch.dcrnn_supervisor - INFO - Epoch [19/1000] (7500) train_mae: 2.0393, val_mae: 2.8780, lr: 0.000100, 403.9s
+2023-03-21 13:45:08,789 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 13:45:08,790 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 13:45:35,733 - model.pytorch.dcrnn_supervisor - INFO - Epoch [20/1000] (7875) train_mae: 2.0359, val_mae: 2.9299, lr: 0.001000, 410.4s
+2023-03-21 13:51:55,235 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 13:51:55,236 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 13:52:22,397 - model.pytorch.dcrnn_supervisor - INFO - Epoch [21/1000] (8250) train_mae: 2.0363, val_mae: 2.9010, lr: 0.001000, 406.7s
+2023-03-21 13:58:45,975 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 13:58:45,976 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 13:59:13,224 - model.pytorch.dcrnn_supervisor - INFO - Epoch [22/1000] (8625) train_mae: 2.0299, val_mae: 2.8669, lr: 0.001000, 410.8s
+2023-03-21 14:05:33,737 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 14:05:33,737 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 14:06:01,217 - model.pytorch.dcrnn_supervisor - INFO - Epoch [23/1000] (9000) train_mae: 2.0310, val_mae: 2.9679, lr: 0.001000, 408.0s
+2023-03-21 14:12:24,311 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 14:12:24,312 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 14:12:51,730 - model.pytorch.dcrnn_supervisor - INFO - Epoch [24/1000] (9375) train_mae: 2.0351, val_mae: 2.9548, lr: 0.001000, 410.5s
+2023-03-21 14:19:13,679 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 14:19:13,679 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 14:19:40,837 - model.pytorch.dcrnn_supervisor - INFO - Epoch [25/1000] (9750) train_mae: 2.0367, val_mae: 3.2402, lr: 0.001000, 409.1s
+2023-03-21 14:26:02,630 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 14:26:02,631 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 14:26:29,833 - model.pytorch.dcrnn_supervisor - INFO - Epoch [26/1000] (10125) train_mae: 2.0337, val_mae: 2.8439, lr: 0.001000, 409.0s
+2023-03-21 14:26:29,838 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 26
+2023-03-21 14:26:29,838 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 2.8589 to 2.8439, saving to data/model/pretrained/METR-LA/la_best
+2023-03-21 14:32:52,658 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 14:32:52,659 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 14:33:20,197 - model.pytorch.dcrnn_supervisor - INFO - Epoch [27/1000] (10500) train_mae: 2.0344, val_mae: 3.0488, lr: 0.001000, 410.4s
+2023-03-21 14:39:40,739 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 14:39:40,740 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 14:40:08,053 - model.pytorch.dcrnn_supervisor - INFO - Epoch [28/1000] (10875) train_mae: 2.0453, val_mae: 2.9224, lr: 0.001000, 407.9s
+2023-03-21 14:46:26,154 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 14:46:26,155 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 14:46:52,931 - model.pytorch.dcrnn_supervisor - INFO - Epoch [29/1000] (11250) train_mae: 2.0487, val_mae: 2.9364, lr: 0.000010, 404.9s
+2023-03-21 20:00:25,390 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:00:46,353 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:02:46,147 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:10:14,511 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:13:43,980 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:16:13,705 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:16:41,376 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:16:41,378 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:16:41,378 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:19:23,086 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:20:56,214 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:21:23,428 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:21:23,430 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:21:23,430 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:22:09,443 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:22:35,862 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:22:35,863 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:22:35,863 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:25:17,620 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:25:47,371 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:25:47,372 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:25:47,372 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:27:52,120 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:28:18,437 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:28:18,438 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:28:18,438 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:31:05,544 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:31:32,070 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:31:32,071 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:31:32,071 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:33:16,613 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:33:43,767 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:33:43,768 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:33:43,768 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:34:16,900 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:34:43,398 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:34:43,399 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:34:43,399 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:36:49,162 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:37:15,447 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:37:15,448 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:37:15,448 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:38:52,145 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:39:18,841 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:39:18,842 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:39:18,842 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:39:37,882 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:39:54,483 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:39:54,484 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:39:54,484 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:41:46,549 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:42:03,579 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:42:03,580 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:42:03,580 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:44:44,324 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:46:08,950 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:47:28,829 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:48:34,725 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:48:51,473 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:48:51,474 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:48:51,474 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:49:48,176 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:50:04,720 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:50:04,721 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:50:04,721 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:51:41,814 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:51:58,884 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:51:58,885 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:51:58,885 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:52:40,513 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:52:57,418 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:52:57,420 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:52:57,420 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:54:13,318 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:54:30,771 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:54:30,773 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:54:30,773 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:56:00,691 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 20:56:17,501 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 20:56:17,503 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 20:56:17,503 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 20:56:18,017 - model.pytorch.dcrnn_supervisor - INFO - Total trainable parameters 372353
+2023-03-21 20:58:00,912 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 20:58:00,914 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 20:58:08,305 - model.pytorch.dcrnn_supervisor - INFO - Epoch [0/1000] (193) train_mae: 6.4693, val_mae: 6.5826, lr: 0.010000, 110.8s
+2023-03-21 20:58:08,310 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 0
+2023-03-21 20:58:08,310 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from inf to 6.5826, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 20:59:51,297 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 20:59:51,298 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 20:59:58,764 - model.pytorch.dcrnn_supervisor - INFO - Epoch [1/1000] (386) train_mae: 5.4896, val_mae: 6.1447, lr: 0.010000, 110.5s
+2023-03-21 20:59:58,769 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 1
+2023-03-21 20:59:58,769 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 6.5826 to 6.1447, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:01:41,723 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:01:41,724 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:01:48,964 - model.pytorch.dcrnn_supervisor - INFO - Epoch [2/1000] (579) train_mae: 5.4144, val_mae: 5.9517, lr: 0.010000, 110.2s
+2023-03-21 21:01:48,969 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 2
+2023-03-21 21:01:48,969 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 6.1447 to 5.9517, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:03:31,621 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:03:31,622 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:03:38,946 - model.pytorch.dcrnn_supervisor - INFO - Epoch [3/1000] (772) train_mae: 5.3450, val_mae: 5.8352, lr: 0.010000, 110.0s
+2023-03-21 21:03:38,950 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 3
+2023-03-21 21:03:38,950 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 5.9517 to 5.8352, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:05:22,734 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:05:22,735 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:05:30,233 - model.pytorch.dcrnn_supervisor - INFO - Epoch [4/1000] (965) train_mae: 5.2802, val_mae: 5.7714, lr: 0.010000, 111.3s
+2023-03-21 21:05:30,239 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 4
+2023-03-21 21:05:30,239 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 5.8352 to 5.7714, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:07:15,129 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:07:15,130 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:07:22,513 - model.pytorch.dcrnn_supervisor - INFO - Epoch [5/1000] (1158) train_mae: 5.2209, val_mae: 5.7313, lr: 0.010000, 112.3s
+2023-03-21 21:07:22,519 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 5
+2023-03-21 21:07:22,519 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 5.7714 to 5.7313, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:09:05,765 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:09:05,766 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:09:13,108 - model.pytorch.dcrnn_supervisor - INFO - Epoch [6/1000] (1351) train_mae: 5.1706, val_mae: 5.6713, lr: 0.010000, 110.6s
+2023-03-21 21:09:13,112 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 6
+2023-03-21 21:09:13,112 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 5.7313 to 5.6713, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:10:55,884 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:10:55,884 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:11:03,104 - model.pytorch.dcrnn_supervisor - INFO - Epoch [7/1000] (1544) train_mae: 5.1437, val_mae: 5.6944, lr: 0.010000, 110.0s
+2023-03-21 21:12:46,413 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:12:46,414 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:12:53,749 - model.pytorch.dcrnn_supervisor - INFO - Epoch [8/1000] (1737) train_mae: 5.1190, val_mae: 5.6380, lr: 0.010000, 110.6s
+2023-03-21 21:12:53,753 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 8
+2023-03-21 21:12:53,753 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 5.6713 to 5.6380, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:14:37,086 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:14:37,087 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:14:44,590 - model.pytorch.dcrnn_supervisor - INFO - Epoch [9/1000] (1930) train_mae: 5.0935, val_mae: 5.6712, lr: 0.010000, 110.8s
+2023-03-21 21:16:28,004 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:16:28,004 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:16:35,391 - model.pytorch.dcrnn_supervisor - INFO - Epoch [10/1000] (2123) train_mae: 5.0789, val_mae: 5.6323, lr: 0.010000, 110.8s
+2023-03-21 21:16:35,396 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 10
+2023-03-21 21:16:35,396 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 5.6380 to 5.6323, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:18:20,074 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:18:20,074 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:18:27,337 - model.pytorch.dcrnn_supervisor - INFO - Epoch [11/1000] (2316) train_mae: 5.0755, val_mae: 5.6511, lr: 0.010000, 111.9s
+2023-03-21 21:20:10,955 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:20:10,956 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:20:18,406 - model.pytorch.dcrnn_supervisor - INFO - Epoch [12/1000] (2509) train_mae: 5.0405, val_mae: 5.6666, lr: 0.010000, 111.1s
+2023-03-21 21:22:01,676 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:22:01,677 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:22:09,125 - model.pytorch.dcrnn_supervisor - INFO - Epoch [13/1000] (2702) train_mae: 5.0120, val_mae: 5.6459, lr: 0.010000, 110.7s
+2023-03-21 21:23:51,323 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:23:51,324 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:23:58,528 - model.pytorch.dcrnn_supervisor - INFO - Epoch [14/1000] (2895) train_mae: 4.9927, val_mae: 5.6910, lr: 0.010000, 109.4s
+2023-03-21 21:25:40,727 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:25:40,728 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:25:47,952 - model.pytorch.dcrnn_supervisor - INFO - Epoch [15/1000] (3088) train_mae: 4.9688, val_mae: 5.6929, lr: 0.010000, 109.4s
+2023-03-21 21:25:47,952 - model.pytorch.dcrnn_supervisor - WARNING - Early stopping at epoch: 15
+2023-03-21 21:25:48,210 - model.pytorch.dcrnn_supervisor - INFO - Loaded model successfully!
+2023-03-21 21:26:06,159 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
+2023-03-21 21:26:22,876 - model.pytorch.dcrnn_supervisor - INFO - Model created
+2023-03-21 21:26:22,877 - model.pytorch.dcrnn_supervisor - INFO - Start training ...
+2023-03-21 21:26:22,877 - model.pytorch.dcrnn_supervisor - INFO - num_batches:193
+2023-03-21 21:26:23,414 - model.pytorch.dcrnn_supervisor - INFO - Total trainable parameters 372353
+2023-03-21 21:28:03,601 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:28:03,604 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:28:10,749 - model.pytorch.dcrnn_supervisor - INFO - Epoch [0/1000] (193) train_mae: 6.5802, val_mae: 6.4928, lr: 0.010000, 107.9s
+2023-03-21 21:28:10,754 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 0
+2023-03-21 21:28:10,754 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from inf to 6.4928, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:29:51,321 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:29:51,321 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:29:58,443 - model.pytorch.dcrnn_supervisor - INFO - Epoch [1/1000] (386) train_mae: 5.6161, val_mae: 6.3090, lr: 0.010000, 107.7s
+2023-03-21 21:29:58,447 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 1
+2023-03-21 21:29:58,447 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 6.4928 to 6.3090, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:31:37,818 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:31:37,819 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:31:44,839 - model.pytorch.dcrnn_supervisor - INFO - Epoch [2/1000] (579) train_mae: 5.4364, val_mae: 5.9428, lr: 0.010000, 106.4s
+2023-03-21 21:31:44,843 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 2
+2023-03-21 21:31:44,843 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 6.3090 to 5.9428, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:33:24,563 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:33:24,564 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:33:31,622 - model.pytorch.dcrnn_supervisor - INFO - Epoch [3/1000] (772) train_mae: 5.3403, val_mae: 5.9402, lr: 0.010000, 106.8s
+2023-03-21 21:33:31,626 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 3
+2023-03-21 21:33:31,626 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 5.9428 to 5.9402, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:35:11,008 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:35:11,008 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:35:18,172 - model.pytorch.dcrnn_supervisor - INFO - Epoch [4/1000] (965) train_mae: 5.2700, val_mae: 5.8163, lr: 0.010000, 106.5s
+2023-03-21 21:35:18,176 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 4
+2023-03-21 21:35:18,177 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 5.9402 to 5.8163, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:36:59,360 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:36:59,361 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:37:06,565 - model.pytorch.dcrnn_supervisor - INFO - Epoch [5/1000] (1158) train_mae: 5.2171, val_mae: 5.7311, lr: 0.010000, 108.4s
+2023-03-21 21:37:06,570 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 5
+2023-03-21 21:37:06,570 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 5.8163 to 5.7311, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:38:46,902 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:38:46,903 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:38:54,102 - model.pytorch.dcrnn_supervisor - INFO - Epoch [6/1000] (1351) train_mae: 5.1757, val_mae: 5.7007, lr: 0.010000, 107.5s
+2023-03-21 21:38:54,106 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 6
+2023-03-21 21:38:54,106 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 5.7311 to 5.7007, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:40:35,313 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:40:35,314 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:40:42,526 - model.pytorch.dcrnn_supervisor - INFO - Epoch [7/1000] (1544) train_mae: 5.1451, val_mae: 5.6944, lr: 0.010000, 108.4s
+2023-03-21 21:40:42,530 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 7
+2023-03-21 21:40:42,530 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 5.7007 to 5.6944, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:42:24,176 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:42:24,176 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:42:31,364 - model.pytorch.dcrnn_supervisor - INFO - Epoch [8/1000] (1737) train_mae: 5.1186, val_mae: 5.7024, lr: 0.010000, 108.8s
+2023-03-21 21:44:13,100 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:44:13,101 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:44:20,378 - model.pytorch.dcrnn_supervisor - INFO - Epoch [9/1000] (1930) train_mae: 5.1025, val_mae: 5.7808, lr: 0.010000, 109.0s
+2023-03-21 21:46:01,645 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:46:01,646 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:46:08,843 - model.pytorch.dcrnn_supervisor - INFO - Epoch [10/1000] (2123) train_mae: 5.0723, val_mae: 5.6301, lr: 0.010000, 108.5s
+2023-03-21 21:46:08,849 - model.pytorch.dcrnn_supervisor - INFO - Saved model at 10
+2023-03-21 21:46:08,850 - model.pytorch.dcrnn_supervisor - INFO - Val loss decrease from 5.6944 to 5.6301, saving to data/model/pretrained/YINCHUAN/yc_best
+2023-03-21 21:47:49,973 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:47:49,974 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:47:57,196 - model.pytorch.dcrnn_supervisor - INFO - Epoch [11/1000] (2316) train_mae: 5.0644, val_mae: 5.7233, lr: 0.010000, 108.3s
+2023-03-21 21:49:38,669 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:49:38,670 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:49:45,928 - model.pytorch.dcrnn_supervisor - INFO - Epoch [12/1000] (2509) train_mae: 5.0384, val_mae: 5.6608, lr: 0.010000, 108.7s
+2023-03-21 21:51:28,075 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:51:28,076 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:51:35,293 - model.pytorch.dcrnn_supervisor - INFO - Epoch [13/1000] (2702) train_mae: 5.0249, val_mae: 5.6432, lr: 0.010000, 109.4s
+2023-03-21 21:53:16,974 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:53:16,974 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:53:24,218 - model.pytorch.dcrnn_supervisor - INFO - Epoch [14/1000] (2895) train_mae: 5.0041, val_mae: 5.7015, lr: 0.010000, 108.9s
+2023-03-21 21:55:06,903 - model.pytorch.dcrnn_supervisor - INFO - epoch complete
+2023-03-21 21:55:06,904 - model.pytorch.dcrnn_supervisor - INFO - evaluating now!
+2023-03-21 21:55:14,332 - model.pytorch.dcrnn_supervisor - INFO - Epoch [15/1000] (3088) train_mae: 4.9807, val_mae: 5.6793, lr: 0.010000, 110.1s
+2023-03-21 21:55:14,333 - model.pytorch.dcrnn_supervisor - WARNING - Early stopping at epoch: 15
+2023-03-21 21:55:14,590 - model.pytorch.dcrnn_supervisor - INFO - Loaded model successfully!
+2023-03-21 21:59:32,954 - model.pytorch.dcrnn_supervisor - INFO - Log directory: data/model/dcrnn/
