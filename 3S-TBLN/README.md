@@ -12,6 +12,17 @@
 > * Note that our TensorFlow version is 1.14.1 and can also be operated on the 2.0. version.  
 ---
 
+# HOW TO RUN THE MODEL?
+
+train model on Ningxia-YC or METR-LA:
+```
+python train.py and input 1 to run
+```
+test model on Ningxia-YC or METR-LA:
+```
+ python train.py and input 0 to test
+```
+
 
 # DATASETS
 
