@@ -12,7 +12,7 @@
 > * Note that our TensorFlow version is 1.14.1 and can also be operated on the 2.0. version.  
 ---
 
-# HOW TO RUN THE MODEL?
+## HOW TO RUN THE MODEL?
 
 train model on Ningxia-YC or METR-LA:
 ```
@@ -24,12 +24,12 @@ test model on Ningxia-YC or METR-LA:
 ```
 
 
-# DATASETS
+## DATASETS DESCRIPTION
 
 > For the public dataset, we should better to transfer data type from .h5 to .csv if the resource data type is h5.
 
 
-# IMPORTANT REFERENCES
+## IMPORTANT REFERENCES
 
 If you find this repository useful in your research, please cite the following paper:
 ```
