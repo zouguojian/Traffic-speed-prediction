@@ -16,11 +16,11 @@
 
 train model on Ningxia-YC or METR-LA:
 ```
-python train.py and input 1 to run
+python run_train.py and input 1 to run
 ```
 test model on Ningxia-YC or METR-LA:
 ```
- python train.py and input 0 to test
+ python run_train.py and input 0 to test
 ```
 
 
@@ -29,7 +29,7 @@ test model on Ningxia-YC or METR-LA:
 > For the public dataset, we should better to transfer data type from .h5 to .csv if the resource data type is h5.
 
 
-# IMPORTANR REFERENCES
+# IMPORTANT REFERENCES
 
 If you find this repository useful in your research, please cite the following paper:
 ```
