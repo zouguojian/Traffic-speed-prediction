@@ -33,6 +33,18 @@ test model on Ningxia-YC or METR-LA:
 
 If you find this repository useful in your research, please cite the following paper:
 ```
+@ARTICLE{10559778,
+  author={Zou, Guojian and Lai, Ziliang and Wang, Ting and Liu, Zongshi and Li, Ye},
+  journal={IEEE Transactions on Intelligent Transportation Systems}, 
+  title={MT-STNet: A Novel Multi-Task Spatiotemporal Network for Highway Traffic Flow Prediction}, 
+  year={2024},
+  volume={25},
+  number={7},
+  pages={8221-8236},
+  doi={10.1109/TITS.2024.3411638}
+}
+
+
 @article{zou2023will,
   title={When Will We Arrive? A Novel Multi-Task Spatio-Temporal Attention Network Based on Individual Preference for Estimating Travel Time},
   author={Zou, Guojian and Lai, Ziliang and Ma, Changxi and Tu, Meiting and Fan, Jing and Li, Ye},
