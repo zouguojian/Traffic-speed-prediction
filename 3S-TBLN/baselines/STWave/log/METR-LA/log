@@ -1,0 +1,31 @@
+------------ Options -------------
+config: config/METR-LA.conf
+cuda: 0
+seed: 1
+batch_size: 8
+max_epoch: 200
+learning_rate: 0.001
+input_len: 48
+output_len: 48
+train_ratio: 0.7
+val_ratio: 0.1
+test_ratio: 0.2
+dims: 16
+heads: 8
+layers: 2
+wave: sym2
+level: 1
+samples: 1.0
+traffic_file: data/METR-LA/train.npz
+adj_file: data/METR-LA/adjacent.npz
+tem_adj_file: data/METR-LA/temadj.npy
+model_file: cpt/METR-LA/saved_model
+log_file: log/METR-LA/log
+-------------- End ----------------
+
+------------ Loading Data -------------
+Shape of data: (25704, 207, 1)
+Shape of Train Data: (17898, 48, 207, 1)
+Shape of Validation Data: (2475, 48, 207, 1)
+Shape of Test Data: (5046, 48, 207, 1)
+Mean: 53.56144785436123 & Std: 20.46572694194655

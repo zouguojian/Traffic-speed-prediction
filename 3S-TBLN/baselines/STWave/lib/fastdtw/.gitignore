@@ -1,0 +1,13 @@
+__pycache__/
+.cache/
+.eggs/
+fastdtw.egg-info/
+.env/
+dist/
+build/
+.vscode/
+.venv/
+.python-version
+*.pyc
+*.so
+*.html
