@@ -14,11 +14,11 @@
 
 ## HOW TO RUN THE MODEL?
 
-train model on Ningxia-YC or METR-LA:
+train model on Ningxia-YC, METR-LA, or PEMS-BAY:
 ```
 python run_train.py and input 1 to run
 ```
-test model on Ningxia-YC or METR-LA:
+test model on Ningxia-YC, METR-LA, or PEMS-BAY:
 ```
  python run_train.py and input 0 to test
 ```
@@ -43,7 +43,6 @@ If you find this repository useful in your research, please cite the following p
   pages={8221-8236},
   doi={10.1109/TITS.2024.3411638}
 }
-
 
 @article{zou2023will,
   title={When Will We Arrive? A Novel Multi-Task Spatio-Temporal Attention Network Based on Individual Preference for Estimating Travel Time},
