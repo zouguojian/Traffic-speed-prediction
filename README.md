@@ -18,7 +18,7 @@ computer device and use them as your component of research or subject.
 ---
 
 #### NOTICE  
---->>>>>>> MT-STGIN has been accepted by Expert Systems with Applications (a short conference version has been accepted by IEEE ITSC 2023);  
+--->>>>>>> MT-STGIN has been accepted by Expert Systems with Applications (a short conference version has been submitted to IEEE ITSC);  
 --->>>>>>> 3S-TBLN has been submitted to IEEE Transactions on Intelligent Transportation Systems TITS (a short conference version has been submitted to IEEE ITSC);   
 --->>>>>>> ST-ANet has been accepted in Computer Engineering.
 
