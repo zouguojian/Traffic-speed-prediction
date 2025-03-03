@@ -5,12 +5,12 @@ class parameter(object):
         self.parser=parser
 
         # >>>需要根据数据集的位置和大小进行特定参数设定
-        self.parser.add_argument('--save_path', type=str, default='weights/3S-TBLN-yinchuan/3S-TBLN', help='save path')
+        self.parser.add_argument('--save_path', type=str, default='weights/YINCHUAN/3S-TBLN', help='save path')
         self.parser.add_argument('--model_name', type=str, default='3S-TBLN', help='training or testing model name')
-        self.parser.add_argument('--file_train_s', type=str, default='data/yinchuan/train_15.csv', help='training_speed file address')
+        self.parser.add_argument('--file_train_s', type=str, default='data/YINCHUAN/train_15.csv', help='training_speed file address')
         self.parser.add_argument('--file_val', type=str, default='data/val.csv', help='validate set file address')
         self.parser.add_argument('--file_test', type=str, default='data/test.csv', help='test set file address')
-        self.parser.add_argument('--file_adj', type=str,default='data/yinchuan/adjacent.csv', help='adj file address')
+        self.parser.add_argument('--file_adj', type=str,default='data/YINCHUAN/adjacent.csv', help='adj file address')
         self.parser.add_argument('--site_num', type=int, default=108, help='total number of road')
         self.parser.add_argument('--granularity', type=int, default=15, help='minute granularity')
 
@@ -21,7 +21,7 @@ class parameter(object):
         self.parser.add_argument('--is_training', type=bool, default=True, help='is training')
         self.parser.add_argument('--epoch', type=int, default=100, help='epoch') # modify
         self.parser.add_argument('--step', type=int, default=1, help='step')
-        self.parser.add_argument('--batch_size', type=int, default=16, help='batch size')  # modify
+        self.parser.add_argument('--batch_size', type=int, default=8, help='batch size')  # modify
         self.parser.add_argument('--learning_rate', type=float, default=0.001, help='learning rate')
         self.parser.add_argument('--dropout', type=float, default=0.2, help='drop out')
         self.parser.add_argument('--num_heads', type=int, default=8, help='total number of head attentions')
@@ -35,8 +35,8 @@ class parameter(object):
         self.parser.add_argument('--features', type=int, default=1, help='numbers of the feature')
         self.parser.add_argument('--features_p', type=int, default=15, help='numbers of the feature pollution')
         self.parser.add_argument('--normalize', type=bool, default=True, help='normalize')
-        self.parser.add_argument('--input_length', type=int, default=12, help='input length')
-        self.parser.add_argument('--output_length', type=int, default=12, help='output length')
+        self.parser.add_argument('--input_length', type=int, default=48, help='input length')
+        self.parser.add_argument('--output_length', type=int, default=48, help='output length')
 
         self.parser.add_argument('--training_set_rate', type=float, default=0.7, help='training set rate')
         self.parser.add_argument('--validate_set_rate', type=float, default=0.15, help='validate set rate')
