@@ -29,16 +29,14 @@ test model on Ningxia-YC, METR-LA, or PEMS-BAY:
 > For the public dataset, we should better to transfer data type from .h5 to .csv if the resource data type is h5.
 
 ## RESULTS OF 3S-TBLN
-Results from METR-LA:
+Results from YINCHUAN:
 ```
 https://github.com/zouguojian/Traffic-speed-prediction/tree/main/3S-TBLN/results
 ```
-
 Results from METR-LA:
 ```
 https://drive.google.com/file/d/1rUTyJPY7xXwYzN5BqJ9s-FsnGl5TVgTD/view?usp=drive_link
 ```
-
 Results from PEMS-BAY:
 ```
 https://drive.google.com/file/d/10szfBDdGAYa-CTBO5H_t0NppAlhGA3dZ/view?usp=drive_link
