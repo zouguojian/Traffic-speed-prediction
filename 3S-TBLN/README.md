@@ -46,6 +46,15 @@ https://drive.google.com/file/d/10szfBDdGAYa-CTBO5H_t0NppAlhGA3dZ/view?usp=drive
 
 If you find this repository useful in your research, please cite the following paper:
 ```
+@article{zou2025multi,
+  title={Multi-graph spatio-temporal network for traffic accident risk forecasting},
+  author={Zou, Guojian and Zhou, Zhiyong and Weibel, Robert and Li, Ye and Wang, Ting and Liu, Zongshi and Ding, Weiping and Fu, Cheng},
+  journal={Pattern Recognition},
+  pages={112784},
+  year={2025},
+  publisher={Elsevier}
+}
+
 @ARTICLE{10559778,
   author={Zou, Guojian and Lai, Ziliang and Wang, Ting and Liu, Zongshi and Li, Ye},
   journal={IEEE Transactions on Intelligent Transportation Systems}, 
